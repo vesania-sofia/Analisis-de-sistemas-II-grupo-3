@@ -318,7 +318,7 @@ public class Vista_Administrador extends javax.swing.JFrame {
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         // TODO add your handling code here:
-        Vista.Registro_Renta alt_cli = new Registro_Renta(this, true);
+        Vista.jDialog_Renta alt_cli = new jDialog_Renta(this, true);
         alt_cli.setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
