@@ -14,12 +14,12 @@ import java.util.List;
  * @author maria
  */
 public class daoRegistroCliente {
-    private static final String SQL_SELECT = "SELECT id_cliente, nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, correo_cliente, estado_cliente FROM TBL_CLIENTES";
-    private static final String SQL_INSERT = "INSERT INTO TBL_CLIENTES( nombre_cliente,apellido_cliente, direccion_cliente, telefono_cliente, correo_cliente, estado_client) VALUES(?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE TBL_CLIENTES nombre_cliente=?, apellido_cliente=?,  direccion_cliente=?, telefono_cliente=? , correo_cliente=?, estado_cliente=?  WHERE id_cliente = ?";
-    private static final String SQL_DELETE = "DELETE FROM TABL_CLIENTES WHERE id_cliente=?";
-    private static final String SQL_SELECT_NOMBRE = "SELECT id_cliente, nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, correo_cliente, estado_cliente  FROM TBL_CLIENTES WHERE nombre_cliente = ?";
-    private static final String SQL_SELECT_ID = "SELECT id_cliente, nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, correo_cliente, estado_cliente  FROM TBL_CLIENTES WHERE id_cliente = ?";     
+    private static final String SQL_SELECT = "SELECT id_cliente, nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, correo_cliente, estado_cliente FROM tbl_clientes";
+    private static final String SQL_INSERT = "INSERT INTO tbl_clientes(nombre_cliente,apellido_cliente, direccion_cliente, telefono_cliente, correo_cliente, estado_cliente) VALUES(?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_clientes SET nombre_cliente=?, apellido_cliente=?,  direccion_cliente=?, telefono_cliente=? , correo_cliente=?, estado_cliente=?  WHERE id_cliente = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_clientes WHERE id_cliente=?";
+    private static final String SQL_SELECT_NOMBRE = "SELECT id_cliente, nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, correo_cliente, estado_cliente FROM tbl_clientes WHERE nombre_cliente = ?";
+    private static final String SQL_SELECT_ID = "SELECT id_cliente, nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, correo_cliente, estado_cliente FROM tbl_clientes WHERE id_cliente = ?";     
 
 
    public List<clsRegistroCliente> consultaRegistroCliente() {
@@ -63,7 +63,7 @@ public class daoRegistroCliente {
     }
 
 
-     public int ingresaRegistroCliente (clsRegistroCliente cliente) {
+     public int ingresarRegistroCliente (clsRegistroCliente cliente) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -105,7 +105,7 @@ public class daoRegistroCliente {
             stmt.setString(4, cliente.gettelefono_cliente());
             stmt.setString(5, cliente.getcorreo_cliente());
             stmt.setString(6, cliente.getestado_cliente());
-
+            stmt.setInt(7, cliente.getid_cliente());
             
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);

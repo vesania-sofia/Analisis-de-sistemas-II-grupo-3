@@ -152,10 +152,10 @@ public class clsRegistroCliente {
         daoRegistroCliente daoRegistroCliente = new daoRegistroCliente();
         return daoRegistroCliente.borrarRegistroCliente(cliente);
     }          
-    public int setIngresaRegistroCliente(clsRegistroCliente cliente)
+    public int setIngresarRegistroCliente(clsRegistroCliente cliente)
     {
         daoRegistroCliente daoRegistroCliente = new daoRegistroCliente();
-        return daoRegistroCliente.ingresaRegistroCliente(cliente);
+        return daoRegistroCliente.ingresarRegistroCliente(cliente);
     }              
     public int setModificarRegistroCLiente(clsRegistroCliente cliente)
     {
