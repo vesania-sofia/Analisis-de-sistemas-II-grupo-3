@@ -5,8 +5,7 @@
 package Vista;
 
 import Controlador.clsRenta;
-import Controlador.clsRegistroCliente; //importamos la clase de Clientes
-import Controlador.clsVideos; //importamos la clase de Videos
+//import Controlador.clsRegistroCliente;
 import java.awt.Component;
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class jDialog_Renta extends javax.swing.JDialog {
 
-     public void llenadoDeComboCliente() {
+     /* public void llenadoDeComboCliente() {
         clsRegistroCliente cliente = new clsRegistroCliente();
         List<clsRegistroCliente> listadoClientes = cliente.getListadoRegistroCliente();
         Cbo_cliente.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -36,20 +35,20 @@ public class jDialog_Renta extends javax.swing.JDialog {
             String item = Cliente.getid_cliente() + " - " + Cliente.getnombre_cliente();
             Cbo_cliente.addItem(item);
         } 
-    }
+    }*/
       
         
-      public void llenadoDeComboVideo() {
-        clsVideos video = new clsVideos();
-        List<clsVideos> listadoVideos = video.getListadoVideo();
-        Cbo_idVideo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        Cbo_idVideo.addItem("Seleccionar...");
+      /*public void llenadoDeComboVideo() {
+        clsVideo video = new clsVideo();
+        List<clsVideo> listadoVideos = video.getListadoVideos();
+        Cbo_video.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Cbo_video.addItem("Seleccionar...");
         for (int i = 0; i < listadoVideos.size(); i++) {
-            clsVideos Video = listadoVideos.get(i);
-            String item = Video.getid_video() + " - " + Video.gettitulo_video();
-            Cbo_idVideo.addItem(item);
+            clsVideo Banco = listadoVideos.get(i);
+            String item = Video.getIdVideo() + " - " + Video.getNombreVideo();
+            Cbo_video.addItem(item);
         }
-    }
+    }*/
         
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -80,8 +79,8 @@ public class jDialog_Renta extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         llenadoDeTablas();
-        llenadoDeComboCliente();
-        llenadoDeComboVideo();
+        //llenadoDeComboCliente();
+     
         //llenadoDeComboVideo
     }
 
@@ -514,7 +513,8 @@ public class jDialog_Renta extends javax.swing.JDialog {
         String selectedItem = Cbo_cliente.getSelectedItem().toString();
         int item = Integer.parseInt(selectedItem.split(" - ")[0]);
         renta.setId_cliente(item);
-      
+        //renta.setId_cliente(Integer.parseInt(Cbo_cliente.getSelectedItem().toString()));
+        
         String fecha_alquiler = Txt_fechaInicioRenta.getText();
         String fecha_renta = Txt_fechaDevolucionRenta.getText();
         
@@ -541,6 +541,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
         String selectedItem2 = Cbo_idVideo.getSelectedItem().toString();
         int item2 = Integer.parseInt(selectedItem2.split(" - ")[0]);
         renta.setId_video(item2);
+        //String id_video = Cbo_idVideo.getSelectedItem().toString();
         
         String estatusAlquiler = Rdb_rentado.isSelected() ? "T" : (Rdb_devuelto.isSelected() ? "F" : "");
 
@@ -555,9 +556,8 @@ public class jDialog_Renta extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(null, "Debe seleccionar un estatus.");
         }
  
-        llenadoDeTablas();
-        llenadoDeComboCliente();
-        llenadoDeComboVideo();
+        //llenadoDeTablas();
+        //llenadoDeComboCliente();
         //BusquedaComp();
         //limpiarTextos(); 
     

@@ -4,7 +4,7 @@
  */
 package Modelo;
 import Controlador.clsRegistroCliente;
-import Seguridad.Modelo.Conexion;
+import Modelo.Conexion;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

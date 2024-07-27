@@ -5,7 +5,7 @@
 package Modelo;
 
 import Controlador.ClsAdministradores;
-import Seguridad.Modelo.Conexion;
+import Controlador.Conexion;
 import java.sql.Connection;
 import java.sql.*;
 import java.util.ArrayList;
