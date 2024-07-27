@@ -4,7 +4,7 @@
  */
 package Vista;
 
-import Vista.Listado_Administradores;
+import Vista.JDialog_Administradores;
 import Vista.Registro_Cliente;
 import Vista.Registro_Video;
 
@@ -35,13 +35,10 @@ public class Vista_Administrador extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -56,7 +53,6 @@ public class Vista_Administrador extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,14 +109,6 @@ public class Vista_Administrador extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem11.setText("Nuevo cliente");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem11);
-
         jMenuItem14.setText("CRUD");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,14 +122,6 @@ public class Vista_Administrador extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/admin.png"))); // NOI18N
         jMenu2.setText("Administradores");
 
-        jMenuItem12.setText("Nuevo Administrador");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem12);
-
         jMenuItem13.setText("CRUD");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,14 +134,6 @@ public class Vista_Administrador extends javax.swing.JFrame {
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/video.png"))); // NOI18N
         jMenu5.setText("Videos");
-
-        jMenuItem16.setText("Nuevo Video");
-        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem16);
 
         jMenuItem15.setText("CRUD");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
@@ -239,14 +211,6 @@ public class Vista_Administrador extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem17);
 
-        jMenuItem18.setText("Pagos");
-        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem18ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem18);
-
         jMenuBar1.add(jMenu7);
 
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salir.png"))); // NOI18N
@@ -284,22 +248,6 @@ public class Vista_Administrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        Vista.Registro_Cliente alt_cli = new Registro_Cliente(this, true);
-        alt_cli.setVisible(true);                 // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
-
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        // TODO add your handling code here:
-        Vista.Registro_Administradores alt_cli = new Registro_Administradores(this, true);
-        alt_cli.setVisible(true);
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
-
-    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        Vista.Registro_Video alt_cli = new Registro_Video(this, true);
-        alt_cli.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem16ActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -332,27 +280,21 @@ public class Vista_Administrador extends javax.swing.JFrame {
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         // TODO add your handling code here:
-        Vista.Listado_Cliente alt_cli = new Listado_Cliente(this, true);
+        Vista.jDialog_vistaCliente alt_cli = new jDialog_vistaCliente(this, true);
         alt_cli.setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         // TODO add your handling code here:
-         Vista.Listado_Administradores alt_cli = new Listado_Administradores(this, true);
+         Vista.JDialog_Administradores alt_cli = new JDialog_Administradores(this, true);
         alt_cli.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
-        Vista.Listado_Video alt_cli = new Listado_Video(this, true);
+        Vista.JDialog_Videos alt_cli = new JDialog_Videos(this, true);
         alt_cli.setVisible(true);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
-
-    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        // TODO add your handling code here:
-        Vista.Registro_Pago alt_cli = new Registro_Pago(this, true);
-        alt_cli.setVisible(true);
-    }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         // TODO add your handling code here:
@@ -407,14 +349,10 @@ public class Vista_Administrador extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

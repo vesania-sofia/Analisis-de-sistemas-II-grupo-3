@@ -16,12 +16,12 @@ import Seguridad.Modelo.Conexion;
  */
 public class daoVideos {
     
-    private static final String SQL_SELECT = "SELECT id_video, titulo_video, precio_video, año_estreno_video, genero_video, actores_video, sintesis_video, extension_video , formato_video FROM TBL_VIDEOS";
+    private static final String SQL_SELECT = "SELECT id_video, titulo_video, precio_video, año_estreno_video, genero_video, actores_video, sintesis_video, existencia_video , formato_video FROM TBL_VIDEOS";
     private static final String SQL_INSERT = "INSERT INTO TBL_VIDEOS( titulo_video, precio_video, año_estreno_video, genero_video,actores_video,sintesis_video,existencia_video,formato_video) VALUES(?, ?, ?, ?, ?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE TBL_VIDEOS SET titulo_video=?, precio_video=?,  año_estreno_video=?, genero_video=? , actores_video=? , sintesis_video=? , extension_video=? , formato_video=?   WHERE id_video = ?";
+    private static final String SQL_UPDATE = "UPDATE TBL_VIDEOS SET titulo_video=?, precio_video=?,  año_estreno_video=?, genero_video=? , actores_video=? , sintesis_video=? , existencia_video=? , formato_video=?   WHERE id_video = ?";
     private static final String SQL_DELETE = "DELETE FROM TBL_VIDEOS WHERE id_video=?";
-    private static final String SQL_SELECT_NOMBRE = "SELECT id_video, titulo_video, precio_video, año_estreno_video, genero_video, actores_video, sintesis_video, Existencia_video , formato_video  FROM TBL_VIDEOS WHERE titulo_video = ?";
-    private static final String SQL_SELECT_ID = "SELECT Id_video, titulo_video, precio_video, año_estreno_video, genero_video, actores_video, sintesis_video, extension_video , formato_video FROM TBL_VIDEOS WHERE id_videos = ?";     
+    private static final String SQL_SELECT_NOMBRE = "SELECT id_video, titulo_video, precio_video, año_estreno_video, genero_video, actores_video, sintesis_video, existencia_video , formato_video  FROM TBL_VIDEOS WHERE titulo_video = ?";
+    private static final String SQL_SELECT_ID = "SELECT Id_video, titulo_video, precio_video, año_estreno_video, genero_video, actores_video, sintesis_video, existencia_video , formato_video FROM TBL_VIDEOS WHERE id_videos = ?";     
     
     
       public List<clsVideos>consultavideos() {
