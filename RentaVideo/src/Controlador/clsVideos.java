@@ -13,7 +13,7 @@ import Modelo.daoVideos;
  */
 public class clsVideos {
     
-     private int id_video;
+    private int id_video;
     private String titulo_video;
     private String precio_video;
     private float año_estreno_video;
@@ -25,7 +25,6 @@ public class clsVideos {
    
 
     public clsVideos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 

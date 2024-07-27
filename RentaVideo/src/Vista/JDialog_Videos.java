@@ -111,6 +111,7 @@ public class JDialog_Videos extends javax.swing.JDialog {
         jLabel4.setText("AÑO DE ESTRENO:");
 
         txtaño.setBackground(new java.awt.Color(51, 51, 51));
+        txtaño.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,6 +122,7 @@ public class JDialog_Videos extends javax.swing.JDialog {
         jLabel5.setText("GENERO:");
 
         txtgenero.setBackground(new java.awt.Color(51, 51, 51));
+        txtgenero.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -131,6 +133,7 @@ public class JDialog_Videos extends javax.swing.JDialog {
         jLabel1.setText("ID:");
 
         txtexistencia.setBackground(new java.awt.Color(51, 51, 51));
+        txtexistencia.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,6 +144,7 @@ public class JDialog_Videos extends javax.swing.JDialog {
         jLabel7.setText("ACTORES:");
 
         txtid.setBackground(new java.awt.Color(51, 51, 51));
+        txtid.setForeground(new java.awt.Color(255, 255, 255));
         txtid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtidActionPerformed(evt);
@@ -148,8 +152,10 @@ public class JDialog_Videos extends javax.swing.JDialog {
         });
 
         txtactores.setBackground(new java.awt.Color(51, 51, 51));
+        txtactores.setForeground(new java.awt.Color(255, 255, 255));
 
         txttitulo.setBackground(new java.awt.Color(51, 51, 51));
+        txttitulo.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -160,8 +166,10 @@ public class JDialog_Videos extends javax.swing.JDialog {
         jLabel3.setText("PRECIO:");
 
         txtsintesis.setBackground(new java.awt.Color(51, 51, 51));
+        txtsintesis.setForeground(new java.awt.Color(255, 255, 255));
 
         txtprecio.setBackground(new java.awt.Color(51, 51, 51));
+        txtprecio.setForeground(new java.awt.Color(255, 255, 255));
         txtprecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtprecioActionPerformed(evt);
@@ -279,6 +287,7 @@ public class JDialog_Videos extends javax.swing.JDialog {
         jScrollPane3.setViewportView(TablaVideos);
 
         txtformato.setBackground(new java.awt.Color(51, 51, 51));
+        txtformato.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
