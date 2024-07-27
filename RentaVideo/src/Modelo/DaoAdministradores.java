@@ -5,12 +5,11 @@
 package Modelo;
 
 import Controlador.ClsAdministradores;
-import Seguridad.Modelo.Conexion;
 import java.sql.Connection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import Seguridad.Modelo.Conexion;
 /**
  *
  * @author KevinL
@@ -19,11 +18,11 @@ import java.util.List;
 
 public class DaoAdministradores {
 
-    private static final String SQL_SELECT = "SELECT id_administradores, nombre_administradores, apellido_administradores, direccion_administradores, telefono_administradores, correo_administradores, contraseña_administradores, estado_administradores, nombre_usuario FROM tbl_administradores";
-    private static final String SQL_INSERT = "INSERT INTO tbl_administradores(id_administradores, nombre_administradores, apellido_administradores, direccion_administradores, telefono_administradores, correo_administradores, contraseña_administradores, estado_administradores, nombre_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_administradores SET nombre_administradores=?, apellido_administradores=?, direccion_administradores=?, telefono_administradores=?, correo_administradores=?, contraseña_administradores=?, estado_administradores=?, nombre_usuario=? WHERE id_administradores=?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_administradores WHERE id_administradores=?";
-    private static final String SQL_SELECT_ID = "SELECT id_administradores, nombre_administradores, apellido_administradores, direccion_administradores, telefono_administradores, correo_administradores, contraseña_administradores, estado_administradores, nombre_usuario FROM tbl_administradores WHERE id_administradores=?";
+    private static final String SQL_SELECT = "SELECT id_admin, nombre_admin, apellido_admin, direccion_admin, telefono_admin, correo_admin, contraseña_admin, estado_admin, nombre_usuario FROM tbl_administradores";
+    private static final String SQL_INSERT = "INSERT INTO tbl_administradores(nombre_admin, apellido_admin, direccion_admin, telefono_admin, correo_admin, contraseña_admin, estado_admin, nombre_usuario) VALUES (?, ?, ?, ?, ?, ?, ? ,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_administradores SET nombre_admin=?, apellido_admin=?, direccion_admin=?, telefono_admin=?, correo_admin=?, contraseña_admin=?, estado_admin=?, nombre_usuario=? WHERE id_admin=?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_administradores WHERE id_admin=?";
+    private static final String SQL_SELECT_ID = "SELECT id_admin, nombre_admin, apellido_admin, direccion_admin, telefono_admin, correo_admin, contraseña_admin, estado_admin, nombre_usuario FROM tbl_administradores WHERE id_admin=?";
     
     public List<ClsAdministradores> consultaAdministradores(){ 
         Connection conn = null;
@@ -36,14 +35,14 @@ public class DaoAdministradores {
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()){
-                int id = rs.getInt( "id_administradores");
-                String nombre = rs.getString("nombre_administradores");
-                String apellido = rs.getString("apellido_administradores");
-                String direccion = rs.getString("direccion_administradores");
-                String telefono = rs.getString("telefono_administradores");
-                String correo = rs.getString("correo_administradores");
-                String contraseña = rs.getString("contraseña_administradores");
-                String estado = rs.getString("estado_administradores");
+                int id = rs.getInt( "id_admin");
+                String nombre = rs.getString("nombre_admin");
+                String apellido = rs.getString("apellido_admin");
+                String direccion = rs.getString("direccion_admin");
+                String telefono = rs.getString("telefono_admin");
+                String correo = rs.getString("correo_admin");
+                String contraseña = rs.getString("contraseña_admin");
+                String estado = rs.getString("estado_admin");
                 String usuario = rs.getString("nombre_usuario");
                 ClsAdministradores adm = new ClsAdministradores();
                 adm.setIDAdmin(id);
@@ -77,15 +76,14 @@ public class DaoAdministradores {
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setInt(1, admin.getIdAdmin());
-            stmt.setString(2, admin.getNombreAdmin());
-            stmt.setString(3, admin.getApellidoAdmin());
-            stmt.setString(4, admin.getDireccionAdmin());
-            stmt.setString(5, admin.getTelefonoAdmin());
-            stmt.setString(6, admin.getCorreoAdmin());
-            stmt.setString(7, admin.getContraAdmin());
-            stmt.setString(8, admin.getEstadoAdmin());
-            stmt.setString(9, admin.getNombreUsuario());
+            stmt.setString(1, admin.getNombreAdmin());
+            stmt.setString(2, admin.getApellidoAdmin());
+            stmt.setString(3, admin.getDireccionAdmin());
+            stmt.setString(4, admin.getTelefonoAdmin());
+            stmt.setString(5, admin.getCorreoAdmin());
+            stmt.setString(6, admin.getContraAdmin());
+            stmt.setString(7, admin.getEstadoAdmin());
+            stmt.setString(8, admin.getNombreUsuario());
             
             System.out.println("ejecutando query: " + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -116,6 +114,7 @@ public class DaoAdministradores {
             stmt.setString(6, admin.getContraAdmin());
             stmt.setString(7, admin.getEstadoAdmin());
             stmt.setString(8, admin.getNombreUsuario());
+            stmt.setInt(9, admin.getIdAdmin());
             
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizados: " + rows);
@@ -164,14 +163,14 @@ public class DaoAdministradores {
             stmt.setInt(1, admin.getIdAdmin());            
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt( "id_administradores");
-                String nombre = rs.getString("nombre_administradores");
-                String apellido = rs.getString("apellido_administradores");
-                String direccion = rs.getString("direccion_administradores");
-                String telefono = rs.getString("telefono_administradores");
-                String correo = rs.getString("correo_administradores");
-                String contraseña = rs.getString("contraseña_administradores");
-                String estado = rs.getString("estado_administradores");
+                int id = rs.getInt( "id_admin");
+                String nombre = rs.getString("nombre_admin");
+                String apellido = rs.getString("apellido_admin");
+                String direccion = rs.getString("direccion_admin");
+                String telefono = rs.getString("telefono_admin");
+                String correo = rs.getString("correo_admin");
+                String contraseña = rs.getString("contraseña_admin");
+                String estado = rs.getString("estado_admin");
                 String usuario = rs.getString("nombre_usuario");
                 admin.setIDAdmin(id);
                 admin.setNombreAdmin(nombre);

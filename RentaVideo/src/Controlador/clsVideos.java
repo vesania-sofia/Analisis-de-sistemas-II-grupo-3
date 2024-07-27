@@ -15,13 +15,13 @@ public class clsVideos {
     
     private int id_video;
     private String titulo_video;
-    private String precio_video;
-    private float año_estreno_video;
+    private float precio_video; // o double si prefieres más precisión
+    private int año_estreno_video; // Cambiado de float a int
     private String genero_video;
     private String actores_video;
     private String sintesis_video;
-    private String existencia_video;
     private String formato_video;
+    private int existencia_video; // Cambiado de String a int si representa una cantidad
    
 
     public clsVideos() {
@@ -45,11 +45,11 @@ public class clsVideos {
         this.titulo_video = titulo_video;
     }
 
-    public String getprecio_video() {
+    public float getprecio_video() {
         return precio_video;
     }
 
-    public void setprecio_video(String precio_video) {
+    public void setprecio_video(float precio_video) {
         this.precio_video = precio_video;
     }
 
@@ -57,7 +57,7 @@ public class clsVideos {
         return año_estreno_video;
     }
 
-    public void setaño_estreno_video(float año_Estreno_video) {
+    public void setaño_estreno_video(int año_Estreno_video) {
         this.año_estreno_video = año_Estreno_video;
     }
 
@@ -85,11 +85,11 @@ public class clsVideos {
         this.sintesis_video = sintesis_video;
     }
 
-    public String getexistencia_video() {
+    public int getexistencia_video() {
         return existencia_video;
     }
 
-    public void setexistencia_video(String existencia_video) {
+    public void setexistencia_video(int existencia_video) {
         this.existencia_video = existencia_video;
     }
 
@@ -103,7 +103,7 @@ public class clsVideos {
 
   
 
-    public clsVideos(int id_video, String titulo_video, String precio_video, float año_estreno_video, String genero_video, String actores_video, String sintesis_video, String existencia_video, String formato_video) {
+    public clsVideos(int id_video, String titulo_video, float precio_video, int año_estreno_video, String genero_video, String actores_video, String sintesis_video, int existencia_video, String formato_video) {
         this.id_video = id_video;
         this.titulo_video = titulo_video;
         this.precio_video = precio_video;
@@ -116,7 +116,7 @@ public class clsVideos {
         
     }
 
-    public clsVideos(int id_video, String titulo_video, String precio_video, float año_estreno_video, String genero_video, String actores_video, String sintesis_video, String existencia_video) {
+    public clsVideos(int id_video, String titulo_video, float precio_video, int año_estreno_video, String genero_video, String actores_video, String sintesis_video, int existencia_video) {
         this.id_video = id_video;
         this.titulo_video = titulo_video;
         this.precio_video = precio_video;
@@ -128,7 +128,7 @@ public class clsVideos {
     
     }
 
-    public clsVideos(int id_video, String titulo_video, String precio_video, float año_estreno_video, String genero_video, String actores_video, String sintesis_video) {
+    public clsVideos(int id_video, String titulo_video, float precio_video, int año_estreno_video, String genero_video, String actores_video, String sintesis_video) {
         this.id_video = id_video;
         this.titulo_video = titulo_video;
         this.precio_video = precio_video;
@@ -139,7 +139,7 @@ public class clsVideos {
   
     }
 
-    public clsVideos(int id_video, String titulo_video, String precio_video, float año_estreno_video, String genero_video, String actores_video) {
+    public clsVideos(int id_video, String titulo_video, float precio_video, int año_estreno_video, String genero_video, String actores_video) {
         this.id_video = id_video;
         this.titulo_video = titulo_video;
         this.precio_video = precio_video;
@@ -149,7 +149,7 @@ public class clsVideos {
         
     }
 
-    public clsVideos(int id_video, String titulo_video, String precio_video, float año_estreno_video, String genero_video) {
+    public clsVideos(int id_video, String titulo_video, float precio_video, int año_estreno_video, String genero_video) {
         this.id_video = id_video;
         this.titulo_video = titulo_video;
         this.precio_video = precio_video;
@@ -158,7 +158,7 @@ public class clsVideos {
     
     }
 
-    public clsVideos(int id_video, String titulo_video, String precio_video, float año_estreno_video) {
+    public clsVideos(int id_video, String titulo_video, float precio_video, int año_estreno_video) {
         this.id_video = id_video;
         this.titulo_video = titulo_video;
         this.precio_video = precio_video;
@@ -166,7 +166,7 @@ public class clsVideos {
       
     }
 
-    public clsVideos(int id_video, String titulo_video, String precio_video) {
+    public clsVideos(int id_video, String titulo_video, float precio_video) {
         this.id_video = id_video;
         this.titulo_video = titulo_video;
         this.precio_video = precio_video;
