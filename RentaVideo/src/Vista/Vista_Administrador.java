@@ -5,8 +5,8 @@
 package Vista;
 
 import Vista.JDialog_Administradores;
-import Vista.Registro_Cliente;
-import Vista.Registro_Video;
+
+
 
 /**
  *

@@ -37,12 +37,12 @@ public class daoVideos {
             while (rs.next()) {
                 int id = rs.getInt("id_video");
                 String titulo = rs.getString("titulo_video");
-                String precio = rs.getString("precio_video");
-                float año = rs.getFloat ("año_estreno_video");
+                float precio = rs.getFloat("precio_video");
+                int año = rs.getInt ("año_estreno_video");
                 String genero =rs.getString("genero_video");
                 String actores =rs.getString("actores_video");
                 String sitensis =rs.getString("sintesis_video");
-                String extension =rs.getString("existencia_video");
+                int extension =rs.getInt("existencia_video");
                 String formato =rs.getString("formato_video");
                
                 clsVideos tipovideos = new clsVideos ();
@@ -77,12 +77,12 @@ public class daoVideos {
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setInt(1, video.getid_video());
             stmt.setString(2, video.gettitulo_video());
-            stmt.setString(3, video.getprecio_video());
+            stmt.setFloat(3, video.getprecio_video());
             stmt.setFloat(4, video.getaño_estreno_video());
             stmt.setString(5, video.getgenero_video());
             stmt.setString(6, video.getactores_video());
             stmt.setString(7, video.getsintesis_video());
-            stmt.setString(8, video.getexistencia_video());
+            stmt.setInt(8, video.getexistencia_video());
             stmt.setString(9, video.getformato_video());
             
             
@@ -110,12 +110,12 @@ public class daoVideos {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, video.gettitulo_video());
-            stmt.setString(2, video.getprecio_video());
+            stmt.setFloat(2, video.getprecio_video());
             stmt.setFloat(3, video.getaño_estreno_video());
             stmt.setString(4, video.getgenero_video());
             stmt.setString(5, video.getactores_video());
             stmt.setString(6, video.getsintesis_video());
-            stmt.setString(7, video.getexistencia_video());
+            stmt.setInt(7, video.getexistencia_video());
             stmt.setString(8, video.getformato_video());
             
             
@@ -168,12 +168,12 @@ public class daoVideos {
             while (rs.next()) {
                 int id = rs.getInt("Id_video");
                 String titulo = rs.getString("Titulo_video");
-                String precio = rs.getString("Precio_video");
-                float año = rs.getFloat("Año_Estreno_video");
+                float precio = rs.getFloat("Precio_video");
+                int año = rs.getInt("Año_Estreno_video");
                 String genero = rs.getString("Genero_video");
                 String actores = rs.getString("Actores_video");
                 String sintesis = rs.getString("Sintesis_video");
-                String extension = rs.getString("Extension_video");
+                int extension = rs.getInt("Extension_video");
                 String formato = rs.getString("Formato_video");
                 
                 
@@ -215,12 +215,12 @@ public class daoVideos {
             while (rs.next()) {
                 int id = rs.getInt("Id_video");
                 String titulo = rs.getString("Titulo_video");
-                String precio = rs.getString("Precio_video");
-                float año = rs.getFloat("Año_Estreno_video");
+                float precio = rs.getFloat("Precio_video");
+                int año = rs.getInt("Año_Estreno_video");
                 String genero = rs.getString("Genero_video");
                 String actores = rs.getString("Actores_video");
                 String sintesis = rs.getString("Sintesis_video");
-                String extension = rs.getString("Extension_video");
+                int extension = rs.getInt("Extension_video");
                 String formato = rs.getString("Formato_video");
                 
             

@@ -169,10 +169,10 @@ public class jDialog_vistaCliente extends javax.swing.JDialog {
             }
         });
 
-        Btn_ayuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Ayuda.png"))); // NOI18N
+        Btn_ayuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AyudaA.png"))); // NOI18N
         Btn_ayuda.setToolTipText("");
 
-        Btn_buscarId.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
+        Btn_buscarId.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BuscarA.png"))); // NOI18N
         Btn_buscarId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_buscarIdActionPerformed(evt);

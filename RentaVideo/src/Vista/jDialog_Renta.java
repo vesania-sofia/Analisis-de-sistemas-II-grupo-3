@@ -7,6 +7,8 @@ package Vista;
 import Controlador.clsRenta;
 import Controlador.clsRegistroCliente; //importamos la clase de Clientes
 import Controlador.clsVideos; //importamos la clase de Videos
+import Modelo.daoRegistroCliente;
+import Modelo.daoRenta;
 import java.awt.Component;
 import java.sql.*;
 import java.util.ArrayList;
@@ -70,6 +72,9 @@ public class jDialog_Renta extends javax.swing.JDialog {
             dato[1] = Integer.toString(ListadoRenta.get(i).getId_cliente());
             dato[2] = ListadoRenta.get(i).getFecha_alquiler();
             dato[3] = ListadoRenta.get(i).getFecha_devolucion();
+            // Obtener el estado seleccionado del JComboBox
+            /*String estadoSeleccionado = (String) Cbo_estatusAlquiler.getSelectedItem();
+            dato[4] = estadoSeleccionado.equalsIgnoreCase("Rentado") ? "Rentado" : "Devuelto";*/
             dato[4] = ListadoRenta.get(i).getEstatus_alquiler();
             dato[5] = Integer.toString(ListadoRenta.get(i).getId_video());
             modelo.addRow(dato);
@@ -83,6 +88,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
         llenadoDeComboCliente();
         llenadoDeComboVideo();
         //llenadoDeComboVideo
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -95,9 +101,13 @@ public class jDialog_Renta extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tbl_alquilerVideos = new javax.swing.JTable();
         Cbo_cliente = new javax.swing.JComboBox<>();
@@ -121,22 +131,38 @@ public class jDialog_Renta extends javax.swing.JDialog {
         Btn_buscar = new javax.swing.JButton();
         Btn_ayuda = new javax.swing.JButton();
         Btn_actualizar = new javax.swing.JButton();
-        Rdb_rentado = new javax.swing.JRadioButton();
-        Rdb_devuelto = new javax.swing.JRadioButton();
+        Txt_estatusAlquiler = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         Txt_idAlquiler = new javax.swing.JTextField();
         lbl_Cliente1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Agregar");
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Eliminar");
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Editar");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 0));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Nombre.png"))); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("ALQUILER DE VIDEOS");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/negocio.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,16 +173,20 @@ public class jDialog_Renta extends javax.swing.JDialog {
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
                 .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap())
         );
@@ -197,8 +227,6 @@ public class jDialog_Renta extends javax.swing.JDialog {
         lbl_video.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_video.setForeground(new java.awt.Color(255, 255, 255));
         lbl_video.setText("Video a Rentar");
-
-        Cbo_idVideo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Video1", "Video2", "Video3", "Video4" }));
 
         lbl_PrecioRenta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbl_PrecioRenta.setForeground(new java.awt.Color(255, 255, 255));
@@ -318,13 +346,25 @@ public class jDialog_Renta extends javax.swing.JDialog {
             }
         });
 
-        buttonGroup1.add(Rdb_rentado);
-        Rdb_rentado.setForeground(new java.awt.Color(255, 255, 255));
-        Rdb_rentado.setText("Rentado");
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Agregar");
 
-        buttonGroup1.add(Rdb_devuelto);
-        Rdb_devuelto.setForeground(new java.awt.Color(255, 255, 255));
-        Rdb_devuelto.setText("Devuelto");
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Agregar");
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Eliminar");
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Editar");
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Limpiar");
 
         javax.swing.GroupLayout pan_videoLayout = new javax.swing.GroupLayout(pan_video);
         pan_video.setLayout(pan_videoLayout);
@@ -343,20 +383,33 @@ public class jDialog_Renta extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_PrecioRenta, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pan_videoLayout.createSequentialGroup()
-                                .addComponent(Rdb_rentado)
-                                .addGap(18, 18, 18)
-                                .addComponent(Rdb_devuelto))))
+                            .addComponent(Txt_estatusAlquiler, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pan_videoLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(Btn_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Btn_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pan_videoLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel14)))
                         .addGap(47, 47, 47)
-                        .addComponent(Btn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Btn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pan_videoLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel15)))
                         .addGap(35, 35, 35)
-                        .addComponent(Btn_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Btn_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pan_videoLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel17)))
                         .addGap(39, 39, 39)
-                        .addComponent(Btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pan_videoLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel19))
+                            .addComponent(Btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,6 +423,11 @@ public class jDialog_Renta extends javax.swing.JDialog {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(Txt_buscado, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(42, 42, 42))
+            .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pan_videoLayout.createSequentialGroup()
+                    .addGap(289, 289, 289)
+                    .addComponent(jLabel13)
+                    .addContainerGap(290, Short.MAX_VALUE)))
         );
         pan_videoLayout.setVerticalGroup(
             pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,9 +439,8 @@ public class jDialog_Renta extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Cbo_idVideo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Rdb_rentado)
-                            .addComponent(Rdb_devuelto))
-                        .addGap(28, 28, 28)
+                            .addComponent(Txt_estatusAlquiler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lbl_PrecioRenta, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 36, Short.MAX_VALUE)
@@ -392,7 +449,13 @@ public class jDialog_Renta extends javax.swing.JDialog {
                     .addComponent(Btn_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Btn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Btn_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
+                .addGap(2, 2, 2)
+                .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel19))
+                .addContainerGap())
             .addGroup(pan_videoLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -407,6 +470,11 @@ public class jDialog_Renta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Btn_ayuda)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pan_videoLayout.createSequentialGroup()
+                    .addGap(150, 150, 150)
+                    .addComponent(jLabel13)
+                    .addContainerGap(150, Short.MAX_VALUE)))
         );
 
         lbl_Cliente1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -430,7 +498,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
@@ -444,9 +512,9 @@ public class jDialog_Renta extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pan_video, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3))))
+                            .addComponent(jScrollPane3)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
@@ -454,7 +522,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_Cliente1)
                     .addComponent(Txt_idAlquiler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -463,7 +531,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(pan_video, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -481,16 +549,41 @@ public class jDialog_Renta extends javax.swing.JDialog {
     private void Btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_modificarActionPerformed
         // TODO add your handling code here:
         clsRenta renta = new clsRenta();
-        renta.setId_cliente(Integer.parseInt(Cbo_cliente.getSelectedItem().toString()));
+
+        try {
+        //Id del Alquiler
+        renta.setId_comprobante(Integer.parseInt(Txt_idAlquiler.getText()));
+        // Extraer y convertir el ID del cliente
+        String clienteSeleccionado = Cbo_cliente.getSelectedItem().toString();
+        int idCliente = Integer.parseInt(clienteSeleccionado.split(" - ")[0].trim());
+        renta.setId_cliente(idCliente);
+
+        // Extraer y convertir el ID del video
+        String videoSeleccionado = Cbo_idVideo.getSelectedItem().toString();
+        int idVideo = Integer.parseInt(videoSeleccionado.split(" - ")[0].trim());
+        renta.setId_video(idVideo);
+
+        // Establecer las fechas
         renta.setFecha_alquiler(Txt_fechaInicioRenta.getText());
         renta.setFecha_devolucion(Txt_fechaDevolucionRenta.getText());
-        //renta.setEstatus_alquiler(Cbo_estatusAlquiler.getSelectedItem().toString());
-        renta.setId_video(Integer.parseInt(Cbo_idVideo.getSelectedItem().toString()));
-        JOptionPane.showMessageDialog(null, "Registro Modificado\n", 
-                    "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);      
-        
+
+        // Crear el DAO y actualizar la renta
+        daoRenta dao = new daoRenta();
+        int result = dao.actualizaRenta(renta);
+
+        if (result > 0) {
+        JOptionPane.showMessageDialog(null, "Datos Modificados\n", 
+            "Información del Sistema", JOptionPane.INFORMATION_MESSAGE); 
         llenadoDeTablas();
-        //limpiarTextos();
+        limpiarTextos();
+        } else {
+        JOptionPane.showMessageDialog(null, "Error al modificar datos\n", 
+            "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Error al convertir el ID a número: " + e.getMessage(), 
+        "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_Btn_modificarActionPerformed
 
     private void Txt_buscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_buscadoActionPerformed
@@ -514,47 +607,28 @@ public class jDialog_Renta extends javax.swing.JDialog {
         String selectedItem = Cbo_cliente.getSelectedItem().toString();
         int item = Integer.parseInt(selectedItem.split(" - ")[0]);
         renta.setId_cliente(item);
-      
-        String fecha_alquiler = Txt_fechaInicioRenta.getText();
-        String fecha_renta = Txt_fechaDevolucionRenta.getText();
         
-        /*//estatus combo
-        String estadoSeleccionado = (String) Cbo_estatusAlquiler.getSelectedItem();
-        renta.setEstatus_alquiler(estadoSeleccionado.equalsIgnoreCase("Rentado") ? "Rentado" : "Devuelto");
-        if (estadoSeleccionado != null) {
-        if (estadoSeleccionado.equalsIgnoreCase("Rentado")) {
-        renta.setEstatus_alquiler("Rentado");
-        } else if (estadoSeleccionado.equalsIgnoreCase("Devuelto")) {
-        renta.setEstatus_alquiler("Devuelto");
-        } else {
-        // Manejo de caso en el que el valor seleccionado no es válido
-        System.out.println("Error: Estado seleccionado no válido.");
-         }
-        } else {
-        // Manejo de caso en el que no se seleccionó ningún valor
-        System.out.println("Error: No se seleccionó ningún estado.");
-        }
-        //String estatus_Alquiler= Cbo_estatusAlquiler.getSelectedItem().toString();
-        */
-       
-        //nombre video clsVideo
+        renta.setFecha_alquiler(Txt_fechaInicioRenta.getText());
+        renta.setFecha_devolucion(Txt_fechaDevolucionRenta.getText());
+        renta.setEstatus_alquiler(Txt_estatusAlquiler.getText());
+        
         String selectedItem2 = Cbo_idVideo.getSelectedItem().toString();
         int item2 = Integer.parseInt(selectedItem2.split(" - ")[0]);
-        renta.setId_video(item2);
-        
-        String estatusAlquiler = Rdb_rentado.isSelected() ? "T" : (Rdb_devuelto.isSelected() ? "F" : "");
+        renta.setId_video(item2);        
 
-        if (!estatusAlquiler.isEmpty()) {
-        renta.setEstatus_alquiler(estatusAlquiler);
+        daoRenta daoRentas = new daoRenta();
+        int result = daoRentas.ingresaRenta(renta);
+
+        if (result > 0) {
         JOptionPane.showMessageDialog(null, "Registro Ingresado\n", 
-                "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
-
-          llenadoDeTablas();
-          limpiarTextos();
+                "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);        
+        llenadoDeTablas();
+        limpiarTextos();
         } else {
-        JOptionPane.showMessageDialog(null, "Debe seleccionar un estatus.");
-        }
- 
+        JOptionPane.showMessageDialog(null, "Error al ingresar registro\n", 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }        
+        
         llenadoDeTablas();
         llenadoDeComboCliente();
         llenadoDeComboVideo();
@@ -584,41 +658,77 @@ public class jDialog_Renta extends javax.swing.JDialog {
     }//GEN-LAST:event_Btn_limpiarActionPerformed
 
     private void Btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_buscarActionPerformed
-        // TODO add your handling code here:
+    // TODO add your handling code here:
         clsRenta renta = new clsRenta();
-        renta.setId_comprobante(Integer.parseInt(Txt_buscado.getText()));
+        String buscado = Txt_buscado.getText().trim();
+
+        if (buscado.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "El campo de búsqueda no puede estar vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+
+        try {
+        renta.setId_comprobante(Integer.parseInt(buscado));
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido en el campo de búsqueda.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+
         renta = renta.getBuscarInformacionRentaPorId(renta);
-        System.out.println("Renta retornada:" + renta);
-        //Txt_idAlquiler.setText(renta.getId_comprobante());
+
+        if (renta != null) {
+        // Si la renta es encontrada
+        JOptionPane.showMessageDialog(this, "Renta encontrada exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        // Mostrar datos en la interfaz
+        Txt_idAlquiler.setText(Integer.toString(renta.getId_comprobante()));
         Txt_fechaInicioRenta.setText(renta.getFecha_alquiler());
         Txt_fechaDevolucionRenta.setText(renta.getFecha_devolucion());
+        Txt_estatusAlquiler.setText(renta.getEstatus_alquiler());
 
-        int cliente = renta.getId_cliente();
-        for (int i = 1; i < Cbo_cliente.getItemCount(); i++) {
-            int item = Integer.parseInt(Cbo_cliente.getItemAt(i).toString());
-            if (item == cliente) {
-                Cbo_cliente.setSelectedIndex(i);
-                break;
-            }
-        }
-
-        int video = renta.getId_video();
-        for (int i = 1; i < Cbo_idVideo.getItemCount(); i++) {
-            int item = Integer.parseInt(Cbo_idVideo.getItemAt(i).toString());
-            if (item == video) {
+        // Seleccionar video en Cbo_idVideo
+        int CodVideo = renta.getId_video();
+        boolean videoEncontrado = false;
+        for (int i = 0; i < Cbo_idVideo.getItemCount(); i++) {
+        String item = Cbo_idVideo.getItemAt(i).toString().trim();
+        try {
+            int itemIdV = Integer.parseInt(item.split(" - ")[0]); // Ajusta según el formato de los ítems
+            if (itemIdV == CodVideo) {
                 Cbo_idVideo.setSelectedIndex(i);
+                videoEncontrado = true;
                 break;
             }
+        } catch (NumberFormatException e) {
+            // Ignorar ítems que no se pueden convertir a entero
         }
-        
-        /*String estatus = renta.getEstatus_alquiler();
-        for (int i = 1; i < Cbo_estatusAlquiler.getItemCount(); i++) {
-            String item = Cbo_estatusAlquiler.getItemAt(i).toString();
-            if (item.equals(estatus)) {
-                Cbo_estatusAlquiler.setSelectedIndex(i);
+        }
+        if (!videoEncontrado) {
+        JOptionPane.showMessageDialog(this, "Video no encontrado en la lista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+
+        // Seleccionar cliente en Cbo_cliente
+        int CodCliente = renta.getId_cliente();
+        boolean clienteEncontrado = false;
+        for (int i = 0; i < Cbo_cliente.getItemCount(); i++) {
+        String item = Cbo_cliente.getItemAt(i).toString().trim();
+        try {
+            int itemId = Integer.parseInt(item.split(" - ")[0]); // Ajusta según el formato de los ítems
+            if (itemId == CodCliente) {
+                Cbo_cliente.setSelectedIndex(i);
+                clienteEncontrado = true;
                 break;
             }
-        }        */
+        } catch (NumberFormatException e) {
+            // Ignorar ítems que no se pueden convertir a entero
+        }
+        }
+        if (!clienteEncontrado) {
+        JOptionPane.showMessageDialog(this, "Cliente no encontrado en la lista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+        } else {
+        // Si la renta no es encontrada
+        JOptionPane.showMessageDialog(this, "Renta no encontrada", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_Btn_buscarActionPerformed
 
     private void Btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_actualizarActionPerformed
@@ -956,17 +1066,25 @@ public class jDialog_Renta extends javax.swing.JDialog {
     private javax.swing.JButton Btn_registrar;
     private javax.swing.JComboBox<String> Cbo_cliente;
     private javax.swing.JComboBox<String> Cbo_idVideo;
-    private javax.swing.JRadioButton Rdb_devuelto;
-    private javax.swing.JRadioButton Rdb_rentado;
     private javax.swing.JTable Tbl_alquilerVideos;
     private javax.swing.JTextField Txt_buscado;
+    private javax.swing.JTextField Txt_estatusAlquiler;
     private javax.swing.JTextField Txt_fechaDevolucionRenta;
     private javax.swing.JTextField Txt_fechaInicioRenta;
     private javax.swing.JTextField Txt_idAlquiler;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
