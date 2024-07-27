@@ -18,7 +18,7 @@ import Seguridad.Modelo.Conexion;
 public class daoRenta {
 
     private static final String SQL_SELECT = "SELECT id_comprobante, id_cliente, fecha_alquiler, fecha_devolucion, estatus_alquiler, id_video FROM TBL_ALQUILERES";
-    private static final String SQL_INSERT = "INSERT INTO TBL_ALQUILERES(id_cliente, fecha_alquiler, fecha_devolucion, estatus_alquiler, id_video) VALUES(?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO tbl_alquileres(id_cliente, fecha_alquiler, fecha_devolucion, estatus_alquiler, id_video) VALUES(?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE TBL_ALQUILERES SET id_cliente=?, fecha_alquiler=?, fecha_devolucion=?, estatus_alquiler=?, id_video=? WHERE id_comprobante = ?";
     private static final String SQL_DELETE = "DELETE FROM TBL_ALQUILERES WHERE id_comprobante=?";
     private static final String SQL_SELECT_NOMBRE = "SELECT id_comprobante, id_cliente, fecha_alquiler, fecha_devolucion, estatus_alquiler, id_video FROM TBL_ALQUILERES WHERE id_cliente = ?";
