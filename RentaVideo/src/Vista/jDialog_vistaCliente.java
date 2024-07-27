@@ -4,6 +4,7 @@
  */
 package Vista;
 import Controlador.clsRegistroCliente;
+import Modelo.daoRegistroCliente;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -18,21 +19,21 @@ import javax.swing.JOptionPane;
 public class jDialog_vistaCliente extends javax.swing.JDialog {
 
     public void llenadoDeTablas() {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Cliene");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Apellido");
-        modelo.addColumn("Dirección");
-        modelo.addColumn("Teléfono");
-        modelo.addColumn("Correo");
-        modelo.addColumn("Estado");
+        DefaultTableModel tabla = new DefaultTableModel();
+        tabla.addColumn("ID Cliente");
+        tabla.addColumn("Nombre");
+        tabla.addColumn("Apellido");
+        tabla.addColumn("Dirección");
+        tabla.addColumn("Teléfono");
+        tabla.addColumn("Correo");
+        tabla.addColumn("Estado");
         
         clsRegistroCliente moneda = new clsRegistroCliente();
         //VendedorDAO vendedorDAO = new VendedorDAO();
 
         List<clsRegistroCliente> listadoRegistroCliete = moneda.getListadoRegistroCliente();
-        Tbl_registroCliente.setModel(modelo);
-        String[] dato = new String[5];
+        Tbl_registroCliente.setModel(tabla);
+        String[] dato = new String[7];
         for (int i = 0; i < listadoRegistroCliete.size(); i++) {
             dato[0] = Integer.toString(listadoRegistroCliete.get(i).getid_cliente());
             dato[1] = listadoRegistroCliete .get(i).getnombre_cliente();
@@ -41,7 +42,7 @@ public class jDialog_vistaCliente extends javax.swing.JDialog {
             dato[4] = listadoRegistroCliete.get(i).gettelefono_cliente();
             dato[5] = listadoRegistroCliete .get(i).getcorreo_cliente();
             dato[6] = listadoRegistroCliete.get(i).getestado_cliente();
-            modelo.addRow(dato);
+            tabla.addRow(dato);
         }       
     }
     /**
@@ -52,6 +53,8 @@ public class jDialog_vistaCliente extends javax.swing.JDialog {
     public jDialog_vistaCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
+        llenadoDeTablas();
     }
 
     /**
@@ -170,6 +173,11 @@ public class jDialog_vistaCliente extends javax.swing.JDialog {
         Btn_ayuda.setToolTipText("");
 
         Btn_buscarId.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
+        Btn_buscarId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_buscarIdActionPerformed(evt);
+            }
+        });
 
         Btn_actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
         Btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -465,6 +473,8 @@ public class jDialog_vistaCliente extends javax.swing.JDialog {
     
     private void Btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_actualizarActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Tabla actualizada\n", 
+                    "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
         llenadoDeTablas();
     }//GEN-LAST:event_Btn_actualizarActionPerformed
 
@@ -494,42 +504,77 @@ public class jDialog_vistaCliente extends javax.swing.JDialog {
 
     private void Btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_modificarActionPerformed
         // TODO add your handling code here:
-        clsRegistroCliente cliente = new clsRegistroCliente();
-        cliente.setid_cliente(Integer.parseInt(Txt_buscarId.getText()));
-        cliente.setnombre_cliente(Txt_nombre.getText());
-        cliente.setapellido_cliente(Txt_apellido.getText());
-        cliente.setdireccion_cliente(Txt_dirección.getText());
-        cliente.settelefono_cliente(Txt_telefono.getText());
-        cliente.setcorreo_cliente(Txt_correo.getText());
-        cliente.setestado_cliente(Txt_estado.getText());
-        
-        cliente.setIngresaRegistroCliente(cliente);
-         JOptionPane.showMessageDialog(null, "Datos Modificado\n", 
-                    "Información del Sistema", JOptionPane.INFORMATION_MESSAGE); 
-         
-         llenadoDeTablas();
+          clsRegistroCliente cliente = new clsRegistroCliente();
+    cliente.setid_cliente(Integer.parseInt(Txt_buscarId.getText()));
+    cliente.setnombre_cliente(Txt_nombre.getText());
+    cliente.setapellido_cliente(Txt_apellido.getText());
+    cliente.setdireccion_cliente(Txt_dirección.getText());
+    cliente.settelefono_cliente(Txt_telefono.getText());
+    cliente.setcorreo_cliente(Txt_correo.getText());
+    cliente.setestado_cliente(Txt_estado.getText());
+
+    daoRegistroCliente dao = new daoRegistroCliente();
+    int result = dao.actualizaRegistroCliente(cliente);
+
+    if (result > 0) {
+        JOptionPane.showMessageDialog(null, "Datos Modificados\n", 
+                "Información del Sistema", JOptionPane.INFORMATION_MESSAGE); 
+        llenadoDeTablas();
         limpiarTextos();
+    } else {
+        JOptionPane.showMessageDialog(null, "Error al modificar datos\n", 
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
     }//GEN-LAST:event_Btn_modificarActionPerformed
 
     private void Btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_agregarActionPerformed
         // TODO add your handling code here:
-        clsRegistroCliente cliente = new clsRegistroCliente();
-        cliente.setid_cliente(Integer.parseInt(Txt_buscarId.getText()));
-        cliente.setnombre_cliente(Txt_nombre.getText());
-        cliente.setapellido_cliente(Txt_apellido.getText());
-        cliente.setdireccion_cliente(Txt_dirección.getText());
-        cliente.settelefono_cliente(Txt_telefono.getText());
-        cliente.setcorreo_cliente(Txt_correo.getText());
-        cliente.setestado_cliente(Txt_estado.getText());
-        
-        cliente.setIngresaRegistroCliente(cliente);
-                JOptionPane.showMessageDialog(null, "Registro Ingresado\n", 
-                            "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
-                
+            clsRegistroCliente cliente = new clsRegistroCliente();
+    cliente.setnombre_cliente(Txt_nombre.getText());
+    cliente.setapellido_cliente(Txt_apellido.getText());
+    cliente.setdireccion_cliente(Txt_dirección.getText());
+    cliente.settelefono_cliente(Txt_telefono.getText());
+    cliente.setcorreo_cliente(Txt_correo.getText());
+    cliente.setestado_cliente(Txt_estado.getText());
+
+    daoRegistroCliente daoRegistroCliente = new daoRegistroCliente();
+    int result = daoRegistroCliente.ingresarRegistroCliente(cliente);
+
+    if (result > 0) {
+        JOptionPane.showMessageDialog(null, "Registro Ingresado\n", 
+                "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);        
         llenadoDeTablas();
         limpiarTextos();
-        
+    } else {
+        JOptionPane.showMessageDialog(null, "Error al ingresar registro\n", 
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
     }//GEN-LAST:event_Btn_agregarActionPerformed
+
+    private void Btn_buscarIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_buscarIdActionPerformed
+        // TODO add your handling code here:
+        
+               clsRegistroCliente cliente = new clsRegistroCliente();      
+        cliente.setid_cliente(Integer.parseInt(Txt_buscarId.getText()));        
+        cliente = cliente.getBuscarInformacionRegistroClientePorId(cliente);
+        
+        if (cliente != null) {
+            
+            JOptionPane.showMessageDialog(this, "Cliente encontrado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE); 
+        
+            Txt_idCliente.setText(Integer.toString(cliente.getid_cliente()));
+            Txt_nombre.setText(cliente.getnombre_cliente());
+            Txt_apellido.setText(cliente.getapellido_cliente());
+            Txt_dirección.setText(cliente.getdireccion_cliente());
+            Txt_telefono.setText(cliente.gettelefono_cliente());
+            Txt_correo.setText(cliente.getcorreo_cliente());
+            Txt_estado.setText(cliente.getestado_cliente());
+        } else {
+            JOptionPane.showMessageDialog(this, "Administrador no encontrado");
+        } 
+    }//GEN-LAST:event_Btn_buscarIdActionPerformed
 
     /**
      * @param args the command line arguments
