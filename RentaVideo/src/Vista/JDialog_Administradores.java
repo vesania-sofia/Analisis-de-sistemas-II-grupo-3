@@ -7,7 +7,6 @@ package Vista;
 import Controlador.ClsAdministradores;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -47,12 +46,8 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             dato[4] = ListadoAdministradores.get(i).getTelefonoAdmin();
             dato[5] = ListadoAdministradores.get(i).getCorreoAdmin();
             dato[6] = ListadoAdministradores.get(i).getContraAdmin();
-        
-            // Obtener el estado seleccionado del JComboBox
-            String estadoSeleccionado = (String) Cbo_EstadoAdmin.getSelectedItem();
-            dato[7] = estadoSeleccionado.equalsIgnoreCase("Activo") ? "Activo" : "Inactivo";
-            
-            dato[8] = ListadoAdministradores.get(i).getDireccionAdmin();
+            dato[7] = ListadoAdministradores.get(i).getEstadoAdmin();
+            dato[8] = ListadoAdministradores.get(i).getNombreUsuario();
             tabla.addRow(dato);
         }       
     }
@@ -63,7 +58,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         initComponents();
         
         this.setLocationRelativeTo(null);
-        
+       
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         model.addElement("activo");
         model.addElement("inactivo");
@@ -159,7 +154,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Lbl_ContraAdmin.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_ContraAdmin.setText("CONTRASEÑA:");
 
-        Cbo_EstadoAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        Cbo_EstadoAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "activo", "inactivo" }));
         Cbo_EstadoAdmin.setToolTipText("");
         Cbo_EstadoAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,7 +193,8 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Lbl_IDAdmin.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_IDAdmin.setText("ID:");
 
-        Txt_IdAdmin.setBackground(new java.awt.Color(51, 51, 51));
+        Txt_IdAdmin.setEditable(false);
+        Txt_IdAdmin.setBackground(new java.awt.Color(102, 102, 102));
         Txt_IdAdmin.setForeground(new java.awt.Color(255, 255, 255));
         Txt_IdAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -438,15 +434,14 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
                                 .addComponent(Lbl_Reportes))))
                     .addComponent(Lbl_CorreoAdmin, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_AdministradoresLayout.createSequentialGroup()
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Lbl_TelefonoAdmin)
                             .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(Lbl_ApellidoAdmin)
                                 .addComponent(Lbl_NombreAdmin)
                                 .addComponent(Lbl_IDAdmin)
-                                .addComponent(Lbl_DireccionAdmin, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                                .addComponent(Lbl_TelefonoAdmin)
-                                .addGap(24, 24, 24)))
+                                .addComponent(Lbl_DireccionAdmin, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGap(17, 17, 17)
                         .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
@@ -579,7 +574,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
          ClsAdministradores admin = new ClsAdministradores();
-            admin.setIDAdmin(Integer.parseInt(Txt_IdAdmin.getText()));
+            //admin.setIDAdmin(Integer.parseInt(Txt_IdAdmin.getText()));
             admin.setNombreAdmin(Txt_NombreAdmin.getText());
             admin.setApellidoAdmin(Txt_ApellidoAdmin.getText());
             admin.setDireccionAdmin(Txt_DireccionAdmin.getText());
@@ -589,7 +584,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             
             // Obtener el estado seleccionado del JComboBox y asignarlo al objeto admin
             String estadoSeleccionado = (String) Cbo_EstadoAdmin.getSelectedItem();
-            admin.setEstadoAdmin(estadoSeleccionado.equalsIgnoreCase("Activo") ? "T" : "F");
+            admin.setEstadoAdmin(estadoSeleccionado.equalsIgnoreCase("activo") ? "activo" : "inactivo");
             
             admin.setNombreUsuario(Txt_Usuario.getText());
             
@@ -621,7 +616,8 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Txt_CorreoAdmin.setText("");
         Txt_ContraAdmin.setText("");
         Txt_Usuario.setText("");
-                
+        Txt_Buscar.setText("");
+
     }
     
     
@@ -644,7 +640,8 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         
         // Obtener el estado seleccionado del JComboBox y asignarlo al objeto admin
         String estadoSeleccionado = (String) Cbo_EstadoAdmin.getSelectedItem();
-        admin.setEstadoAdmin(estadoSeleccionado.equalsIgnoreCase("Activo") ? "T" : "F");
+        System.out.println("Estado seleccionado: " + estadoSeleccionado);
+        admin.setEstadoAdmin(estadoSeleccionado.equalsIgnoreCase("activo") ? "activo" : "inactivo");
         
         admin.setNombreUsuario(Txt_Usuario.getText());
         
@@ -707,7 +704,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             Txt_Usuario.setText(admin.getNombreUsuario());
         
         // Establecer el estado en el JComboBox
-            String estado = admin.getEstadoAdmin().equalsIgnoreCase("T") ? "Activo" : "Inactivo";
+            String estado = admin.getEstadoAdmin().equalsIgnoreCase("activo") ? "activo" : "inactivo";
             Cbo_EstadoAdmin.setSelectedItem(estado);
             
         } else {
