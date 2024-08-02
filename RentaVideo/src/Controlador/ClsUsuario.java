@@ -5,6 +5,7 @@
  */
 package Controlador;//  
 
+import Modelo.daoRenta;
 import Modelo.daoUsuario;
 import java.sql.Date;
 import Modelo.daoUsuario;
@@ -198,6 +199,11 @@ public class ClsUsuario {
                 ", id_tipo_usuario" + id_tipo_usuario +  '}';
     }
    
+    public ClsUsuario getBuscarInformacionRentaPorNombre(ClsUsuario users){
+        daoUsuario daoUsuario = new daoUsuario();
+        return daoUsuario.consultaListadoUsuariosPorNombre(users);
+    }
+    
     public ClsUsuario getBuscarUsuarioPorID(ClsUsuario users){
         daoUsuario daoUsuario = new daoUsuario();
         return daoUsuario.consultaBuscarUsuarioPorId(users);

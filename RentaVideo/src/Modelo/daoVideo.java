@@ -4,7 +4,7 @@
  */
 package Modelo;
 import Controlador.clsVideo;
-import Modelo.Conexion;
+import Seguridad.Modelo.Conexion;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

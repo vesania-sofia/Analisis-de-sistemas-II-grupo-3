@@ -22,6 +22,7 @@ public class DaoAdministradores {
     private static final String SQL_INSERT = "INSERT INTO tbl_administradores(nombre_admin, apellido_admin, direccion_admin, telefono_admin, correo_admin, contraseña_admin, estado_admin, nombre_usuario) VALUES (?, ?, ?, ?, ?, ?, ? ,?)";
     private static final String SQL_UPDATE = "UPDATE tbl_administradores SET nombre_admin=?, apellido_admin=?, direccion_admin=?, telefono_admin=?, correo_admin=?, contraseña_admin=?, estado_admin=?, nombre_usuario=? WHERE id_admin=?";
     private static final String SQL_DELETE = "DELETE FROM tbl_administradores WHERE id_admin=?";
+    private static final String SQL_SELECT_NOMBRE = "SELECT id_admin, nombre_admin, apellido_admin, direccion_admin, telefono_admin, correo_admin, contraseña_admin, estado_admin, nombre_usuario FROM tbl_administradores WHERE contraseña_admin=? AND nombre_usuario=?";
     private static final String SQL_SELECT_ID = "SELECT id_admin, nombre_admin, apellido_admin, direccion_admin, telefono_admin, correo_admin, contraseña_admin, estado_admin, nombre_usuario FROM tbl_administradores WHERE id_admin=?";
     
     // Método auxiliar para cerrar recursos
@@ -270,10 +271,51 @@ public class DaoAdministradores {
         
         return admin;
     }    
-    
+     
+public ClsAdministradores consultaAdministradorPorNombre(ClsAdministradores admin) {
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    try {
+        conn = Conexion.getConnection();
+        stmt = conn.prepareStatement(SQL_SELECT_NOMBRE);
+        stmt.setString(1, admin.getContraAdmin());
+        stmt.setString(2, admin.getNombreUsuario());
+
+        rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            admin = mapResultSetToAdmin(rs);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace(System.out);
+    } finally {
+        closeResources(rs, stmt, conn);
+    }
+    return admin;
 }
-    
-   
 
 
+public ClsAdministradores login(String nombreUsuario, String contraseña) {
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    ClsAdministradores admin = null;
 
+    try {
+        conn = Conexion.getConnection();
+        stmt = conn.prepareStatement(SQL_SELECT_NOMBRE);
+        stmt.setString(1, contraseña);
+        stmt.setString(2, nombreUsuario);
+        rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            admin = mapResultSetToAdmin(rs);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace(System.out);
+    } finally {
+        closeResources(rs, stmt, conn);
+    }
+    return admin;
+}}

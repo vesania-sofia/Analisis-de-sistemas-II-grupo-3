@@ -131,17 +131,22 @@ public class ClsAdministradores {
 @Override
 public String toString() {
         return "ClsAdministradores{" +
-               "id_administradores=" + id_admin +
-               ", nombre_administradores='" + nombre_admin + '\'' +
-               ", apellido_administradores='" + apellido_admin + '\'' +
-               ", direccion_administradores='" + direccion_admin + '\'' +
-               ", telefono_administradores='" + telefono_admin + '\'' +
-               ", correo_administradores='" + correo_admin + '\'' +
-               ", contraseña_administradores='" + contraseña_admin+ '\'' +
-               ", estado_administradores='" + estado_admin + '\'' +
+               "id_admin=" + id_admin +
+               ", nombre_admin='" + nombre_admin + '\'' +
+               ", apellido_admin='" + apellido_admin + '\'' +
+               ", direccion_admin='" + direccion_admin + '\'' +
+               ", telefono_admin='" + telefono_admin + '\'' +
+               ", correo_admin='" + correo_admin + '\'' +
+               ", contraseña_admin='" + contraseña_admin+ '\'' +
+               ", estado_admin='" + estado_admin + '\'' +
                ", nombre_usuario="+ nombre_usuario + '}';
     }
- 
+
+    public ClsAdministradores getBuscarAdministradorPorNombre(ClsAdministradores admin){ 
+        DaoAdministradores DaoAdministradores = new DaoAdministradores();
+        return DaoAdministradores.consultaAdministradorPorNombre(admin); 
+    }
+
     public ClsAdministradores getBuscarAdministradorPorId(ClsAdministradores admin){ 
         DaoAdministradores DaoAdministradores = new DaoAdministradores();
         return DaoAdministradores.consultaAdministradorPorId(admin); 
@@ -168,7 +173,11 @@ public String toString() {
         return DaoAdministradores.actualizarAdministradorPorId(admin); 
     }
     
+    public ClsAdministradores login(String nombreUsuario, String contraseña) {
+    ClsAdministradores admin = new ClsAdministradores();
+    admin.setNombreUsuario(nombreUsuario);
+    admin.setContraAdmin(contraseña);
+    return new DaoAdministradores().consultaAdministradorPorNombre(admin);
 }
 
-
-
+}
