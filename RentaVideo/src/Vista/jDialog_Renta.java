@@ -6,7 +6,7 @@ package Vista;
 
 import Controlador.clsRenta;
 import Controlador.clsRegistroCliente; //importamos la clase de Clientes
-import Controlador.clsVideos; //importamos la clase de Videos
+import Controlador.clsVideo; //importamos la clase de Videos
 import Modelo.daoRegistroCliente;
 import Modelo.daoRenta;
 import java.awt.Component;
@@ -42,13 +42,13 @@ public class jDialog_Renta extends javax.swing.JDialog {
       
         
       public void llenadoDeComboVideo() {
-        clsVideos video = new clsVideos();
-        List<clsVideos> listadoVideos = video.getListadoVideo();
+        clsVideo video = new clsVideo();
+        List<clsVideo> listadoVideos = video.getListadoRegistroVideo();
         Cbo_idVideo.setAlignmentX(Component.CENTER_ALIGNMENT);
         Cbo_idVideo.addItem("Seleccionar...");
         for (int i = 0; i < listadoVideos.size(); i++) {
-            clsVideos Video = listadoVideos.get(i);
-            String item = Video.getid_video() + " - " + Video.gettitulo_video();
+            clsVideo Video = listadoVideos.get(i);
+            String item = Video.getId_video() + " - " + Video.getTitulo_video();
             Cbo_idVideo.addItem(item);
         }
     }
@@ -547,7 +547,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
     }//GEN-LAST:event_Txt_fechaDevolucionRentaActionPerformed
 
     private void Btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_modificarActionPerformed
-        // TODO add your handling code here:
+// TODO add your handling code here:
         clsRenta renta = new clsRenta();
 
         try {
@@ -567,6 +567,8 @@ public class jDialog_Renta extends javax.swing.JDialog {
         renta.setFecha_alquiler(Txt_fechaInicioRenta.getText());
         renta.setFecha_devolucion(Txt_fechaDevolucionRenta.getText());
 
+        renta.setEstatus_alquiler(Txt_estatusAlquiler.getText());
+       
         // Crear el DAO y actualizar la renta
         daoRenta dao = new daoRenta();
         int result = dao.actualizaRenta(renta);

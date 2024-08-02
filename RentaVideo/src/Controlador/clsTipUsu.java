@@ -8,9 +8,30 @@ import Modelo.daoTipUsu;
 
 /**
  *
- * @author macho
+ * @author DELL
  */
 public class clsTipUsu {
+    private int id_tipo_usuario;
+    private String nombre_tipo_usuario;
+    private String status_tipo_usuario;
+
+    public clsTipUsu() {
+    }
+
+    public clsTipUsu(int id_tipo_usuario) {
+        this.id_tipo_usuario = id_tipo_usuario;
+    }
+
+    public clsTipUsu(int id_tipo_usuario, String nombre_tipo_usuario) {
+        this.id_tipo_usuario = id_tipo_usuario;
+        this.nombre_tipo_usuario = nombre_tipo_usuario;
+    }
+
+    public clsTipUsu(int id_tipo_usuario, String nombre_tipo_usuario, String status_tipo_usuario) {
+        this.id_tipo_usuario = id_tipo_usuario;
+        this.nombre_tipo_usuario = nombre_tipo_usuario;
+        this.status_tipo_usuario = status_tipo_usuario;
+    }
 
     public int getId_tipo_usuario() {
         return id_tipo_usuario;
@@ -36,34 +57,6 @@ public class clsTipUsu {
         this.status_tipo_usuario = status_tipo_usuario;
     }
     
-
-    public clsTipUsu(int id_tipo_usuario, String nombre_tipo_usuario, String status_tipo_usuario) {
-        this.id_tipo_usuario = id_tipo_usuario;
-        this.nombre_tipo_usuario = nombre_tipo_usuario;
-        this.status_tipo_usuario = status_tipo_usuario;
-    }
-
-    public clsTipUsu(int id_tipo_usuario, String nombre_tipo_usuario) {
-        this.id_tipo_usuario = id_tipo_usuario;
-        this.nombre_tipo_usuario = nombre_tipo_usuario;
-    }
-
-    public clsTipUsu(int id_tipo_usuario) {
-        this.id_tipo_usuario = id_tipo_usuario;
-    }
-
-  
-    
-    private int id_tipo_usuario;
-    private String nombre_tipo_usuario;
-    private String status_tipo_usuario;
-
-    public clsTipUsu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
-    
     @Override
     public String toString() {
         return "clsTipUsu{" + "nombre_tipo_usuario =" + nombre_tipo_usuario  + ", status_tipo_usuario=" + status_tipo_usuario  + '}';
@@ -79,12 +72,19 @@ public class clsTipUsu {
         daoTipUsu daoTipUsu = new daoTipUsu();
         return daoTipUsu.consultaUsuariosPorId(usuario);
     }    
-    public List<clsTipUsu> getUsuariosVideo()
+    public List<clsTipUsu> getListadoUsuarios()
+    {
+        daoTipUsu daoTipUsu = new daoTipUsu();
+        List<clsTipUsu> listadoUsuario = daoTipUsu.consultausuarios();
+        return listadoUsuario;
+    }
+    
+    /*public List<clsTipUsu> getUsuariosVideo()
     {
         daoTipUsu daoTipUsu = new daoTipUsu();
         List<clsTipUsu> listadousuarios = daoTipUsu.consultausuarios();
         return listadousuarios;
-    }
+    }*/
     public int setBorrarUsuario(clsTipUsu usuarios)
     {
         daoTipUsu daoTipUsu = new daoTipUsu();
@@ -99,11 +99,9 @@ public class clsTipUsu {
     {
         daoTipUsu daoTipUsu = new daoTipUsu();
         return daoTipUsu.actualizausuarios(usuarios);
-    }              
-
-    
-    
-    public void setId_tipo_ususario(int id) {
+    }  
+    }  
+    /*public void setId_tipo_ususario(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -131,10 +129,10 @@ public class clsTipUsu {
 
     public List<clsTipUsu> getListadoUsuario() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    }*/
 
 
 
  
     
-}
+

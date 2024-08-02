@@ -22,6 +22,7 @@ public class DaoAdministradores {
     private static final String SQL_INSERT = "INSERT INTO tbl_administradores(nombre_admin, apellido_admin, direccion_admin, telefono_admin, correo_admin, contraseña_admin, estado_admin, nombre_usuario) VALUES (?, ?, ?, ?, ?, ?, ? ,?)";
     private static final String SQL_UPDATE = "UPDATE tbl_administradores SET nombre_admin=?, apellido_admin=?, direccion_admin=?, telefono_admin=?, correo_admin=?, contraseña_admin=?, estado_admin=?, nombre_usuario=? WHERE id_admin=?";
     private static final String SQL_DELETE = "DELETE FROM tbl_administradores WHERE id_admin=?";
+    private static final String SQL_SELECT_NOMBRE = "SELECT id_admin, nombre_admin, apellido_admin, direccion_admin, telefono_admin, correo_admin, contraseña_admin, estado_admin, nombre_usuario FROM tbl_administradores WHERE nombre_usuario=? AND contraseña_admin=?";
     private static final String SQL_SELECT_ID = "SELECT id_admin, nombre_admin, apellido_admin, direccion_admin, telefono_admin, correo_admin, contraseña_admin, estado_admin, nombre_usuario FROM tbl_administradores WHERE id_admin=?";
     
     // Método auxiliar para cerrar recursos
@@ -269,11 +270,76 @@ public class DaoAdministradores {
         }
         
         return admin;
-    }    
+    } 
     
+public ClsAdministradores consultaAdministradorPorNombre(ClsAdministradores admin) {
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+        try {
+            conn = Conexion.getConnection();
+            System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + admin);
+            stmt = conn.prepareStatement(SQL_SELECT_NOMBRE);  
+            //stmt.setInt(1, admin.getIdAdmin());
+            //stmt.setString(1, admin.getContraAdmin());
+            stmt.setString(1, admin.getNombreUsuario());
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt( "id_admin");
+                String nombre = rs.getString("nombre_admin");
+                String apellido = rs.getString("apellido_admin");
+                String direccion = rs.getString("direccion_admin");
+                String telefono = rs.getString("telefono_admin");
+                String correo = rs.getString("correo_admin");
+                String contraseña = rs.getString("contraseña_admin");
+                String estado = rs.getString("estado_admin");
+                String usuario = rs.getString("nombre_usuario");
+
+                //renta = new clsRenta();
+                admin.setIDAdmin(id);
+                admin.setNombreAdmin(nombre);
+                admin.setApellidoAdmin(apellido);
+                admin.setDireccionAdmin(direccion);
+                admin.setTelefonoAdmin(telefono);
+                admin.setCorreoAdmin(correo);
+                admin.setContraAdmin(contraseña);
+                admin.setEstadoAdmin(estado);
+                admin.setNombreUsuario(usuario);
+                System.out.println(" registro consultado: " + admin);                
+            }
+            //System.out.println("Registros buscado:" + persona);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return admin;
 }
-    
+
+public ClsAdministradores login(String nombreUsuario, String contraseña) {
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    ClsAdministradores admin = null;
+
+    try {
+        conn = Conexion.getConnection();
+        stmt = conn.prepareStatement(SQL_SELECT_NOMBRE);
+        stmt.setString(1, nombreUsuario);
+        stmt.setString(2, contraseña);
+        rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            admin = mapResultSetToAdmin(rs);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace(System.out);
+    } finally {
+        closeResources(rs, stmt, conn);
+    }
+    return admin;
+}
+}    
    
-
-
-
