@@ -52,12 +52,12 @@ public class ClsAdministradores {
     
     public ClsAdministradores() {  
     }
-    
-    public ClsAdministradores (int id_adm) {
+    /*
+    public ClsAdministradores (int id_admin) {
         this.id_admin = id_admin;
     }
     
-    public ClsAdministradores(int id_administradores, String nombre_admin) {
+    public ClsAdministradores(int id_admin, String nombre_admin) {
         this.id_admin = id_admin;
         this.nombre_admin = nombre_admin;
     }
@@ -113,6 +113,7 @@ public class ClsAdministradores {
         this.estado_admin = estado_admin;
     }
 
+    */
     public ClsAdministradores(int id_admin, String nombre_admin, String apellido_admin, String direccion_admin, String telefono_admin, String correo_admin, String contraseña_admin, String estado_admin, String nombre_usuario) {
         this.id_admin = id_admin;
         this.nombre_admin = nombre_admin;
@@ -140,14 +141,7 @@ public String toString() {
                ", estado_administradores='" + estado_admin + '\'' +
                ", nombre_usuario="+ nombre_usuario + '}';
     }
-
-    //Busqueda por nombre posiblemente no se utilice
-/*
-    public ClsAdministradores getBuscarAdministradorPorNombre(ClsAdministradores administrador){ //Pendiente atributo administrador en modelo
-        DaoAdministradores DaoAdministradores = new DaoAdministradores();
-        return DaoAdministradores.consultaAdministradorPorNombre(administrador); //Pendiente funcion en modelo
-    }
-*/    
+ 
     public ClsAdministradores getBuscarAdministradorPorId(ClsAdministradores admin){ 
         DaoAdministradores DaoAdministradores = new DaoAdministradores();
         return DaoAdministradores.consultaAdministradorPorId(admin); 

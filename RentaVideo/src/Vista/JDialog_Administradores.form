@@ -180,18 +180,16 @@
                       </Group>
                       <Component id="Lbl_CorreoAdmin" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="Lbl_TelefonoAdmin" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="Lbl_ApellidoAdmin" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="Lbl_NombreAdmin" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="Lbl_IDAdmin" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="Lbl_DireccionAdmin" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="Lbl_TelefonoAdmin" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              </Group>
                           </Group>
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
