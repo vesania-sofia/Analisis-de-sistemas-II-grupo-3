@@ -168,6 +168,13 @@ public String toString() {
         return DaoAdministradores.actualizarAdministradorPorId(admin); 
     }
     
+    public ClsAdministradores login(String nombreUsuario, String contraseña) {
+    ClsAdministradores admin = new ClsAdministradores();
+    admin.setNombreUsuario(nombreUsuario);
+    admin.setContraAdmin(contraseña);
+    return new DaoAdministradores().consultaAdministradorPorNombre(admin);
+}
+    
 }
 
 
