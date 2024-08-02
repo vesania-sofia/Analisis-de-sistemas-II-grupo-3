@@ -6,7 +6,7 @@ package Vista;
 
 import Controlador.ClsAdministradores;
 import java.util.List;
-import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -46,12 +46,8 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             dato[4] = ListadoAdministradores.get(i).getTelefonoAdmin();
             dato[5] = ListadoAdministradores.get(i).getCorreoAdmin();
             dato[6] = ListadoAdministradores.get(i).getContraAdmin();
-        
-            // Obtener el estado seleccionado del JComboBox
-            String estadoSeleccionado = (String) Cbo_EstadoAdmin.getSelectedItem();
-            dato[7] = estadoSeleccionado.equalsIgnoreCase("activo") ? "activo" : "inactivo";
-            
-            dato[8] = ListadoAdministradores.get(i).getDireccionAdmin();
+            dato[7] = ListadoAdministradores.get(i).getEstadoAdmin();
+            dato[8] = ListadoAdministradores.get(i).getNombreUsuario();
             tabla.addRow(dato);
         }       
     }
@@ -62,10 +58,11 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         initComponents();
         
         this.setLocationRelativeTo(null);
-        
-        Cbo_EstadoAdmin = new JComboBox<>();
-        Cbo_EstadoAdmin.addItem("activo");
-        Cbo_EstadoAdmin.addItem("inactivo");
+       
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        model.addElement("activo");
+        model.addElement("inactivo");
+        Cbo_EstadoAdmin.setModel(model);
         
         llenadoDeTabla();
         
@@ -437,15 +434,14 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
                                 .addComponent(Lbl_Reportes))))
                     .addComponent(Lbl_CorreoAdmin, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_AdministradoresLayout.createSequentialGroup()
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Lbl_TelefonoAdmin)
                             .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(Lbl_ApellidoAdmin)
                                 .addComponent(Lbl_NombreAdmin)
                                 .addComponent(Lbl_IDAdmin)
-                                .addComponent(Lbl_DireccionAdmin, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                                .addComponent(Lbl_TelefonoAdmin)
-                                .addGap(24, 24, 24)))
+                                .addComponent(Lbl_DireccionAdmin, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGap(17, 17, 17)
                         .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
@@ -644,6 +640,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         
         // Obtener el estado seleccionado del JComboBox y asignarlo al objeto admin
         String estadoSeleccionado = (String) Cbo_EstadoAdmin.getSelectedItem();
+        System.out.println("Estado seleccionado: " + estadoSeleccionado);
         admin.setEstadoAdmin(estadoSeleccionado.equalsIgnoreCase("activo") ? "activo" : "inactivo");
         
         admin.setNombreUsuario(Txt_Usuario.getText());
@@ -707,7 +704,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             Txt_Usuario.setText(admin.getNombreUsuario());
         
         // Establecer el estado en el JComboBox
-            String estado = admin.getEstadoAdmin().equalsIgnoreCase("T") ? "activo" : "inactivo";
+            String estado = admin.getEstadoAdmin().equalsIgnoreCase("activo") ? "activo" : "inactivo";
             Cbo_EstadoAdmin.setSelectedItem(estado);
             
         } else {
@@ -740,262 +737,6 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JDialog_Administradores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
