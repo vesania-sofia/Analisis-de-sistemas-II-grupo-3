@@ -25,7 +25,7 @@ public class daoUsuario {
     private static final String SQL_UPDATE = "UPDATE tbl_usuario SET nombre_usuario = ?,contraseña_usuario = ?, ultima_sesion_usuario = ?, status_usuario = ?, nombre_real_usuario = ?, correo_usuario = ?, telefono_usuario = ?, direccion_usuario = ?, id_tipo_usuario = ? WHERE id_usuario = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_usuario WHERE Id_usuario=?";
     private static final String SQL_SELECT_ID = "SELECT id_usuario, nombre_usuario,contraseña_usuario, ultima_sesion_usuario, status_usuario, nombre_real_usuario, correo_usuario, telefono_usuario, direccion_usuario, id_tipo_usuario FROM tbl_usuario WHERE id_usuario = ?";     
-    private static final String SQL_SELECT_NOMBRE = "SELECT id_usuario, nombre_usuario, contraseña_usuario, ultima_sesion_usuario, status_usuario, nombre_real_usuario, correo_usuario, telefono_usuario, direccion_usuario,  id_tipo_usuario  FROM tbl_usuario WHERE nombre_usuario = ?";
+    private static final String SQL_SELECT_NOMBRE = "SELECT id_usuario, nombre_usuario, contraseña_usuario, ultima_sesion_usuario, status_usuario, nombre_real_usuario, correo_usuario, telefono_usuario, direccion_usuario,  id_tipo_usuario  FROM tbl_usuario WHERE nombre_usuario = ? AND contraseña_usuario = ?";
     
       public List<ClsUsuario> consultaUsuario() {
       
@@ -254,7 +254,9 @@ public class daoUsuario {
         return usuario;
         
       }        
-        public ClsUsuario login(String nombreUsuario, String contraseña) {
+       
+    
+public ClsUsuario login(String nombre_usuario, String contraseña_usuario) {
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
@@ -263,22 +265,22 @@ public class daoUsuario {
     try {
         conn = Conexion.getConnection();
         stmt = conn.prepareStatement(SQL_SELECT_NOMBRE);
-        stmt.setString(1, nombreUsuario);
-        stmt.setString(2, contraseña);
+        stmt.setString(1, nombre_usuario);
+        stmt.setString(2, contraseña_usuario);
         rs = stmt.executeQuery();
 
         if (rs.next()) {
-           /* int id_usuario = rs.getInt("id_usuario");
-                   String nombre_usuario = rs.getString("nombre_usuario");
-                   String contraseña_usuario = rs.getString("contraseña_usuario");
-                   String ultima_sesion_usuario = rs.getString("ultima_sesion_usuario");
-                   String status_usuario = rs.getString("status_usuario");
-                   String nombre_real_usuario = rs.getString("nombre_real_usuario");
-                   String correo_usuario = rs.getString("correo_usuario");
-                   String telefono_usuario = rs.getString("telefono_usuario");
-                   String direccion_usuario = rs.getString("direccion_usuario");
-                   int id_tipo_usuario = rs.getInt("id_tipo_usuario");
-      */     
+            usuario = new ClsUsuario();
+            usuario.setid_usuario(rs.getInt("id_usuario"));
+            usuario.setnombre_usuario(rs.getString("nombre_usuario"));
+            usuario.setcontraseña_usuario(rs.getString("contraseña_usuario"));
+            usuario.setultima_sesion_usuario(rs.getString("ultima_sesion_usuario"));
+            usuario.setstatus_usuario(rs.getString("status_usuario"));
+            usuario.setnombre_real_usuario(rs.getString("nombre_real_usuario"));
+            usuario.setcorreo_usuario(rs.getString("correo_usuario"));
+            usuario.settelefono_usuario(rs.getString("telefono_usuario"));
+            usuario.setdireccion_usuario(rs.getString("direccion_usuario"));
+            usuario.setid_tipo_usuario(rs.getInt("id_tipo_usuario"));
         }
     } catch (SQLException ex) {
         ex.printStackTrace(System.out);
@@ -287,18 +289,23 @@ public class daoUsuario {
     }
     return usuario;
 }
-    
-    private void closeResources(AutoCloseable... resources) {
-        for (AutoCloseable resource : resources) {
-            if (resource != null) {
-                try {
-                    resource.close();
-                } catch (Exception e) {
-                    e.printStackTrace(System.out);
-                }
-            }
+
+private void closeResources(ResultSet rs, PreparedStatement stmt, Connection conn) {
+    try {
+        if (rs != null) {
+            rs.close();
         }
+        if (stmt != null) {
+            stmt.close();
+        }
+        if (conn != null) {
+            conn.close();
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace(System.out);
     }
+}
+      
     
 
 }
