@@ -240,7 +240,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Txt_ContraAdmin.setBackground(new java.awt.Color(51, 51, 51));
         Txt_ContraAdmin.setForeground(new java.awt.Color(255, 255, 255));
 
-        Btn_Guardar.setBackground(new java.awt.Color(51, 51, 51));
+        Btn_Guardar.setBackground(new java.awt.Color(255, 255, 255));
         Btn_Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar.png"))); // NOI18N
         Btn_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,7 +252,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Lbl_Guardar.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_Guardar.setText("GUARDAR");
 
-        Btn_Limpiar.setBackground(new java.awt.Color(51, 51, 51));
+        Btn_Limpiar.setBackground(new java.awt.Color(255, 255, 255));
         Btn_Limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/limpiar.png"))); // NOI18N
         Btn_Limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,7 +277,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(Tbc_Admin);
 
-        Btn_Actualizar.setBackground(new java.awt.Color(51, 51, 51));
+        Btn_Actualizar.setBackground(new java.awt.Color(255, 255, 255));
         Btn_Actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
         Btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -289,7 +289,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Lbl_Actualizar.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_Actualizar.setText("ACTUALIZAR");
 
-        Btn_Modifcar.setBackground(new java.awt.Color(51, 51, 51));
+        Btn_Modifcar.setBackground(new java.awt.Color(255, 255, 255));
         Btn_Modifcar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
         Btn_Modifcar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,7 +301,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Lbl_Modificar.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_Modificar.setText("   MODIFiCAR");
 
-        Btn_Eliminar.setBackground(new java.awt.Color(51, 51, 51));
+        Btn_Eliminar.setBackground(new java.awt.Color(255, 255, 255));
         Btn_Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
         Btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,7 +313,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Lbl_Eliminar.setForeground(new java.awt.Color(255, 255, 255));
         Lbl_Eliminar.setText(" ELIMINAR");
 
-        Btn_Ayuda.setBackground(new java.awt.Color(51, 51, 51));
+        Btn_Ayuda.setBackground(new java.awt.Color(255, 255, 255));
         Btn_Ayuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ayuda.png"))); // NOI18N
         Btn_Ayuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,7 +321,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             }
         });
 
-        Btn_Reportes.setBackground(new java.awt.Color(51, 51, 51));
+        Btn_Reportes.setBackground(new java.awt.Color(255, 255, 255));
         Btn_Reportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Reportes.png"))); // NOI18N
         Btn_Reportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -349,7 +349,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             }
         });
 
-        Btn_Buscar.setBackground(new java.awt.Color(51, 51, 51));
+        Btn_Buscar.setBackground(new java.awt.Color(255, 255, 255));
         Btn_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Buscar.png"))); // NOI18N
         Btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -533,12 +533,14 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
                     .addComponent(Lbl_Ayuda)
                     .addComponent(Lbl_Reportes)
                     .addComponent(Lbl_Limpiar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Lbl_Buscar)
-                        .addComponent(Txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Btn_Buscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
+                        .addGap(0, 27, Short.MAX_VALUE)
+                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lbl_Buscar)
+                            .addComponent(Txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(17, 17, 17))
         );
 
