@@ -5,6 +5,14 @@
  */
 package Vista;
 
+import Seguridad.Controlador.clsSeguridad;
+import Controlador.ClsUsuarioConectado;
+import Controlador.ClsUsuario;
+import Seguridad.Modelo.Conexion;
+import Modelo.daoUsuario;
+import javax.swing.JOptionPane;
+import java.awt.HeadlessException;
+
 /**
  *
  * @author User
@@ -15,7 +23,8 @@ public class Login_Usuarios extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login_Usuarios() {
-        initComponents();
+            initComponents();
+
     }
 
     /**
@@ -31,14 +40,14 @@ public class Login_Usuarios extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Txt_usuario = new javax.swing.JTextField();
+        Btn_ingresar = new javax.swing.JButton();
+        Btn_salir = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        Txt_contraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Movie Shack Hut - Inicio de Sesión");
@@ -58,22 +67,22 @@ public class Login_Usuarios extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Usuario:");
 
-        jTextField1.setBackground(new java.awt.Color(51, 51, 51));
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_usuario.setBackground(new java.awt.Color(51, 51, 51));
+        Txt_usuario.setForeground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setBackground(new java.awt.Color(51, 51, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ingreso.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Btn_ingresar.setBackground(new java.awt.Color(51, 51, 255));
+        Btn_ingresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ingreso.png"))); // NOI18N
+        Btn_ingresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Btn_ingresarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(153, 0, 0));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salir.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Btn_salir.setBackground(new java.awt.Color(153, 0, 0));
+        Btn_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salir.png"))); // NOI18N
+        Btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Btn_salirActionPerformed(evt);
             }
         });
 
@@ -108,8 +117,8 @@ public class Login_Usuarios extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jPasswordField1.setBackground(new java.awt.Color(51, 51, 51));
-        jPasswordField1.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_contraseña.setBackground(new java.awt.Color(51, 51, 51));
+        Txt_contraseña.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,20 +138,20 @@ public class Login_Usuarios extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1)))
+                            .addComponent(Txt_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                            .addComponent(Txt_contraseña)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
-                            .addComponent(jButton1))
+                            .addComponent(Btn_ingresar))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(151, 151, 151)
                                 .addComponent(jLabel6))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(123, 123, 123)
-                                .addComponent(jButton2)))))
+                                .addComponent(Btn_salir)))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -153,16 +162,16 @@ public class Login_Usuarios extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1)
+                    .addComponent(Txt_usuario)
                     .addComponent(jLabel4))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Txt_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(Btn_ingresar)
+                    .addComponent(Btn_salir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -190,20 +199,46 @@ public class Login_Usuarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Btn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ingresarActionPerformed
         // TODO add your handling code here:
-    Vista_Usuario ventana = new Vista_Usuario();
-    
-    this.dispose();
-    
-    // Hacer la nueva ventana visible
-    ventana.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+if (Txt_usuario.getText().trim().isEmpty() || Txt_contraseña.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "NO PUEDEN HABER CAMPOS VACIOS", "ERROR", JOptionPane.ERROR_MESSAGE);
+    } else {
+        try {
+            daoUsuario dao = new daoUsuario();
+            String usuarioTexto = Txt_usuario.getText().trim();
+            String contraseñaTexto = new String(Txt_contraseña.getPassword()).trim();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            ClsUsuario usuario = dao.login(usuarioTexto, contraseñaTexto);
+            if (usuario != null) {
+                JOptionPane.showMessageDialog(null, "Bienvenido al SISTEMA\n", "Mensaje de bienvenida", JOptionPane.INFORMATION_MESSAGE);
+
+                ClsUsuarioConectado usuarioRegistrado = new ClsUsuarioConectado();
+                usuarioRegistrado.setid_usuario(usuario.getid_usuario());
+                usuarioRegistrado.setnombre_usuario(usuario.getnombre_usuario());
+
+                // Abrir la ventana principal
+                Vista_Usuario menuGeneral = new Vista_Usuario();
+                menuGeneral.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "ERROR AL ENCONTRAR USUARIO o CONTRASEÑA", "ERROR", JOptionPane.ERROR_MESSAGE);
+                Txt_usuario.setText("");
+                Txt_contraseña.setText("");
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "ERROR AL ENCONTRAR USUARIO o CONTRASEÑA", "ERROR", JOptionPane.ERROR_MESSAGE);
+            Txt_usuario.setText("");
+            Txt_contraseña.setText("");
+        }
+    }
+    }//GEN-LAST:event_Btn_ingresarActionPerformed
+
+    
+    private void Btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_salirActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Btn_salirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,8 +291,10 @@ public class Login_Usuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Btn_ingresar;
+    private javax.swing.JButton Btn_salir;
+    private javax.swing.JPasswordField Txt_contraseña;
+    private javax.swing.JTextField Txt_usuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -266,7 +303,5 @@ public class Login_Usuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
