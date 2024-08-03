@@ -10,28 +10,80 @@ import Modelo.daoPagos;
  * @author sofia
  */
 public class clsPagos {
-    private int id_recibo;
-    private int id_alquiler;
+    private int id_sispag;
+    private int id_comprobante;
     private float pago;
-    private String tipo_pago;
-    private int descuento_pago;
-    private int mora_pago;
-    
+    private String tipo_sispag;
+    private int descuento_sispag;
+    private int mora_sispag;
+    private int id_admin;
 
-    public int getId_recibo() {
-        return id_recibo;
+    public clsPagos(int id_sispag, int id_comprobante, float pago, String tipo_sispag, int descuento_sispag, int mora_sispag, int id_admin) {
+        this.id_sispag = id_sispag;
+        this.id_comprobante = id_comprobante;
+        this.pago = pago;
+        this.tipo_sispag = tipo_sispag;
+        this.descuento_sispag = descuento_sispag;
+        this.mora_sispag = mora_sispag;
+        this.id_admin = id_admin;
     }
 
-    public void setId_recibo(int id_recibo) {
-        this.id_recibo = id_recibo;
+    public clsPagos(int id_sispag, int id_comprobante, float pago, String tipo_sispag, int descuento_sispag, int mora_sispag) {
+        this.id_sispag = id_sispag;
+        this.id_comprobante = id_comprobante;
+        this.pago = pago;
+        this.tipo_sispag = tipo_sispag;
+        this.descuento_sispag = descuento_sispag;
+        this.mora_sispag = mora_sispag;
     }
 
-    public int getId_alquiler() {
-        return id_alquiler;
+    public clsPagos(int id_sispag, int id_comprobante, float pago, String tipo_sispag, int descuento_sispag) {
+        this.id_sispag = id_sispag;
+        this.id_comprobante = id_comprobante;
+        this.pago = pago;
+        this.tipo_sispag = tipo_sispag;
+        this.descuento_sispag = descuento_sispag;
     }
 
-    public void setId_alquiler(int id_alquiler) {
-        this.id_alquiler = id_alquiler;
+    public clsPagos(int id_sispag, int id_comprobante, float pago, String tipo_sispag) {
+        this.id_sispag = id_sispag;
+        this.id_comprobante = id_comprobante;
+        this.pago = pago;
+        this.tipo_sispag = tipo_sispag;
+    }
+
+    public clsPagos(int id_sispag, int id_comprobante, float pago) {
+        this.id_sispag = id_sispag;
+        this.id_comprobante = id_comprobante;
+        this.pago = pago;
+    }
+
+    public clsPagos(int id_sispag, int id_comprobante) {
+        this.id_sispag = id_sispag;
+        this.id_comprobante = id_comprobante;
+    }
+
+    public clsPagos(int id_sispag) {
+        this.id_sispag = id_sispag;
+    }
+
+    public clsPagos() {
+    }
+
+    public int getId_sispag() {
+        return id_sispag;
+    }
+
+    public void setId_sispag(int id_sispag) {
+        this.id_sispag = id_sispag;
+    }
+
+    public int getId_comprobante() {
+        return id_comprobante;
+    }
+
+    public void setId_comprobante(int id_comprobante) {
+        this.id_comprobante = id_comprobante;
     }
 
     public float getPago() {
@@ -42,76 +94,43 @@ public class clsPagos {
         this.pago = pago;
     }
 
-    public String getTipo_pago() {
-        return tipo_pago;
+    public String getTipo_sispag() {
+        return tipo_sispag;
     }
 
-    public void setTipo_pago(String tipo_pago) {
-        this.tipo_pago = tipo_pago;
+    public void setTipo_sispag(String tipo_sispag) {
+        this.tipo_sispag = tipo_sispag;
     }
 
-    public int getDescuento_pago() {
-        return descuento_pago;
+    public int getDescuento_sispag() {
+        return descuento_sispag;
     }
 
-    public void setDescuento_pago(int descuento_pago) {
-        this.descuento_pago = descuento_pago;
+    public void setDescuento_sispag(int descuento_sispag) {
+        this.descuento_sispag = descuento_sispag;
     }
 
-    public int getMora_pago() {
-        return mora_pago;
+    public int getMora_sispag() {
+        return mora_sispag;
     }
 
-    public void setMora_pago(int mora_pago) {
-        this.mora_pago = mora_pago;
+    public void setMora_sispag(int mora_sispag) {
+        this.mora_sispag = mora_sispag;
+    }
+
+    public int getId_admin() {
+        return id_admin;
+    }
+
+    public void setId_admin(int id_admin) {
+        this.id_admin = id_admin;
     }
     
-     public clsPagos() {
-     }
-    
-    public clsPagos(int id_recibo, int id_alquiler, float pago, String tipo_pago, int descuento_pago, int mora_pago) {
-        this.id_recibo = id_recibo;
-        this.id_alquiler = id_alquiler;
-        this.pago = pago;
-        this.tipo_pago = tipo_pago;
-        this.descuento_pago = descuento_pago;
-        this.mora_pago = mora_pago;
-    }
-
-    public clsPagos(int id_recibo, int id_alquiler, float pago, String tipo_pago, int descuento_pago) {
-        this.id_recibo = id_recibo;
-        this.id_alquiler = id_alquiler;
-        this.pago = pago;
-        this.tipo_pago = tipo_pago;
-        this.descuento_pago = descuento_pago;
-    }
-
-    public clsPagos(int id_recibo, int id_alquiler, float pago, String tipo_pago) {
-        this.id_recibo = id_recibo;
-        this.id_alquiler = id_alquiler;
-        this.pago = pago;
-        this.tipo_pago = tipo_pago;
-    }
-
-    public clsPagos(int id_recibo, int id_alquiler, float pago) {
-        this.id_recibo = id_recibo;
-        this.id_alquiler = id_alquiler;
-        this.pago = pago;
-    }
-
-    public clsPagos(int id_recibo, int id_alquiler) {
-        this.id_recibo = id_recibo;
-        this.id_alquiler = id_alquiler;
-    }
-
-    public clsPagos(int id_recibo) {
-        this.id_recibo = id_recibo;
-    }
 
     
     @Override
     public String toString() {
-        return "clsPagos{" + "id_recibo =" + id_recibo    + ", id_alquiler=" + id_alquiler + ", pago=" + pago + ", tipo_pago  =" + tipo_pago   + ", descuento_pago  =" + descuento_pago + ", mora_pago  =" + mora_pago +  '}';
+        return "clsPagos{" + "id_sispag =" + id_sispag    + ", id_comprobante=" + id_comprobante + ", pago=" + pago + ", tipo_sispag  =" + tipo_sispag   + ", descuento_sispag  =" + descuento_sispag + ", mora_sispag  =" + mora_sispag + ", id_admin  =" + id_admin + '}';
     }
     //Metodos de acceso a la capa controlador
     public clsPagos getBuscarInformacionPagoPorNombre(clsPagos Spago)
