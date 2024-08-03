@@ -17,9 +17,9 @@ import Seguridad.Modelo.Conexion;
 public class daoPagos {
     
     private static final String SQL_SELECT = "SELECT id_recibo, id_alquiler, pago, tipo_pago, descuento_pago, mora_pago FROM TBL_SISTEMA_DE_PAGOS";
-    private static final String SQL_INSERT = "INSERT INTO TBL_SISTEMA_DE_PAGOS(id_alquiler, pago, tipo_pago, descuento_pago, mora_pago) VALUES(?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO TBL_SISTEMA_DE_PAGOS(id_alquiler, pago, tipo_pago, descuento_pago, mora_pago) VALUES(?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE TBL_SISTEMA_DE_PAGOS SET id_alquiler=?, pago=?,  tipo_pago=?, descuento_pago=?, mora_pago=? WHERE id_recibo = ?";
-    private static final String SQL_DELETE = "DELETE FROM TBL_SISTEMA_DE_PAGOS WHERE tipModId=?";
+    private static final String SQL_DELETE = "DELETE FROM TBL_SISTEMA_DE_PAGOS WHERE id_recibo=?";
     private static final String SQL_SELECT_NOMBRE = "SELECT id_recibo, pago, tipo_pago, descuento_pago, mora_pago  FROM TBL_SISTEMA_DE_PAGOS WHERE id_alquiler = ?";
     private static final String SQL_SELECT_ID = "SELECT id_recibo, id_alquiler, pago, tipo_pago, descuento_pago, mora_pago FROM TBL_SISTEMA_DE_PAGOS WHERE id_recibo = ?";     
 
