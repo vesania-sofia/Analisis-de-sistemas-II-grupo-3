@@ -1,31 +1,41 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ */
 package Vista;
 
-/**
- * @author Wendy Elizabeth Sacayón Fajardo 0901 - 21 - 125 
- */
 
 import Controlador.ClsUsuario;
 import Modelo.daoUsuario;
-import java.text.ParseException;
+import Controlador.clsTipUsu;
+import java.awt.Component;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 
-
-
-public class jDialog_UsuarioVista extends javax.swing.JFrame {
-
+/**
+ *
+ * @author maria
+ */
+public class jDialog_vistaUsuario extends javax.swing.JDialog {
     
-
-    /**
-     */
+         
+      public void llenadoDeComboTipoUsuario() {
+        clsTipUsu usuario = new clsTipUsu();
+        List<clsTipUsu> listadoUsuario = usuario.getListadoUsuarios();
+        Cbo_idTipoUsuario.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Cbo_idTipoUsuario.addItem("Seleccionar...");
+        for (int i = 0; i < listadoUsuario.size(); i++) {
+            clsTipUsu Usuario = listadoUsuario.get(i);
+            String item = Usuario.getId_tipo_usuario() + " - " + Usuario.getNombre_tipo_usuario();
+            Cbo_idTipoUsuario.addItem(item);
+        }
+    }
     
-   ////////////////////////////////////////////////////////////////////////////
-    
-    public void llenadoDeTabla() {
+        public void llenadoDeTabla() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Usuario");
         modelo.addColumn("Nombre");
@@ -40,51 +50,35 @@ public class jDialog_UsuarioVista extends javax.swing.JFrame {
         
         ClsUsuario users = new ClsUsuario();
         
-        List<ClsUsuario> listadoUsuarios =  users.getListadoUsuarios();
-        TablaUsuario.setModel(modelo);
+        List<ClsUsuario> listadoUsuarios =  users.getListadoUsuario();
+        Tbl_usuario.setModel(modelo);
         String[] dato = new String[10];
         
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        
         for (int i = 0; i < listadoUsuarios.size(); i++) {
-            dato[0] = Integer.toString(listadoUsuarios.get(i).getId_usuario());
-            dato[1] = listadoUsuarios .get(i).getNombre_usuario();
-            dato[2] = listadoUsuarios .get(i).getContraseña_usuario();
-            Date ultimaSesion = listadoUsuarios.get(i).getUltima_sesion_usuario();
-            dato[3] = (ultimaSesion != null) ? dateFormat.format(ultimaSesion) : "";
-            dato[4] = listadoUsuarios .get(i).getStatus_usuario();
-            dato[5] = listadoUsuarios .get(i).getNombre_real_usuario();
-            dato[6] = listadoUsuarios .get(i).getCorreo_usuario();
-            dato[7] = listadoUsuarios .get(i).getTelefono_usuario();
-            dato[8] = listadoUsuarios .get(i).getDireccion_usuario();
-            dato[9] = Integer.toString(listadoUsuarios.get(i).getId_tipo_usuario());
+            dato[0] = Integer.toString(listadoUsuarios.get(i).getid_usuario());
+            dato[1] = listadoUsuarios .get(i).getnombre_usuario();
+            dato[2] = listadoUsuarios .get(i).getcontraseña_usuario();
+            dato[3] = listadoUsuarios .get(i).getultima_sesion_usuario();
+            dato[4] = listadoUsuarios .get(i).getstatus_usuario();
+            dato[5] = listadoUsuarios .get(i).getnombre_real_usuario();
+            dato[6] = listadoUsuarios .get(i).getcorreo_usuario();
+            dato[7] = listadoUsuarios .get(i).gettelefono_usuario();
+            dato[8] = listadoUsuarios .get(i).getdireccion_usuario();
+            dato[9] = Integer.toString(listadoUsuarios.get(i).getid_tipo_usuario());
             modelo.addRow(dato);
         }
     }
-  
 
-       /* *  Creates new form jDialog_vistaCliente
-            * @param parent
-            * @param modal*/
-
-public jDialog_UsuarioVista() {
-        
+    /**
+     * Creates new form jDialog_vistaUsuario
+     */
+    public jDialog_vistaUsuario(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        llenadoDeTabla();
+        llenadoDeComboTipoUsuario();
     }
-
-    //*private void initComponents() {
-      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    //}
-    //public class VistaUsuario
-    
-
-
-  /*   public frmMantenimientoTablaUsuario() {
-        initComponents();
-        llenadoDeTablas();
-    }*/
-     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,15 +101,14 @@ public jDialog_UsuarioVista() {
         Label_telefono = new javax.swing.JLabel();
         Label_direccion = new javax.swing.JLabel();
         Label_tipoUsuario = new javax.swing.JLabel();
-        Txt_Nombre = new javax.swing.JTextField();
-        txt_Contraseña = new javax.swing.JTextField();
-        Txt_UltimaSesion = new javax.swing.JTextField();
-        Txt_Estatus = new javax.swing.JTextField();
+        Txt_nombre = new javax.swing.JTextField();
+        Txt_contraseña = new javax.swing.JTextField();
+        Txt_ultimaSesion = new javax.swing.JTextField();
+        Txt_status = new javax.swing.JTextField();
         Txt_nomReal = new javax.swing.JTextField();
-        Txt_Correo = new javax.swing.JTextField();
-        Txt_Telefomo = new javax.swing.JTextField();
-        Txt_Direccion = new javax.swing.JTextField();
-        Txt_TipoUsuario = new javax.swing.JTextField();
+        Txt_correo = new javax.swing.JTextField();
+        Txt_telefono = new javax.swing.JTextField();
+        Txt_direccion = new javax.swing.JTextField();
         Btn_registrar = new javax.swing.JButton();
         Btn_modificar = new javax.swing.JButton();
         Btn_limpiar = new javax.swing.JButton();
@@ -126,10 +119,11 @@ public jDialog_UsuarioVista() {
         Btn_eliminar = new javax.swing.JButton();
         Label_idabuscar = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TablaUsuario = new javax.swing.JTable();
+        Tbl_usuario = new javax.swing.JTable();
         Txt_buscar = new javax.swing.JTextField();
+        Cbo_idTipoUsuario = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(160, 21, 62));
 
@@ -144,7 +138,7 @@ public jDialog_UsuarioVista() {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(Label_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -192,33 +186,31 @@ public jDialog_UsuarioVista() {
         Label_tipoUsuario.setForeground(new java.awt.Color(255, 255, 255));
         Label_tipoUsuario.setText("Tipo de Usuario");
 
-        Txt_Nombre.setBackground(new java.awt.Color(204, 204, 204));
+        Txt_nombre.setBackground(new java.awt.Color(204, 204, 204));
 
-        txt_Contraseña.setBackground(new java.awt.Color(204, 204, 204));
-        txt_Contraseña.addActionListener(new java.awt.event.ActionListener() {
+        Txt_contraseña.setBackground(new java.awt.Color(204, 204, 204));
+        Txt_contraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_ContraseñaActionPerformed(evt);
+                Txt_contraseñaActionPerformed(evt);
             }
         });
 
-        Txt_UltimaSesion.setBackground(new java.awt.Color(204, 204, 204));
+        Txt_ultimaSesion.setBackground(new java.awt.Color(204, 204, 204));
 
-        Txt_Estatus.setBackground(new java.awt.Color(204, 204, 204));
+        Txt_status.setBackground(new java.awt.Color(204, 204, 204));
 
         Txt_nomReal.setBackground(new java.awt.Color(204, 204, 204));
 
-        Txt_Correo.setBackground(new java.awt.Color(204, 204, 204));
+        Txt_correo.setBackground(new java.awt.Color(204, 204, 204));
 
-        Txt_Telefomo.setBackground(new java.awt.Color(204, 204, 204));
+        Txt_telefono.setBackground(new java.awt.Color(204, 204, 204));
 
-        Txt_Direccion.setBackground(new java.awt.Color(204, 204, 204));
-        Txt_Direccion.addActionListener(new java.awt.event.ActionListener() {
+        Txt_direccion.setBackground(new java.awt.Color(204, 204, 204));
+        Txt_direccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Txt_DireccionActionPerformed(evt);
+                Txt_direccionActionPerformed(evt);
             }
         });
-
-        Txt_TipoUsuario.setBackground(new java.awt.Color(204, 204, 204));
 
         Btn_registrar.setText("Registrar");
         Btn_registrar.addActionListener(new java.awt.event.ActionListener() {
@@ -270,7 +262,7 @@ public jDialog_UsuarioVista() {
         Label_idabuscar.setForeground(new java.awt.Color(255, 255, 255));
         Label_idabuscar.setText("ID a buscar ");
 
-        TablaUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        Tbl_usuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -281,7 +273,13 @@ public jDialog_UsuarioVista() {
                 "Id Usuario", "Nombre", "Contraseña", "Ultima Sesion", "Estatus", "Nombre Real", "Correo", "Telefono", "Direccion", "Tipo Usuario"
             }
         ));
-        jScrollPane2.setViewportView(TablaUsuario);
+        jScrollPane2.setViewportView(Tbl_usuario);
+
+        Cbo_idTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cbo_idTipoUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -293,82 +291,86 @@ public jDialog_UsuarioVista() {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_registrar, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                     .addComponent(Btn_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addGap(346, 346, 346)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Label_direccion)
-                            .addComponent(Label_telefono)
-                            .addComponent(Label_Correo)
-                            .addComponent(Label_nombreReal)
-                            .addComponent(Label_estatus)
-                            .addComponent(Label_ultimaSesion)
-                            .addComponent(Label_contraseña)
-                            .addComponent(Label_nombre)
-                            .addComponent(Label_tipoUsuario))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(Txt_Direccion)
-                                .addComponent(Txt_Telefomo, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Txt_Correo, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Txt_nomReal, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Txt_Estatus, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Txt_UltimaSesion, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_Contraseña)
-                                .addComponent(Txt_TipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
-                            .addComponent(Txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(361, 361, 361))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
+                                .addGap(355, 355, 355)
                                 .addComponent(Label_idabuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
                                 .addComponent(Btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 20, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Btn_modificar)
-                            .addComponent(Btn_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Label_direccion)
+                                    .addComponent(Label_telefono)
+                                    .addComponent(Label_Correo)
+                                    .addComponent(Label_nombreReal)
+                                    .addComponent(Label_estatus)
+                                    .addComponent(Label_ultimaSesion)
+                                    .addComponent(Label_contraseña)
+                                    .addComponent(Label_nombre)
+                                    .addComponent(Label_tipoUsuario))
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Txt_direccion, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Txt_telefono)
+                                    .addComponent(Txt_correo)
+                                    .addComponent(Txt_nomReal)
+                                    .addComponent(Txt_status)
+                                    .addComponent(Txt_ultimaSesion)
+                                    .addComponent(Txt_contraseña, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Txt_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                                    .addComponent(Cbo_idTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(Btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Btn_reportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Btn_modificar)
+                                    .addComponent(Btn_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(Btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Btn_reportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(361, 361, 361))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Label_nombre)
-                            .addComponent(Txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Label_contraseña)
-                            .addComponent(txt_Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Txt_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Label_ultimaSesion)
-                            .addComponent(Txt_UltimaSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Txt_ultimaSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Label_estatus)
-                            .addComponent(Txt_Estatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Txt_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Label_nombreReal)
@@ -376,23 +378,20 @@ public jDialog_UsuarioVista() {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Label_Correo)
-                            .addComponent(Txt_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Label_telefono)
-                            .addComponent(Txt_Telefomo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Label_direccion)
-                            .addComponent(Txt_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Label_tipoUsuario)
-                            .addComponent(Txt_TipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(Btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
+                            .addComponent(Cbo_idTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(76, 76, 76)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,119 +435,32 @@ public jDialog_UsuarioVista() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_limpiarActionPerformed
-        limpiarTextos();
-           
-        habilitarBotones();
-    }//GEN-LAST:event_Btn_limpiarActionPerformed
+    private void Txt_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_contraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Txt_contraseñaActionPerformed
 
-    public void limpiarTextos()
-    {
-        Txt_Nombre.setText("");
-        txt_Contraseña.setText("");
-        Txt_UltimaSesion.setText("");
-        Txt_Estatus.setText("");
-        Txt_nomReal.setText("");
-        Txt_Correo.setText("");
-        Txt_Telefomo.setText("");
-        Txt_Direccion.setText("");
-        Txt_TipoUsuario.setText("");
-
-    }
-    public void habilitarBotones()
-    {
-        Btn_modificar.setEnabled(true);
-        Btn_eliminar.setEnabled(true);
-        Btn_ayuda.setEnabled(true);
-        Btn_buscar.setEnabled(true);
-        Btn_limpiar.setEnabled(true);
-        Btn_actualizar.setEnabled(true);
-
-    }
-    public void desHabilitarBotones()
-    {
-        Btn_modificar.setEnabled(true);
-        Btn_eliminar.setEnabled(true);
-        Btn_ayuda.setEnabled(true);
-        Btn_buscar.setEnabled(true);
-        Btn_limpiar.setEnabled(true);
-        Btn_actualizar.setEnabled(true);
-
-    }
-    
-    private void Btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_eliminarActionPerformed
-        int registrosBorrados=0;
-        ClsUsuario usuario = new ClsUsuario();
-        usuario.setId_usuario(Integer.parseInt(Txt_buscar.getText()));
-        registrosBorrados=usuario.setBorrarUsuarios(usuario);
-        JOptionPane.showMessageDialog(null, "Registro Borrado\n", 
-                    "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
-        limpiarTextos();
-    }//GEN-LAST:event_Btn_eliminarActionPerformed
-
-    private void Btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_modificarActionPerformed
-     ClsUsuario usuario = new ClsUsuario();      
-                
-        if (usuario != null) {
-            
-            JOptionPane.showMessageDialog(this, "Usuario Modificado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE); 
-        
-            Txt_Nombre.setText(usuario.getNombre_usuario());
-            txt_Contraseña.setText(usuario.getContraseña_usuario());  
-            
-            // Convertir java.sql.Date a String
-        java.sql.Date ultimaSesion = usuario.getUltima_sesion_usuario();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String ultimaSesionStr = (ultimaSesion != null) ? dateFormat.format(ultimaSesion) : "";
-        Txt_UltimaSesion.setText(ultimaSesionStr);
-            
-            //Txt_UltimaSesion.setText(usuario.getUltima_sesion_usuario());
-            Txt_Estatus.setText(usuario.getStatus_usuario());
-            Txt_nomReal.setText(usuario.getNombre_real_usuario());
-            Txt_Correo.setText(usuario.getCorreo_usuario());
-            Txt_Telefomo.setText(usuario.getTelefono_usuario());
-            Txt_Direccion.setText(usuario.getDireccion_usuario());
-            Txt_TipoUsuario.setText(Integer.toString(usuario.getId_tipo_usuario()));
-            
-        } else {
-            JOptionPane.showMessageDialog(this, "Usuario No Modificado");
-        } 
-            
-    
-
-
-                
-    }//GEN-LAST:event_Btn_modificarActionPerformed
+    private void Txt_direccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_direccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Txt_direccionActionPerformed
 
     private void Btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_registrarActionPerformed
-       ClsUsuario users = new ClsUsuario(); 
-    users.setNombre_usuario(Txt_Nombre.getText());
-    users.setContraseña_usuario(txt_Contraseña.getText());   
-    
-    // Convertir la cadena de texto a java.sql.Date
-    try {
-        String fechaTexto = Txt_UltimaSesion.getText();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date parsedDate = dateFormat.parse(fechaTexto);
-        java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
-        users.setUltima_sesion_usuario_util(sqlDate);
-    } catch (ParseException e) {
-        JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Use yyyy-MM-dd.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Salir del método si hay un error en la fecha
-    }
+    ClsUsuario usuario = new ClsUsuario(); 
+    usuario.setnombre_usuario(Txt_nombre.getText());
+    usuario.setcontraseña_usuario(Txt_contraseña.getText());  
+    usuario.setultima_sesion_usuario(Txt_ultimaSesion.getText());
+    usuario.setstatus_usuario(Txt_status.getText());
+    usuario.setnombre_real_usuario(Txt_nomReal.getText());
+    usuario.setcorreo_usuario(Txt_correo.getText());
+    usuario.settelefono_usuario(Txt_telefono.getText());
+    usuario.setdireccion_usuario(Txt_direccion.getText());
 
-    //usuario.setUltima_sesion_usuario_util(Txt_UltimaSesion.getText());
-    
-    users.setStatus_usuario(Txt_Estatus.getText());
-    users.setNombre_real_usuario(Txt_nomReal.getText());
-    users.setCorreo_usuario(Txt_Correo.getText());
-    users.setTelefono_usuario(Txt_Telefomo.getText());
-    users.setDireccion_usuario(Txt_Direccion.getText());
-    //users.setId_tipo_usuario(Integer.parseInt(Txt_TipoUsuario.getText()));
-    
-     daoUsuario guardar = new daoUsuario();
-    int result = guardar.ingresaUsuario(users);
+
+    String selectedItem2 = Cbo_idTipoUsuario.getSelectedItem().toString();
+        int item2 = Integer.parseInt(selectedItem2.split(" - ")[0]);
+        usuario.setid_tipo_usuario(item2);
+        
+    daoUsuario daoUsuario = new daoUsuario();
+    int result = daoUsuario.ingresarUsuario(usuario);
 
     if (result > 0) {
         JOptionPane.showMessageDialog(null, "Registro Ingresado\n", 
@@ -559,60 +471,168 @@ public jDialog_UsuarioVista() {
         JOptionPane.showMessageDialog(null, "Error al ingresar registro\n", 
                 "Error", JOptionPane.ERROR_MESSAGE);
     }
-      
-        llenadoDeTabla();
-    
+
     }//GEN-LAST:event_Btn_registrarActionPerformed
 
+    private void Btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_modificarActionPerformed
+
+       ClsUsuario usuario = new ClsUsuario(); 
+      
+        try { 
+    usuario.setid_usuario(Integer.parseInt(Txt_buscar.getText()));
+    usuario.setnombre_usuario(Txt_nombre.getText());
+    usuario.setcontraseña_usuario(Txt_contraseña.getText());  
+    usuario.setultima_sesion_usuario(Txt_ultimaSesion.getText());
+    usuario.setstatus_usuario(Txt_status.getText());
+    usuario.setnombre_real_usuario(Txt_nomReal.getText());
+    usuario.setcorreo_usuario(Txt_correo.getText());
+    usuario.settelefono_usuario(Txt_telefono.getText());
+    usuario.setdireccion_usuario(Txt_direccion.getText());
+    // Extraer y convertir el ID del usuario 
+        String UsuarioSeleccionado = Cbo_idTipoUsuario.getSelectedItem().toString();
+        int id_tipo_usuario = Integer.parseInt(UsuarioSeleccionado.split(" - ")[0].trim());
+        usuario.setid_tipo_usuario(id_tipo_usuario);
+        
+    daoUsuario daoUsuario = new daoUsuario();
+    int result = daoUsuario.actualizaUsuario(usuario);
+
+         if (result > 0) {
+        JOptionPane.showMessageDialog(null, "Datos Modificados\n", 
+            "Información del Sistema", JOptionPane.INFORMATION_MESSAGE); 
+        llenadoDeTabla();
+        limpiarTextos();
+        } else {
+        JOptionPane.showMessageDialog(null, "Error al modificar datos\n", 
+            "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Error al convertir el ID a número: " + e.getMessage(), 
+        "Error", JOptionPane.ERROR_MESSAGE);
+        }
+   
+    }//GEN-LAST:event_Btn_modificarActionPerformed
+
+    private void Btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_limpiarActionPerformed
+        limpiarTextos();
+           
+        habilitarBotones();
+    }//GEN-LAST:event_Btn_limpiarActionPerformed
+public void limpiarTextos()
+    {
+  
+        Txt_nombre.setText("");
+        Txt_contraseña.setText("");
+        Txt_ultimaSesion.setText("");
+        Txt_status.setText("");
+        Txt_nomReal.setText("");
+        Txt_correo.setText("");
+        Txt_telefono.setText("");
+        Txt_direccion.setText("");
+        Txt_buscar.setText("");
+        Cbo_idTipoUsuario.setSelectedIndex(0);
+
+    }
+    public void habilitarBotones()
+    {
+        Btn_registrar.setEnabled(true);
+        Btn_modificar.setEnabled(true);
+        Btn_eliminar.setEnabled(true);
+        Btn_ayuda.setEnabled(true);
+        Btn_buscar.setEnabled(true);
+        Btn_limpiar.setEnabled(true);
+        Btn_actualizar.setEnabled(true);
+
+    }
+    public void desHabilitarBotones()
+    {
+        Btn_registrar.setEnabled(true);
+        Btn_modificar.setEnabled(true);
+        Btn_eliminar.setEnabled(true);
+        Btn_ayuda.setEnabled(true);
+        Btn_buscar.setEnabled(true);
+        Btn_limpiar.setEnabled(true);
+        Btn_actualizar.setEnabled(true);
+    }
+    
     private void Btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_buscarActionPerformed
         // TODO add your handling code here:
-         ClsUsuario usuario = new ClsUsuario();      
-        usuario.setId_usuario(Integer.parseInt(Txt_buscar.getText()));        
-        usuario = usuario.getBuscarUsuarioPorID(usuario);
+        ClsUsuario usuario = new ClsUsuario();
+    String buscado = Txt_buscar.getText().trim();
         
+                if (buscado.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "El campo de búsqueda no puede estar vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+
+        try {
+        usuario.setid_usuario(Integer.parseInt(buscado));
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido en el campo de búsqueda.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        usuario = usuario.getBuscarInformacionUsuarioPorId(usuario);
+
         if (usuario != null) {
-            
-            JOptionPane.showMessageDialog(this, "Usuario encontrado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE); 
-        
-            Txt_Nombre.setText(usuario.getNombre_usuario());
-            txt_Contraseña.setText(usuario.getContraseña_usuario());  
-            
-            // Convertir java.sql.Date a String
-        java.sql.Date ultimaSesion = usuario.getUltima_sesion_usuario();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String ultimaSesionStr = (ultimaSesion != null) ? dateFormat.format(ultimaSesion) : "";
-        Txt_UltimaSesion.setText(ultimaSesionStr);
-            
-            //Txt_UltimaSesion.setText(usuario.getUltima_sesion_usuario());
-            Txt_Estatus.setText(usuario.getStatus_usuario());
-            Txt_nomReal.setText(usuario.getNombre_real_usuario());
-            Txt_Correo.setText(usuario.getCorreo_usuario());
-            Txt_Telefomo.setText(usuario.getTelefono_usuario());
-            Txt_Direccion.setText(usuario.getDireccion_usuario());
-            Txt_TipoUsuario.setText(Integer.toString(usuario.getId_tipo_usuario()));
-            
+
+            JOptionPane.showMessageDialog(this, "Usuario encontrado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+
+            Txt_nombre.setText(usuario.getnombre_usuario());
+            Txt_contraseña.setText(usuario.getcontraseña_usuario());
+            Txt_ultimaSesion.setText(usuario.getultima_sesion_usuario());
+            Txt_status.setText(usuario.getstatus_usuario());
+            Txt_nomReal.setText(usuario.getnombre_real_usuario());
+            Txt_correo.setText(usuario.getcorreo_usuario());
+            Txt_telefono.setText(usuario.gettelefono_usuario());
+            Txt_direccion.setText(usuario.getdireccion_usuario());
+
+           
+            // Seleccionar video en Cbo_idVideo
+        int tipoUsuario = usuario.getid_tipo_usuario();
+        boolean tipoUsuarioncontrado = false;
+        for (int i = 0; i < Cbo_idTipoUsuario.getItemCount(); i++) {
+        String item = Cbo_idTipoUsuario.getItemAt(i).toString().trim();
+        try {
+            int itemIdV = Integer.parseInt(item.split(" - ")[0]); // Ajusta según el formato de los ítems
+            if (itemIdV == tipoUsuario) {
+                Cbo_idTipoUsuario.setSelectedIndex(i);
+                tipoUsuarioncontrado = true;
+                break;
+            }
+        } catch (NumberFormatException e) {
+            // Ignorar ítems que no se pueden convertir a entero
+        }
+        }
+        if (!tipoUsuarioncontrado) {
+        JOptionPane.showMessageDialog(this, "Tipo Usuario no encontrado en la lista", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+
         } else {
             JOptionPane.showMessageDialog(this, "Usuario no encontrado");
-        } 
+        }
     }//GEN-LAST:event_Btn_buscarActionPerformed
 
     private void Btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_actualizarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Tabla actualizada\n", 
-                    "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Tabla actualizada\n",
+            "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
         llenadoDeTabla();
     }//GEN-LAST:event_Btn_actualizarActionPerformed
 
-    private void txt_ContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_ContraseñaActionPerformed
+    private void Btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_eliminarActionPerformed
+        int registrosBorrados=0;
+        ClsUsuario usuario = new ClsUsuario();
+        usuario.setid_usuario(Integer.parseInt(Txt_buscar.getText()));
+        registrosBorrados=usuario.setBorrarUsuario(usuario);
+        JOptionPane.showMessageDialog(null, "Registro Borrado\n", 
+                    "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
+        limpiarTextos();
+    }//GEN-LAST:event_Btn_eliminarActionPerformed
 
-    private void Txt_DireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_DireccionActionPerformed
+    private void Cbo_idTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cbo_idTipoUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Txt_DireccionActionPerformed
+    }//GEN-LAST:event_Cbo_idTipoUsuarioActionPerformed
 
-   
-  
     /**
      * @param args the command line arguments
      */
@@ -630,27 +650,30 @@ public jDialog_UsuarioVista() {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jDialog_UsuarioVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jDialog_vistaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jDialog_UsuarioVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jDialog_vistaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jDialog_UsuarioVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jDialog_vistaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jDialog_UsuarioVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jDialog_vistaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jDialog_UsuarioVista().setVisible(true);
+                jDialog_vistaUsuario dialog = new jDialog_vistaUsuario(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_actualizar;
@@ -661,6 +684,7 @@ public jDialog_UsuarioVista() {
     private javax.swing.JButton Btn_modificar;
     private javax.swing.JButton Btn_registrar;
     private javax.swing.JButton Btn_reportes;
+    private javax.swing.JComboBox<String> Cbo_idTipoUsuario;
     private javax.swing.JLabel Label_Correo;
     private javax.swing.JLabel Label_Usuario;
     private javax.swing.JLabel Label_contraseña;
@@ -672,19 +696,18 @@ public jDialog_UsuarioVista() {
     private javax.swing.JLabel Label_telefono;
     private javax.swing.JLabel Label_tipoUsuario;
     private javax.swing.JLabel Label_ultimaSesion;
-    private javax.swing.JTable TablaUsuario;
-    private javax.swing.JTextField Txt_Correo;
-    private javax.swing.JTextField Txt_Direccion;
-    private javax.swing.JTextField Txt_Estatus;
-    private javax.swing.JTextField Txt_Nombre;
-    private javax.swing.JTextField Txt_Telefomo;
-    private javax.swing.JTextField Txt_TipoUsuario;
-    private javax.swing.JTextField Txt_UltimaSesion;
+    private javax.swing.JTable Tbl_usuario;
     private javax.swing.JTextField Txt_buscar;
+    private javax.swing.JTextField Txt_contraseña;
+    private javax.swing.JTextField Txt_correo;
+    private javax.swing.JTextField Txt_direccion;
     private javax.swing.JTextField Txt_nomReal;
+    private javax.swing.JTextField Txt_nombre;
+    private javax.swing.JTextField Txt_status;
+    private javax.swing.JTextField Txt_telefono;
+    private javax.swing.JTextField Txt_ultimaSesion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField txt_Contraseña;
     // End of variables declaration//GEN-END:variables
 }
