@@ -15,8 +15,8 @@ import Seguridad.Modelo.Conexion;
  */
 public class daoTipUsu {
     private static final String SQL_SELECT = "SELECT id_tipo_usuario, nombre_tipo_usuario, status_tipo_usuario FROM TBL_TIPO_USUARIO";
-    private static final String SQL_INSERT = "INSERT INTO TBL_TIPO_USUARIO( id_tipo_usuario, nombre_tipo_usuario, status_tipo_usuario) VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE TBL_TIPO_USUARIO SET id_tipo_usuario=?, nombre_tipo_usuario=?,  status_tipo_usuario=? WHERE id_tipo_usuario = ?";
+    private static final String SQL_INSERT = "INSERT INTO TBL_TIPO_USUARIO id_tipo_usuario, nombre_tipo_usuario, status_tipo_usuario VALUES(?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE TBL_TIPO_USUARIO SET id_tipo_usuario=?, nombre_tipo_usuario=?, status_tipo_usuario=? WHERE id_tipo_usuario = ?";
     private static final String SQL_DELETE = "DELETE FROM TBL_TIPO_USUARIO WHERE id_tipo_usuario=?";
     private static final String SQL_SELECT_NOMBRE = "SELECT id_tipo_usuario, nombre_tipo_usuario, status_tipo_usuario FROM TBL_TIPO_USUARIO WHERE nombre_tipo_usuario = ?";
     private static final String SQL_SELECT_ID = "SELECT id_tipo_usuario, nombre_tipo_usuario, status_tipo_usuario FROM TBL_TIPO_USUARIO WHERE id_tipo_usuario = ?"; 
