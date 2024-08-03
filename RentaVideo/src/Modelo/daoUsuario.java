@@ -8,6 +8,7 @@ import Controlador.ClsUsuario;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import Seguridad.Modelo.Conexion;
 
 
 /**

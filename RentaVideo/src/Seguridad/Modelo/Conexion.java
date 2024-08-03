@@ -18,9 +18,9 @@ import java.sql.SQLException;
  */
 public class Conexion {
 
-private static final String JDBC_URL = "jdbc:mysql://localhost/tienda_video?useSSL=false&serverTimezone=UTC";    
+private static final String JDBC_URL = "jdbc:mysql://localhost:3306/tienda_videos";   
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASS = "200118";
+    private static final String JDBC_PASS = "carlos04";
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
     }
