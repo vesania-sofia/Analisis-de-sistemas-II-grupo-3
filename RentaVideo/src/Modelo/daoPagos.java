@@ -19,9 +19,9 @@ public class daoPagos {
     private static final String SQL_SELECT = "SELECT id_sispag, id_comprobante, pago, tipo_sispag, descuento_sispag, mora_sispag, id_admin  FROM TBL_SISTEMA_DE_PAGOS";
     private static final String SQL_INSERT = "INSERT INTO TBL_SISTEMA_DE_PAGOS(id_comprobante, pago, tipo_sispag, descuento_sispag, mora_sispag, id_admin) VALUES(?, ?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE TBL_SISTEMA_DE_PAGOS SET id_comprobante=?, pago=?, tipo_sispag=?, descuento_sispag=?, mora_sispag=?, id_admin=? WHERE id_sispag = ?";
-    private static final String SQL_DELETE = "DELETE FROM TBL_SISTEMA_DE_PAGOS WHERE tipModId=?";
-    private static final String SQL_SELECT_NOMBRE = "SELECT id_sispag, pago, tipo_sispag, descuento_sispag, mora_sispag, id_admin  FROM TBL_SISTEMA_DE_PAGOS WHERE id_comprobante = ?";
-    private static final String SQL_SELECT_ID = "SELECT id_comprobante, pago, tipo_sispag, descuento_sispag, mora_sispag, id_admin FROM TBL_SISTEMA_DE_PAGOS WHERE id_sispag = ?";     
+    private static final String SQL_DELETE = "DELETE FROM TBL_SISTEMA_DE_PAGOS WHERE id_sispag=?";
+    private static final String SQL_SELECT_NOMBRE = "SELECT id_sispag, id_comprobante, pago, tipo_sispag, descuento_sispag, mora_sispag, id_admin  FROM TBL_SISTEMA_DE_PAGOS WHERE id_comprobante = ?";
+    private static final String SQL_SELECT_ID = "SELECT id_sispag, id_comprobante, pago, tipo_sispag, descuento_sispag, mora_sispag, id_admin FROM TBL_SISTEMA_DE_PAGOS WHERE id_sispag = ?";     
 
     
       public List<clsPagos> consultaPagos() {
@@ -81,7 +81,7 @@ public class daoPagos {
             stmt.setString(3, Spago.getTipo_sispag());
             stmt.setInt(4, Spago.getDescuento_sispag());
             stmt.setInt(5, Spago.getMora_sispag());
-            stmt.setInt(5, Spago.getId_admin());
+            stmt.setInt(6, Spago.getId_admin());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -111,7 +111,8 @@ public class daoPagos {
             stmt.setString(3, Spago.getTipo_sispag());
             stmt.setInt(4, Spago.getDescuento_sispag());
             stmt.setInt(5, Spago.getMora_sispag());
-            stmt.setInt(5, Spago.getId_admin());
+            stmt.setInt(6, Spago.getId_admin());
+            stmt.setInt(7, Spago.getId_sispag());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
