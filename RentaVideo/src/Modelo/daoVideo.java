@@ -13,6 +13,8 @@ import java.util.List;
  *
  * @author macho
  */
+
+/*DAO CREADO POR CARLOS HERNANDEZ 9959-21-363*/
 public class daoVideo {
     private static final String SQL_SELECT = "SELECT id_video, titulo_video, precio_video, año_estreno_video, genero_video, actores_video, sintesis_video, existencia_video, formato_video FROM tbl_videos";
     private static final String SQL_INSERT = "INSERT INTO tbl_videos(titulo_video, precio_video, año_estreno_video, genero_video, actores_video, sintesis_video, existencia_video, formato_video) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";

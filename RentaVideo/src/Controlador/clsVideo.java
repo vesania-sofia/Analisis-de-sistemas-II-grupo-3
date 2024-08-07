@@ -10,6 +10,8 @@ import Modelo.daoVideo;
  *
  * @author macho
  */
+
+/*CLASE CREADO POR CARLOS HERNANDEZ 9959-21-363*/
 public class clsVideo {
     
     private int id_video;
