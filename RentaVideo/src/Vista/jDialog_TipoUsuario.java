@@ -42,8 +42,8 @@ public class jDialog_TipoUsuario extends javax.swing.JDialog {
         String[] dato = new String[3];
         for (int i = 0; i < ListadoUsuario.size(); i++) {
             dato[0] = Integer.toString(ListadoUsuario.get(i).getId_tipo_usuario());
-            dato[1] = ListadoUsuario .get(i).getNombre_tipo_usuario();
-            dato[2] = ListadoUsuario .get(i).getStatus_tipo_usuario();
+            dato[1] = ListadoUsuario .get(i).getNombre_Tusuario();
+            dato[2] = ListadoUsuario .get(i).getStatus_Tusuario();
             modelo.addRow(dato);
         }       
     }
@@ -302,8 +302,8 @@ public class jDialog_TipoUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
         clsTipUsu usuario = new clsTipUsu();
         usuario.setId_tipo_usuario(Integer.parseInt(Txt_idTipoUsu.getText()));
-        usuario.setNombre_tipo_usuario(Txt_nombreTipoUsu.getText());
-        usuario.setStatus_tipo_usuario(Txt_estatusTipoUsu.getText());
+        usuario.setNombre_Tusuario(Txt_nombreTipoUsu.getText());
+        usuario.setStatus_Tusuario(Txt_estatusTipoUsu.getText());
 
         JOptionPane.showMessageDialog(null, "Registro Ingresado\n",
             "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
@@ -315,8 +315,8 @@ public class jDialog_TipoUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
         clsTipUsu usuario = new clsTipUsu();
         usuario.setId_tipo_usuario(Integer.parseInt(Txt_idTipoUsu.getText()));
-        usuario.setNombre_tipo_usuario(Txt_nombreTipoUsu.getText());
-        usuario.setStatus_tipo_usuario(Txt_estatusTipoUsu.getText());
+        usuario.setNombre_Tusuario(Txt_nombreTipoUsu.getText());
+        usuario.setStatus_Tusuario(Txt_estatusTipoUsu.getText());
         
         daoTipUsu dao = new daoTipUsu();
         int result = dao.actualizausuarios(usuario);
@@ -363,8 +363,8 @@ public class jDialog_TipoUsuario extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Tipo Usuario encontrado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE); 
         
             Txt_idTipoUsu.setText(Integer.toString(usuario.getId_tipo_usuario()));
-            Txt_nombreTipoUsu.setText(usuario.getNombre_tipo_usuario());
-            Txt_estatusTipoUsu.setText(usuario.getStatus_tipo_usuario());
+            Txt_nombreTipoUsu.setText(usuario.getNombre_Tusuario());
+            Txt_estatusTipoUsu.setText(usuario.getStatus_Tusuario());
         } else {
             JOptionPane.showMessageDialog(this, "Administrador no encontrado");
         } 
