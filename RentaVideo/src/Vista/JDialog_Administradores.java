@@ -196,6 +196,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Txt_IdAdmin.setEditable(false);
         Txt_IdAdmin.setBackground(new java.awt.Color(102, 102, 102));
         Txt_IdAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        Txt_IdAdmin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Txt_IdAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Txt_IdAdminActionPerformed(evt);
