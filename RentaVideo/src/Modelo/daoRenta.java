@@ -10,6 +10,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import Seguridad.Modelo.Conexion;
+import java.util.Date;
+//import java.sql.Date;
 
 /**
  *
@@ -41,8 +43,8 @@ public class daoRenta {
 
                 int id_comprobante = rs.getInt("id_comprobante");
                 int id_cliente = rs.getInt("id_cliente");
-                String fecha_alquiler = rs.getString("fecha_alquiler");
-                String fecha_devolucion = rs.getString("fecha_devolucion");
+                Date fecha_alquiler = rs.getDate("fecha_alquiler"); // Usar java.sql.Date
+                Date fecha_devolucion = rs.getDate("fecha_devolucion"); // Usar java.sql.Date
                 String estatus_alquiler = rs.getString("estatus_alquiler");
                 int id_video = rs.getInt("id_video");
                 clsRenta renta = new clsRenta();
@@ -74,8 +76,8 @@ public class daoRenta {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setInt(1, renta.getId_cliente());
-            stmt.setString(2, renta.getFecha_alquiler());
-            stmt.setString(3, renta.getFecha_devolucion());
+            stmt.setDate(2, new java.sql.Date(renta.getFecha_alquiler().getTime())); // Convertir java.util.Date a java.sql.Date
+            stmt.setDate(3, new java.sql.Date(renta.getFecha_devolucion().getTime())); // Convertir java.util.Date a java.sql.Date
             stmt.setString(4, renta.getEstatus_alquiler());
             stmt.setInt(5, renta.getId_video());
 
@@ -104,11 +106,11 @@ public class daoRenta {
             stmt = conn.prepareStatement(SQL_UPDATE);
 
             stmt.setInt(1, renta.getId_cliente());
-            stmt.setString(2, renta.getFecha_alquiler());
-            stmt.setString(3, renta.getFecha_devolucion());
+            stmt.setDate(2, new java.sql.Date(renta.getFecha_alquiler().getTime())); // Convertir java.util.Date a java.sql.Date
+            stmt.setDate(3, new java.sql.Date(renta.getFecha_devolucion().getTime())); // Convertir java.util.Date a java.sql.Date
             stmt.setString(4, renta.getEstatus_alquiler());
             stmt.setInt(5, renta.getId_video());
-            stmt.setInt(6, renta.getId_comprobante());
+            stmt.setInt(6, renta.getId_comprobante()); // ID del registro a actualizar
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -150,7 +152,7 @@ public class daoRenta {
     }
 
 
-    public clsRenta consultaRentaPorNombre(clsRenta renta) {
+/*    public clsRenta consultaRentaPorNombre(clsRenta renta) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -191,7 +193,9 @@ public class daoRenta {
 
 
         return renta;
-    }
+    }*/
+    
+    
     public clsRenta consultaRentaPorId(clsRenta renta) {
 
         Connection conn = null;
@@ -208,8 +212,8 @@ public class daoRenta {
             while (rs.next()) {
                 int id_comprobante = rs.getInt("id_comprobante");
                 int id_cliente = rs.getInt("id_cliente");
-                String fecha_alquiler = rs.getString("fecha_alquiler");
-                String fecha_devolucion = rs.getString("fecha_devolucion");
+                Date fecha_alquiler = rs.getDate("fecha_alquiler");
+                Date fecha_devolucion = rs.getDate("fecha_devolucion");
                 String estatus_alquiler = rs.getString("estatus_alquiler");
                 int id_video = rs.getInt("id_video");
 

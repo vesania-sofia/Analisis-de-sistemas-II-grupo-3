@@ -6,6 +6,7 @@
 package Controlador;
 import java.util.List;
 import Modelo.daoRenta;
+import java.util.Date;
 
 /**
  *
@@ -14,8 +15,8 @@ import Modelo.daoRenta;
 public class clsRenta {
     private int id_comprobante;
     private int  id_cliente;
-    private String fecha_alquiler;
-    private String fecha_devolucion;
+    private Date  fecha_alquiler;
+    private Date  fecha_devolucion;
     private String estatus_alquiler;
     private int id_video;
 
@@ -31,20 +32,20 @@ public class clsRenta {
         this.id_cliente = id_cliente;
     }
 
-    public clsRenta(int id_comprobante, int id_cliente, String fecha_alquiler) {
+    public clsRenta(int id_comprobante, int id_cliente, Date fecha_alquiler) {
         this.id_comprobante = id_comprobante;
         this.id_cliente = id_cliente;
         this.fecha_alquiler = fecha_alquiler;
     }
 
-    public clsRenta(int id_comprobante, int id_cliente, String fecha_alquiler, String fecha_devolucion) {
+    public clsRenta(int id_comprobante, int id_cliente, Date fecha_alquiler, Date fecha_devolucion) {
         this.id_comprobante = id_comprobante;
         this.id_cliente = id_cliente;
         this.fecha_alquiler = fecha_alquiler;
         this.fecha_devolucion = fecha_devolucion;
     }
 
-    public clsRenta(int id_comprobante, int id_cliente, String fecha_alquiler, String fecha_devolucion, String estatus_alquiler) {
+    public clsRenta(int id_comprobante, int id_cliente, Date fecha_alquiler, Date fecha_devolucion, String estatus_alquiler) {
         this.id_comprobante = id_comprobante;
         this.id_cliente = id_cliente;
         this.fecha_alquiler = fecha_alquiler;
@@ -52,7 +53,7 @@ public class clsRenta {
         this.estatus_alquiler = estatus_alquiler;
     }
 
-    public clsRenta(int id_comprobante, int id_cliente, String fecha_alquiler, String fecha_devolucion, String estatus_alquiler, int id_video) {
+    public clsRenta(int id_comprobante, int id_cliente, Date fecha_alquiler, Date fecha_devolucion, String estatus_alquiler, int id_video) {
         this.id_comprobante = id_comprobante;
         this.id_cliente = id_cliente;
         this.fecha_alquiler = fecha_alquiler;
@@ -77,19 +78,19 @@ public class clsRenta {
         this.id_cliente = id_cliente;
     }
 
-    public String getFecha_alquiler() {
+    public Date getFecha_alquiler() {
         return fecha_alquiler;
     }
 
-    public void setFecha_alquiler(String fecha_alquiler) {
+    public void setFecha_alquiler(Date fecha_alquiler) {
         this.fecha_alquiler = fecha_alquiler;
     }
 
-    public String getFecha_devolucion() {
+    public Date getFecha_devolucion() {
         return fecha_devolucion;
     }
 
-    public void setFecha_devolucion(String fecha_devolucion) {
+    public void setFecha_devolucion(Date fecha_devolucion) {
         this.fecha_devolucion = fecha_devolucion;
     }
 
@@ -114,11 +115,11 @@ public class clsRenta {
         return "clsRenta{" + "id_comprobante=" + id_comprobante + ", id_cliente=" + id_cliente + ", fecha_alquiler=" + fecha_alquiler + ", fecha_devolucion=" + fecha_devolucion + ", estatus_alquiler=" + estatus_alquiler + ", id_video=" + id_video +'}';
     }
    //Metodos de acceso a la capa controlador
-    public clsRenta getBuscarInformacionRentaPorNombre(clsRenta renta)
+    /*public clsRenta getBuscarInformacionRentaPorNombre(clsRenta renta)
     {
         daoRenta daorenta = new daoRenta();
         return daorenta.consultaRentaPorNombre(renta);
-    }
+    }*/
     public clsRenta getBuscarInformacionRentaPorId(clsRenta renta)
     {
         daoRenta daorenta = new daoRenta();
