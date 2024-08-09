@@ -14,12 +14,12 @@ import Seguridad.Modelo.Conexion;
  * @author DELL
  */
 public class daoTipUsu {
-    private static final String SQL_SELECT = "SELECT id_tipo_usuario, nombre_tipo_usuario, status_tipo_usuario FROM TBL_TIPO_USUARIO";
-    private static final String SQL_INSERT = "INSERT INTO TBL_TIPO_USUARIO id_tipo_usuario, nombre_tipo_usuario, status_tipo_usuario VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE TBL_TIPO_USUARIO SET id_tipo_usuario=?, nombre_tipo_usuario=?, status_tipo_usuario=? WHERE id_tipo_usuario = ?";
+    private static final String SQL_SELECT = "SELECT id_tipo_usuario, nombre_Tusuario, status_Tusuario FROM TBL_TIPO_USUARIO";
+    private static final String SQL_INSERT = "INSERT INTO TBL_TIPO_USUARIO id_tipo_usuario, nombre_Tusuario, status_Tusuario VALUES(?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE TBL_TIPO_USUARIO SET id_tipo_usuario=?, nombre_Tusuario=?, status_Tusuario=? WHERE id_tipo_usuario = ?";
     private static final String SQL_DELETE = "DELETE FROM TBL_TIPO_USUARIO WHERE id_tipo_usuario=?";
-    private static final String SQL_SELECT_NOMBRE = "SELECT id_tipo_usuario, nombre_tipo_usuario, status_tipo_usuario FROM TBL_TIPO_USUARIO WHERE nombre_tipo_usuario = ?";
-    private static final String SQL_SELECT_ID = "SELECT id_tipo_usuario, nombre_tipo_usuario, status_tipo_usuario FROM TBL_TIPO_USUARIO WHERE id_tipo_usuario = ?"; 
+    private static final String SQL_SELECT_NOMBRE = "SELECT id_tipo_usuario, nombre_Tusuario, status_Tusuario FROM TBL_TIPO_USUARIO WHERE nombre_Tusuario = ?";
+    private static final String SQL_SELECT_ID = "SELECT id_tipo_usuario, nombre_Tusuario, status_Tusuario FROM TBL_TIPO_USUARIO WHERE id_tipo_usuario = ?"; 
     
      public List<clsTipUsu>consultausuarios() {
         Connection conn = null;
@@ -34,13 +34,13 @@ public class daoTipUsu {
             while (rs.next()) {
                 
                 int id = rs.getInt("id_tipo_usuario");
-                String nombre = rs.getString("nombre_tipo_usuario");
-                String estatus = rs.getString("status_tipo_usuario");
+                String nombre = rs.getString("nombre_Tusuario");
+                String estatus = rs.getString("status_Tusuario");
          
                 clsTipUsu tipousuario = new clsTipUsu ();
                 tipousuario.setId_tipo_usuario(id);
-                tipousuario.setNombre_tipo_usuario(nombre);
-                tipousuario.setStatus_tipo_usuario(estatus);
+                tipousuario.setNombre_Tusuario(nombre);
+                tipousuario.setStatus_Tusuario(estatus);
                 usuario.add (tipousuario);
             }
         } catch (SQLException ex) {
@@ -62,8 +62,8 @@ public class daoTipUsu {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setInt(1, usuario.getId_tipo_usuario());
-            stmt.setString(2, usuario.getNombre_tipo_usuario());
-            stmt.setString(3, usuario.getStatus_tipo_usuario());
+            stmt.setString(2, usuario.getNombre_Tusuario());
+            stmt.setString(3, usuario.getStatus_Tusuario());
             
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -88,8 +88,8 @@ public class daoTipUsu {
             stmt = conn.prepareStatement(SQL_UPDATE);
             
             stmt.setInt(1, usuario.getId_tipo_usuario());
-            stmt.setString(2, usuario.getNombre_tipo_usuario());
-            stmt.setString(3, usuario.getStatus_tipo_usuario());            
+            stmt.setString(2, usuario.getNombre_Tusuario());
+            stmt.setString(3, usuario.getStatus_Tusuario());            
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
@@ -137,16 +137,16 @@ public class daoTipUsu {
             
             System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + usuario);
             stmt = conn.prepareStatement(SQL_SELECT_NOMBRE);           
-            stmt.setString(1, usuario.getNombre_tipo_usuario());
+            stmt.setString(1, usuario.getNombre_Tusuario());
             rs = stmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id_tipo_usuario");
-                String nombre = rs.getString("nombre_tipo_usuario");
-                String estatus = rs.getString("status_tipo_usuario");
+                String nombre = rs.getString("nombre_Tusuario");
+                String estatus = rs.getString("status_Tusuario");
                 
                 usuario.setId_tipo_usuario(id);
-                usuario.setNombre_tipo_usuario(nombre);
-                usuario.setStatus_tipo_usuario(estatus);
+                usuario.setNombre_Tusuario(nombre);
+                usuario.setStatus_Tusuario(estatus);
            
                 
                 System.out.println(" registro consultado: " + usuario );                
@@ -175,12 +175,12 @@ public class daoTipUsu {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id_tipo_usuario");
-                String nombre = rs.getString("nombre_tipo_usuario");
-                String estatus = rs.getString("status_tipo_usuario");
+                String nombre = rs.getString("nombre_Tusuario");
+                String estatus = rs.getString("status_Tusuario");
               
                 usuario.setId_tipo_usuario(id);
-                usuario.setNombre_tipo_usuario(nombre);
-                usuario.setStatus_tipo_usuario(estatus);
+                usuario.setNombre_Tusuario(nombre);
+                usuario.setStatus_Tusuario(estatus);
                 
                 System.out.println(" registro consultado: " + usuario);                
             }

@@ -12,8 +12,8 @@ import Modelo.daoTipUsu;
  */
 public class clsTipUsu {
     private int id_tipo_usuario;
-    private String nombre_tipo_usuario;
-    private String status_tipo_usuario;
+    private String nombre_Tusuario;
+    private String status_Tusuario;
 
     public clsTipUsu() {
     }
@@ -22,15 +22,15 @@ public class clsTipUsu {
         this.id_tipo_usuario = id_tipo_usuario;
     }
 
-    public clsTipUsu(int id_tipo_usuario, String nombre_tipo_usuario) {
+    public clsTipUsu(int id_tipo_usuario, String nombre_Tusuario) {
         this.id_tipo_usuario = id_tipo_usuario;
-        this.nombre_tipo_usuario = nombre_tipo_usuario;
+        this.nombre_Tusuario = nombre_Tusuario;
     }
 
-    public clsTipUsu(int id_tipo_usuario, String nombre_tipo_usuario, String status_tipo_usuario) {
+    public clsTipUsu(int id_tipo_usuario, String nombre_Tusuario, String status_Tusuario) {
         this.id_tipo_usuario = id_tipo_usuario;
-        this.nombre_tipo_usuario = nombre_tipo_usuario;
-        this.status_tipo_usuario = status_tipo_usuario;
+        this.nombre_Tusuario = nombre_Tusuario;
+        this.status_Tusuario = status_Tusuario;
     }
 
     public int getId_tipo_usuario() {
@@ -41,25 +41,25 @@ public class clsTipUsu {
         this.id_tipo_usuario = id_tipo_usuario;
     }
 
-    public String getNombre_tipo_usuario() {
-        return nombre_tipo_usuario;
+    public String getNombre_Tusuario() {
+        return nombre_Tusuario;
     }
 
-    public void setNombre_tipo_usuario(String nombre_tipo_usuario) {
-        this.nombre_tipo_usuario = nombre_tipo_usuario;
+    public void setNombre_Tusuario(String nombre_Tusuario) {
+        this.nombre_Tusuario = nombre_Tusuario;
     }
 
-    public String getStatus_tipo_usuario() {
-        return status_tipo_usuario;
+    public String getStatus_Tusuario() {
+        return status_Tusuario;
     }
 
-    public void setStatus_tipo_usuario(String status_tipo_usuario) {
-        this.status_tipo_usuario = status_tipo_usuario;
+    public void setStatus_Tusuario(String status_Tusuario) {
+        this.status_Tusuario = status_Tusuario;
     }
     
     @Override
     public String toString() {
-        return "clsTipUsu{" + "nombre_tipo_usuario =" + nombre_tipo_usuario  + ", status_tipo_usuario=" + status_tipo_usuario  + '}';
+        return "clsTipUsu{" + "nombre_Tusuario =" + nombre_Tusuario  + ", status_Tusuario=" + status_Tusuario  + '}';
     }
     //Metodos de acceso a la capa controlador
     public clsTipUsu getBuscarInformacionUsuarioPorNombre(clsTipUsu usuarios)
@@ -100,39 +100,4 @@ public class clsTipUsu {
         daoTipUsu daoTipUsu = new daoTipUsu();
         return daoTipUsu.actualizausuarios(usuarios);
     }  
-    }  
-    /*public void setId_tipo_ususario(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void setNombre_tipo_ususario(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public int id_tipo_ususario() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public String nombre_tipo_usuario() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-   
-
-    public String status_tipo_usuario() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public String gettitulo_video() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public List<clsTipUsu> getListadoUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }*/
-
-
-
- 
-    
-
+    } 
