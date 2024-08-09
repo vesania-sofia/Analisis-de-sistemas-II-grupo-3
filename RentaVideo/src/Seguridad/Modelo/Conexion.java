@@ -18,7 +18,7 @@ import java.sql.SQLException;
  */
 public class Conexion {
 
-private static final String JDBC_URL = "jdbc:mysql://localhost/tienda_video?useSSL=false&serverTimezone=UTC";    
+private static final String JDBC_URL = "jdbc:mysql://localhost/tienda_videos?useSSL=false&serverTimezone=UTC";    
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASS = "200118";
     public static Connection getConnection() throws SQLException {
@@ -50,3 +50,5 @@ private static final String JDBC_URL = "jdbc:mysql://localhost/tienda_video?useS
     }
 }
     
+
+
