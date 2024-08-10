@@ -54,6 +54,39 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         }       
     }
     
+    private boolean validarcampos(){
+        //verifica que cada campo no este vacio
+        if (Txt_NombreAdmin.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "El campo nombre es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+        }
+        if (Txt_ApellidoAdmin.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "El campo apellido es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+        }
+        if (Txt_DireccionAdmin.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "El campo Direccion es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+        }
+        if (Txt_TelefonoAdmin.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "El campo Telefono es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+        }
+        if (Txt_CorreoAdmin.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "El campo Correo es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+        }
+        if (Txt_ContraAdmin.getPassword().length==0){
+            JOptionPane.showMessageDialog(this, "El campo Contraseña es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+        }
+        if (Txt_Usuario.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "El campo Nombre de Usuario es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+        }
+        
+        return true;
+    }
     
     public JDialog_Administradores(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -574,7 +607,12 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
-         ClsAdministradores admin = new ClsAdministradores();
+        if(!validarcampos()){
+            return; //Si la validacion falla, no se continua con el guardado
+        }
+        
+        
+        ClsAdministradores admin = new ClsAdministradores();
          //DaoAdministradores dao = new DaoAdministradores(); Parte de la funcion de encriptacion
             //admin.setIDAdmin(Integer.parseInt(Txt_IdAdmin.getText()));
             admin.setNombreAdmin(Txt_NombreAdmin.getText());
