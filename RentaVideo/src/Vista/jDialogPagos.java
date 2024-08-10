@@ -634,8 +634,9 @@ public class jDialogPagos extends javax.swing.JDialog {
     }//GEN-LAST:event_Btn_eliminarPActionPerformed
 
     private void Btn_modificarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_modificarPActionPerformed
-       // TODO add your handling code here:
-        clsPagos Spagos = new clsPagos();
+
+// TODO add your handling code here:
+     clsPagos Spagos = new clsPagos();
         try {
             //Id del Alquiler
 
@@ -655,13 +656,16 @@ public class jDialogPagos extends javax.swing.JDialog {
             float pago = Float.parseFloat(txt_Pago.getText());
             int descuento = Integer.parseInt(txtDescuento.getText());
             int mora = Integer.parseInt(txtMora.getText());
-
+            String tipoPago = Cbo_Pago.getSelectedItem().toString();
+        if (tipoPago.equals("tarjeta_credito") || tipoPago.equals("tarjeta_debito")) {
+            pago += pago * 0.05;
+        }
                 float totalPago = pago + mora - descuento;
         Spagos.setPago(totalPago);
         //txtPagototal.setText(String.format("%.2f", totalPago));
         Spagos.setDescuento_sispag(descuento);
         Spagos.setMora_sispag(mora);
-        Spagos.setTipo_sispag(Cbo_Pago.getSelectedItem().toString());
+         
             
             daoPagos daoP = new daoPagos();
             int result = daoP.actualizaPago(Spagos);
@@ -701,7 +705,10 @@ public class jDialogPagos extends javax.swing.JDialog {
         //txtPagototal.setText(String.format("%.2f", totalPago));
         Spagos.setDescuento_sispag(descuento);
         Spagos.setMora_sispag(mora);
-        Spagos.setTipo_sispag(Cbo_Pago.getSelectedItem().toString());
+        String tipoPago = Cbo_Pago.getSelectedItem().toString();
+        if (tipoPago.equals("tarjeta_credito") || tipoPago.equals("tarjeta_debito")) {
+            pago += pago * 0.05;
+        }
 
         daoPagos daoP = new daoPagos();
         int result = daoP.ingresaPago(Spagos);
