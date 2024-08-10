@@ -10,6 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import Seguridad.Modelo.Conexion;
+import static Seguridad.Modelo.Conexion.getConnection;
 import java.util.Date;
 //import java.sql.Date;
 
@@ -96,36 +97,34 @@ public class daoRenta {
 
 
     public int actualizaRenta(clsRenta renta) {
+    String query = "UPDATE TBL_ALQUILERES SET id_cliente = ?, fecha_alquiler = ?, fecha_devolucion = ?, estatus_alquiler = ?, id_video = ? WHERE id_comprobante = ?";
+    try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
+        ps.setInt(1, renta.getId_cliente());
 
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        int rows = 0;
-        try {
-            conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
-            stmt = conn.prepareStatement(SQL_UPDATE);
-
-            stmt.setInt(1, renta.getId_cliente());
-            stmt.setDate(2, new java.sql.Date(renta.getFecha_alquiler().getTime())); // Convertir java.util.Date a java.sql.Date
-            stmt.setDate(3, new java.sql.Date(renta.getFecha_devolucion().getTime())); // Convertir java.util.Date a java.sql.Date
-            stmt.setString(4, renta.getEstatus_alquiler());
-            stmt.setInt(5, renta.getId_video());
-            stmt.setInt(6, renta.getId_comprobante()); // ID del registro a actualizar
-
-            rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(stmt);
-            Conexion.close(conn);
+        // Verificar si la fecha es nula antes de establecer el parámetro
+        if (renta.getFecha_alquiler() != null) {
+            ps.setDate(2, new java.sql.Date(renta.getFecha_alquiler().getTime()));
+        } else {
+            ps.setNull(2, java.sql.Types.DATE);
         }
 
-        return rows;
+        if (renta.getFecha_devolucion() != null) {
+            ps.setDate(3, new java.sql.Date(renta.getFecha_devolucion().getTime()));
+        } else {
+            ps.setNull(3, java.sql.Types.DATE);
+        }
+
+        ps.setString(4, renta.getEstatus_alquiler());
+        ps.setInt(5, renta.getId_video());
+        ps.setInt(6, renta.getId_comprobante());
+
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected;
+    } catch (SQLException e) {
+        e.printStackTrace(); // Maneja el error adecuadamente
+        return 0;
     }
-
-
+}
     public int borrarRenta(clsRenta renta) {
 
         Connection conn = null;

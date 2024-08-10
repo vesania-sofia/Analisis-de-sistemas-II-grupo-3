@@ -202,6 +202,11 @@ public class Vista_Administrador extends javax.swing.JFrame {
         jMenu6.add(jMenuItem6);
 
         jMenuItem7.setText("Videos rentados en una fecha específica");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem7);
 
         jMenuItem8.setText("Videos rentados en la última visita de un cliente");
@@ -292,6 +297,23 @@ public class Vista_Administrador extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
+        Connection conn = null;        
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            conn = Seguridad.Modelo.Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+
+                    + "/src/Reportes/rptRentaVideoUltimaVisita1.jrxml");
+	    print = JasperFillManager.fillReport(report, p, conn);
+            JasperViewer view = new JasperViewer(print, false);
+	    view.setTitle("Reporte Prueba");
+            view.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
@@ -408,6 +430,27 @@ public class Vista_Administrador extends javax.swing.JFrame {
         e.printStackTrace();
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        Connection conn = null;        
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            conn = Seguridad.Modelo.Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+
+                    + "/src/Reportes/rptRentaVideoFechaEspecifica.jrxml");
+	    print = JasperFillManager.fillReport(report, p, conn);
+            JasperViewer view = new JasperViewer(print, false);
+	    view.setTitle("Reporte Prueba");
+            view.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
