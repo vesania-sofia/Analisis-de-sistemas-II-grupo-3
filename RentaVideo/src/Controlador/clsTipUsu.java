@@ -59,8 +59,12 @@ public class clsTipUsu {
     
     @Override
     public String toString() {
-        return "clsTipUsu{" + "nombre_Tusuario =" + nombre_Tusuario  + ", status_Tusuario=" + status_Tusuario  + '}';
-    }
+    return "clsTipUsu{" +
+           "id_tipo_usuario=" + id_tipo_usuario + 
+           ", nombre_Tusuario='" + nombre_Tusuario + '\'' + 
+           ", status_Tusuario='" + status_Tusuario + '\'' + 
+           '}';
+}
     //Metodos de acceso a la capa controlador
     public clsTipUsu getBuscarInformacionUsuarioPorNombre(clsTipUsu usuarios)
     {

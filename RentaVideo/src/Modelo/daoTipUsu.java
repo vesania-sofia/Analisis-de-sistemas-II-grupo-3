@@ -15,8 +15,8 @@ import Seguridad.Modelo.Conexion;
  */
 public class daoTipUsu {
     private static final String SQL_SELECT = "SELECT id_tipo_usuario, nombre_Tusuario, status_Tusuario FROM TBL_TIPO_USUARIO";
-    private static final String SQL_INSERT = "INSERT INTO TBL_TIPO_USUARIO id_tipo_usuario, nombre_Tusuario, status_Tusuario VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE TBL_TIPO_USUARIO SET id_tipo_usuario=?, nombre_Tusuario=?, status_Tusuario=? WHERE id_tipo_usuario = ?";
+    private static final String SQL_INSERT = "INSERT INTO tbl_tipo_usuario(nombre_Tusuario, status_Tusuario) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE TBL_TIPO_USUARIO SET nombre_Tusuario=?, status_Tusuario=? WHERE id_tipo_usuario = ?";
     private static final String SQL_DELETE = "DELETE FROM TBL_TIPO_USUARIO WHERE id_tipo_usuario=?";
     private static final String SQL_SELECT_NOMBRE = "SELECT id_tipo_usuario, nombre_Tusuario, status_Tusuario FROM TBL_TIPO_USUARIO WHERE nombre_Tusuario = ?";
     private static final String SQL_SELECT_ID = "SELECT id_tipo_usuario, nombre_Tusuario, status_Tusuario FROM TBL_TIPO_USUARIO WHERE id_tipo_usuario = ?"; 
@@ -54,54 +54,50 @@ public class daoTipUsu {
         
     }
     
-     public int ingresaUsusarios (clsTipUsu usuario) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        int rows = 0;
-        try {
-            conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setInt(1, usuario.getId_tipo_usuario());
-            stmt.setString(2, usuario.getNombre_Tusuario());
-            stmt.setString(3, usuario.getStatus_Tusuario());
-            
-            System.out.println("ejecutando query:" + SQL_INSERT);
-            rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(stmt);
-            Conexion.close(conn);
-        }
-        return rows;   
+     public int ingresaUsusarios(clsTipUsu usuario) {
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    int rows = 0;
+    try {
+        conn = Conexion.getConnection();
+        stmt = conn.prepareStatement(SQL_INSERT);
+        stmt.setString(1, usuario.getNombre_Tusuario());
+        stmt.setString(2, usuario.getStatus_Tusuario());
+        
+        System.out.println("Ejecutando query:" + SQL_INSERT);
+        rows = stmt.executeUpdate();
+        System.out.println("Registros afectados:" + rows);
+    } catch (SQLException ex) {
+        ex.printStackTrace(System.out);
+    } finally {
+        Conexion.close(stmt);
+        Conexion.close(conn);
     }
+    return rows;   
+}
      
-     public int actualizausuarios (clsTipUsu usuario) {
-         
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        int rows = 0;
-        try {
-            conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
-            stmt = conn.prepareStatement(SQL_UPDATE);
-            
-            stmt.setInt(1, usuario.getId_tipo_usuario());
-            stmt.setString(2, usuario.getNombre_Tusuario());
-            stmt.setString(3, usuario.getStatus_Tusuario());            
-            rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(stmt);
-            Conexion.close(conn);
-        }
-
-        return rows;
+     public int actualizausuarios(clsTipUsu usuario) {
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    int rows = 0;
+    try {
+        conn = Conexion.getConnection();
+        stmt = conn.prepareStatement(SQL_UPDATE);
+        
+        stmt.setString(1, usuario.getNombre_Tusuario());
+        stmt.setString(2, usuario.getStatus_Tusuario());    
+        stmt.setInt(3, usuario.getId_tipo_usuario()); // Verifica que este valor no sea nulo
+        
+        rows = stmt.executeUpdate();
+        System.out.println("Registros actualizados:" + rows);
+    } catch (SQLException ex) {
+        ex.printStackTrace(System.out);
+    } finally {
+        Conexion.close(stmt);
+        Conexion.close(conn);
     }
+    return rows;
+}
      
      
         public int borrarUsuarios(clsTipUsu usuario) {
@@ -168,7 +164,7 @@ public class daoTipUsu {
         ResultSet rs = null;
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + usuario);
+            System.out.println("Ejecutando query:" + SQL_SELECT_ID + " objeto recibido: " + usuario);
             stmt = conn.prepareStatement(SQL_SELECT_ID);
             stmt.setInt(1, usuario.getId_tipo_usuario());            
            
