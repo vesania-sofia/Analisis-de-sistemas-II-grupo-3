@@ -7,6 +7,7 @@ package Vista;
 import Controlador.ClsUsuario;
 import Modelo.daoUsuario;
 import Controlador.clsTipUsu;
+import Seguridad.Modelo.Conexion;
 import java.awt.Component;
 import Modelo.daoTipUsu;
 import java.sql.*;
@@ -123,7 +124,6 @@ Cbo_estado.setSelectedIndex(0);
         Txt_telefono = new javax.swing.JTextField();
         Txt_direccion = new javax.swing.JTextField();
         Btn_ayuda = new javax.swing.JButton();
-        Btn_reportes = new javax.swing.JButton();
         Btn_actualizar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tbl_usuario = new javax.swing.JTable();
@@ -197,11 +197,9 @@ Cbo_estado.setSelectedIndex(0);
         });
 
         Btn_ayuda.setText("Ayuda");
-
-        Btn_reportes.setText("Reportes");
-        Btn_reportes.addActionListener(new java.awt.event.ActionListener() {
+        Btn_ayuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_reportesActionPerformed(evt);
+                Btn_ayudaActionPerformed(evt);
             }
         });
 
@@ -264,12 +262,9 @@ Cbo_estado.setSelectedIndex(0);
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(326, 326, 326)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Btn_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(587, 587, 587)
-                                .addComponent(Btn_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(Btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(587, 587, 587)
+                        .addComponent(Btn_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -320,8 +315,6 @@ Cbo_estado.setSelectedIndex(0);
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Label_tipoUsuario)
                             .addComponent(Cbo_idTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Btn_reportes)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -702,9 +695,22 @@ if (resultadoBusqueda != null) {
         // TODO add your handling code here:
     }//GEN-LAST:event_Cbo_idTipoUsuarioActionPerformed
 
-    private void Btn_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_reportesActionPerformed
+    private void Btn_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ayudaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_reportesActionPerformed
+           try {
+            if ((new File("src\\Ayudas\\ayuda-usuario.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\Ayudas\\ayuda-usuario.chm");
+                p.waitFor();
+            } else {
+                System.out.println("La ayuda no fue encontrada");
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } 
+    }//GEN-LAST:event_Btn_ayudaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -756,7 +762,6 @@ if (resultadoBusqueda != null) {
     private javax.swing.JButton Btn_limpiar;
     private javax.swing.JButton Btn_modificar;
     private javax.swing.JButton Btn_registrar;
-    private javax.swing.JButton Btn_reportes;
     private javax.swing.JComboBox<String> Cbo_estado;
     private javax.swing.JComboBox<String> Cbo_idTipoUsuario;
     private javax.swing.JLabel Label_Correo;
