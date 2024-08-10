@@ -567,6 +567,19 @@ if (video != null && video.getId_video() != 0) {
 
     private void Btn_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ayudaActionPerformed
         // TODO add your handling code here:
+          try {
+            if ((new File("src\\Ayudas\\ayudas-videos.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\Ayudas\\ayudas-videos.chm");
+                p.waitFor();
+            } else {
+                System.out.println("La ayuda no fue encontrada");
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         
     }//GEN-LAST:event_Btn_ayudaActionPerformed
       public void limpiarTextos()
