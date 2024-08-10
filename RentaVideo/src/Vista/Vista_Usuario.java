@@ -3,19 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vista;
-
 import Seguridad.Modelo.Conexion;
-import Controlador.ClsUsuario;
-import Controlador.clsVideo;
-import Controlador.clsRenta;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
+import Modelo.daoVideo;
 import java.io.File;
 import java.sql.Connection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -35,6 +28,10 @@ public class Vista_Usuario extends javax.swing.JFrame {
      */
     public Vista_Usuario() {
         initComponents();
+                setLocationRelativeTo(null);
+        this.setExtendedState(Vista_Usuario.MAXIMIZED_BOTH);
+        this.setTitle("Vista Usuario");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**
@@ -51,7 +48,7 @@ public class Vista_Usuario extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        rpt_gananciaSemanaMes = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -116,18 +113,22 @@ public class Vista_Usuario extends javax.swing.JFrame {
         jMenuBar1.setBackground(new java.awt.Color(255, 51, 51));
 
         jMenu2.setBackground(new java.awt.Color(255, 51, 51));
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Reportes.png"))); // NOI18N
         jMenu2.setText("REPORTES");
         jMenu2.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jMenu2.setIconTextGap(1);
-
-        jMenuItem1.setText("Ganancias por semana y por mes");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenu2ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+
+        rpt_gananciaSemanaMes.setText("Ganancias por semana y por mes");
+        rpt_gananciaSemanaMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rpt_gananciaSemanaMesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(rpt_gananciaSemanaMes);
 
         jMenuItem2.setText("Bitácora");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -155,11 +156,6 @@ public class Vista_Usuario extends javax.swing.JFrame {
         jMenu2.add(jMenuItem6);
 
         jMenuItem7.setText("Videos rentados en una fecha específica");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
         jMenu2.add(jMenuItem7);
 
         jMenuItem8.setText("Videos rentados en la última visita de un cliente");
@@ -200,9 +196,26 @@ public class Vista_Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void rpt_gananciaSemanaMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rpt_gananciaSemanaMesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+                Connection conn = null;
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        try 
+            {
+            conn = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/Reportes/rpt_gananciasSemanaMes.jrxml");
+            print = JasperFillManager.fillReport(report, p, conn);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setVisible(true);
+            
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+    }//GEN-LAST:event_rpt_gananciaSemanaMesActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
@@ -212,29 +225,11 @@ public class Vista_Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
         // TODO add your handling code here:
-        Connection conn = null;        
-        Map p = new HashMap();
-        JasperReport report;
-        JasperPrint print;
 
-        try {
-            conn = Conexion.getConnection();
-            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-
-                    + "/src/Reportes/rptRentaVideoFechaEspecifica.jrxml");
-	    print = JasperFillManager.fillReport(report, p, conn);
-            JasperViewer view = new JasperViewer(print, false);
-	    view.setTitle("Reporte Prueba");
-            view.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        /*int resultadoBitacora=0;
-                    clsBitacora bitacoraRegistro = new clsBitacora();
-                    resultadoBitacora = bitacoraRegistro.setIngresarBitacora(clsUsuarioConectado.getIdUsuario(),codigoAplicacion,"RPT"); */
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+        
+    }//GEN-LAST:event_jMenu2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,7 +272,6 @@ public class Vista_Usuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -290,5 +284,6 @@ public class Vista_Usuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JMenuItem rpt_gananciaSemanaMes;
     // End of variables declaration//GEN-END:variables
 }
