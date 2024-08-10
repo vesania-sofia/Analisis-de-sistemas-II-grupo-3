@@ -9,7 +9,11 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.PlainDocument;
+//import Modelo.DaoAdministradores; Parte de la funcion de encriptacion
 /**
  *
  * @author sofia
@@ -29,7 +33,6 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         tabla.addColumn("Direccion");
         tabla.addColumn("Telefono");
         tabla.addColumn("Correo");
-        tabla.addColumn("Contraseña");
         tabla.addColumn("Estado");
         tabla.addColumn("Usuario");
 
@@ -45,9 +48,8 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             dato[3] = ListadoAdministradores.get(i).getDireccionAdmin();
             dato[4] = ListadoAdministradores.get(i).getTelefonoAdmin();
             dato[5] = ListadoAdministradores.get(i).getCorreoAdmin();
-            dato[6] = ListadoAdministradores.get(i).getContraAdmin();
-            dato[7] = ListadoAdministradores.get(i).getEstadoAdmin();
-            dato[8] = ListadoAdministradores.get(i).getNombreUsuario();
+            dato[6] = ListadoAdministradores.get(i).getEstadoAdmin();
+            dato[7] = ListadoAdministradores.get(i).getNombreUsuario();
             tabla.addRow(dato);
         }       
     }
@@ -59,13 +61,16 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         
         this.setLocationRelativeTo(null);
        
+        setUpFiltroBuscaryTelefono();
+        
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         model.addElement("activo");
         model.addElement("inactivo");
         Cbo_EstadoAdmin.setModel(model);
         
         llenadoDeTabla();
-        
+        Btn_Eliminar.setEnabled(false); //Inicializar el boton eliminar desactivado
+        Btn_Modificar.setEnabled(false);  //Inicializar el boton Modificar desactivado
     }
 
     /**
@@ -99,28 +104,27 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Txt_TelefonoAdmin = new javax.swing.JTextField();
         Lbl_CorreoAdmin = new javax.swing.JLabel();
         Txt_CorreoAdmin = new javax.swing.JTextField();
-        Txt_ContraAdmin = new javax.swing.JTextField();
-        Btn_Guardar = new javax.swing.JButton();
-        Lbl_Guardar = new javax.swing.JLabel();
-        Btn_Limpiar = new javax.swing.JButton();
-        Lbl_Limpiar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tbc_Admin = new javax.swing.JTable();
         Btn_Actualizar = new javax.swing.JButton();
         Lbl_Actualizar = new javax.swing.JLabel();
-        Btn_Modifcar = new javax.swing.JButton();
-        Lbl_Modificar = new javax.swing.JLabel();
-        Btn_Eliminar = new javax.swing.JButton();
-        Lbl_Eliminar = new javax.swing.JLabel();
-        Btn_Ayuda = new javax.swing.JButton();
-        Btn_Reportes = new javax.swing.JButton();
-        Lbl_Ayuda = new javax.swing.JLabel();
-        Lbl_Reportes = new javax.swing.JLabel();
         Lbl_Buscar = new javax.swing.JLabel();
         Txt_Buscar = new javax.swing.JTextField();
         Btn_Buscar = new javax.swing.JButton();
         Lbl_Usuario = new javax.swing.JLabel();
         Txt_Usuario = new javax.swing.JTextField();
+        Txt_ContraAdmin = new javax.swing.JPasswordField();
+        Pnl_botones = new javax.swing.JPanel();
+        Btn_Guardar = new javax.swing.JButton();
+        Lbl_Guardar = new javax.swing.JLabel();
+        Lbl_Modificar = new javax.swing.JLabel();
+        Btn_Modificar = new javax.swing.JButton();
+        Btn_Eliminar = new javax.swing.JButton();
+        Lbl_Eliminar = new javax.swing.JLabel();
+        Btn_Limpiar = new javax.swing.JButton();
+        Lbl_Limpiar = new javax.swing.JLabel();
+        Lbl_Ayuda = new javax.swing.JLabel();
+        Btn_Ayuda = new javax.swing.JButton();
 
         jButton8.setBackground(new java.awt.Color(0, 102, 255));
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar.png"))); // NOI18N
@@ -148,10 +152,10 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        Pnl_Administradores.setBackground(new java.awt.Color(160, 21, 62));
+        Pnl_Administradores.setBackground(new java.awt.Color(201, 217, 242));
 
-        Lbl_ContraAdmin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_ContraAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_ContraAdmin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_ContraAdmin.setForeground(new java.awt.Color(0, 0, 0));
         Lbl_ContraAdmin.setText("CONTRASEÑA:");
 
         Cbo_EstadoAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "activo", "inactivo" }));
@@ -162,9 +166,9 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             }
         });
 
-        Lbl_EstadoAdmin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_EstadoAdmin.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_EstadoAdmin.setText("ESTADO");
+        Lbl_EstadoAdmin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_EstadoAdmin.setForeground(new java.awt.Color(0, 0, 0));
+        Lbl_EstadoAdmin.setText("ESTADO:");
 
         Pnl_TituloAdmin.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -189,91 +193,63 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        Lbl_IDAdmin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_IDAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_IDAdmin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_IDAdmin.setForeground(new java.awt.Color(0, 0, 0));
         Lbl_IDAdmin.setText("ID:");
 
         Txt_IdAdmin.setEditable(false);
         Txt_IdAdmin.setBackground(new java.awt.Color(102, 102, 102));
         Txt_IdAdmin.setForeground(new java.awt.Color(255, 255, 255));
-        Txt_IdAdmin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Txt_IdAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Txt_IdAdminActionPerformed(evt);
             }
         });
 
-        Lbl_NombreAdmin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_NombreAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_NombreAdmin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_NombreAdmin.setForeground(new java.awt.Color(0, 0, 0));
         Lbl_NombreAdmin.setText("NOMBRE:");
 
         Txt_NombreAdmin.setBackground(new java.awt.Color(51, 51, 51));
         Txt_NombreAdmin.setForeground(new java.awt.Color(255, 255, 255));
 
-        Lbl_ApellidoAdmin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_ApellidoAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_ApellidoAdmin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_ApellidoAdmin.setForeground(new java.awt.Color(0, 0, 0));
         Lbl_ApellidoAdmin.setText("APELLIDO:");
 
         Txt_ApellidoAdmin.setBackground(new java.awt.Color(51, 51, 51));
         Txt_ApellidoAdmin.setForeground(new java.awt.Color(255, 255, 255));
 
-        Lbl_DireccionAdmin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_DireccionAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_DireccionAdmin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_DireccionAdmin.setForeground(new java.awt.Color(0, 0, 0));
         Lbl_DireccionAdmin.setText("DIRECCIÓN:");
 
         Txt_DireccionAdmin.setBackground(new java.awt.Color(51, 51, 51));
         Txt_DireccionAdmin.setForeground(new java.awt.Color(255, 255, 255));
 
-        Lbl_TelefonoAdmin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_TelefonoAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_TelefonoAdmin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_TelefonoAdmin.setForeground(new java.awt.Color(0, 0, 0));
         Lbl_TelefonoAdmin.setText("TELÉFONO:");
 
         Txt_TelefonoAdmin.setBackground(new java.awt.Color(51, 51, 51));
         Txt_TelefonoAdmin.setForeground(new java.awt.Color(255, 255, 255));
 
-        Lbl_CorreoAdmin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_CorreoAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_CorreoAdmin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_CorreoAdmin.setForeground(new java.awt.Color(0, 0, 0));
         Lbl_CorreoAdmin.setText("CORREO:");
 
         Txt_CorreoAdmin.setBackground(new java.awt.Color(51, 51, 51));
         Txt_CorreoAdmin.setForeground(new java.awt.Color(255, 255, 255));
 
-        Txt_ContraAdmin.setBackground(new java.awt.Color(51, 51, 51));
-        Txt_ContraAdmin.setForeground(new java.awt.Color(255, 255, 255));
-
-        Btn_Guardar.setBackground(new java.awt.Color(255, 255, 255));
-        Btn_Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar.png"))); // NOI18N
-        Btn_Guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_GuardarActionPerformed(evt);
-            }
-        });
-
-        Lbl_Guardar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_Guardar.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_Guardar.setText("GUARDAR");
-
-        Btn_Limpiar.setBackground(new java.awt.Color(255, 255, 255));
-        Btn_Limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/limpiar.png"))); // NOI18N
-        Btn_Limpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_LimpiarActionPerformed(evt);
-            }
-        });
-
-        Lbl_Limpiar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_Limpiar.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_Limpiar.setText("LIMPIAR ");
-
         Tbc_Admin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "CORREO", "CONTRASEÑA", "ESTADO", "USUARIO"
+                "ID", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "CORREO", "ESTADO", "USUARIO"
             }
         ));
         jScrollPane1.setViewportView(Tbc_Admin);
@@ -286,60 +262,12 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             }
         });
 
-        Lbl_Actualizar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_Actualizar.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_Actualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_Actualizar.setForeground(new java.awt.Color(0, 0, 0));
         Lbl_Actualizar.setText("ACTUALIZAR");
 
-        Btn_Modifcar.setBackground(new java.awt.Color(255, 255, 255));
-        Btn_Modifcar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
-        Btn_Modifcar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_ModifcarActionPerformed(evt);
-            }
-        });
-
-        Lbl_Modificar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_Modificar.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_Modificar.setText("   MODIFiCAR");
-
-        Btn_Eliminar.setBackground(new java.awt.Color(255, 255, 255));
-        Btn_Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
-        Btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_EliminarActionPerformed(evt);
-            }
-        });
-
-        Lbl_Eliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_Eliminar.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_Eliminar.setText(" ELIMINAR");
-
-        Btn_Ayuda.setBackground(new java.awt.Color(255, 255, 255));
-        Btn_Ayuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ayuda.png"))); // NOI18N
-        Btn_Ayuda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_AyudaActionPerformed(evt);
-            }
-        });
-
-        Btn_Reportes.setBackground(new java.awt.Color(255, 255, 255));
-        Btn_Reportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Reportes.png"))); // NOI18N
-        Btn_Reportes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_ReportesActionPerformed(evt);
-            }
-        });
-
-        Lbl_Ayuda.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_Ayuda.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_Ayuda.setText("AYUDA");
-
-        Lbl_Reportes.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_Reportes.setForeground(new java.awt.Color(255, 255, 255));
-        Lbl_Reportes.setText("REPORTES");
-
-        Lbl_Buscar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_Buscar.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_Buscar.setForeground(new java.awt.Color(0, 0, 0));
         Lbl_Buscar.setText("ID A BUSCAR");
 
         Txt_Buscar.setBackground(new java.awt.Color(51, 51, 51));
@@ -347,6 +275,11 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Txt_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Txt_BuscarActionPerformed(evt);
+            }
+        });
+        Txt_Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Txt_BuscarKeyReleased(evt);
             }
         });
 
@@ -358,81 +291,164 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             }
         });
 
-        Lbl_Usuario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Lbl_Usuario.setForeground(new java.awt.Color(255, 255, 255));
+        Lbl_Usuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_Usuario.setForeground(new java.awt.Color(0, 0, 0));
         Lbl_Usuario.setText("USUARIO:");
 
         Txt_Usuario.setBackground(new java.awt.Color(51, 51, 51));
         Txt_Usuario.setForeground(new java.awt.Color(255, 255, 255));
 
+        Txt_ContraAdmin.setBackground(new java.awt.Color(51, 51, 51));
+        Txt_ContraAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Txt_ContraAdminActionPerformed(evt);
+            }
+        });
+
+        Pnl_botones.setBackground(new java.awt.Color(105, 135, 189));
+
+        Btn_Guardar.setBackground(new java.awt.Color(255, 255, 255));
+        Btn_Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar.png"))); // NOI18N
+        Btn_Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_GuardarActionPerformed(evt);
+            }
+        });
+
+        Lbl_Guardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_Guardar.setForeground(new java.awt.Color(0, 0, 0));
+        Lbl_Guardar.setText("REGISTRAR");
+
+        Lbl_Modificar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_Modificar.setForeground(new java.awt.Color(0, 0, 0));
+        Lbl_Modificar.setText("MODIFICAR");
+
+        Btn_Modificar.setBackground(new java.awt.Color(255, 255, 255));
+        Btn_Modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
+        Btn_Modificar.setMaximumSize(new java.awt.Dimension(76, 76));
+        Btn_Modificar.setPreferredSize(new java.awt.Dimension(76, 76));
+        Btn_Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ModificarActionPerformed(evt);
+            }
+        });
+
+        Btn_Eliminar.setBackground(new java.awt.Color(255, 255, 255));
+        Btn_Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
+        Btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_EliminarActionPerformed(evt);
+            }
+        });
+
+        Lbl_Eliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_Eliminar.setForeground(new java.awt.Color(0, 0, 0));
+        Lbl_Eliminar.setText("  ELIMINAR");
+
+        Btn_Limpiar.setBackground(new java.awt.Color(255, 255, 255));
+        Btn_Limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/limpiar.png"))); // NOI18N
+        Btn_Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_LimpiarActionPerformed(evt);
+            }
+        });
+
+        Lbl_Limpiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_Limpiar.setForeground(new java.awt.Color(0, 0, 0));
+        Lbl_Limpiar.setText("LIMPIAR ");
+
+        Lbl_Ayuda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lbl_Ayuda.setForeground(new java.awt.Color(0, 0, 0));
+        Lbl_Ayuda.setText("AYUDA");
+
+        Btn_Ayuda.setBackground(new java.awt.Color(255, 255, 255));
+        Btn_Ayuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ayuda.png"))); // NOI18N
+        Btn_Ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_AyudaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Pnl_botonesLayout = new javax.swing.GroupLayout(Pnl_botones);
+        Pnl_botones.setLayout(Pnl_botonesLayout);
+        Pnl_botonesLayout.setHorizontalGroup(
+            Pnl_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Pnl_botonesLayout.createSequentialGroup()
+                .addGroup(Pnl_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Pnl_botonesLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(Pnl_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Lbl_Modificar)
+                            .addGroup(Pnl_botonesLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(Pnl_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Lbl_Limpiar)
+                                    .addComponent(Btn_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lbl_Ayuda)))
+                            .addGroup(Pnl_botonesLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Lbl_Guardar)
+                            .addGroup(Pnl_botonesLayout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(Btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Lbl_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(Pnl_botonesLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        Pnl_botonesLayout.setVerticalGroup(
+            Pnl_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Pnl_botonesLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Lbl_Guardar)
+                .addGap(18, 18, 18)
+                .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Lbl_Modificar)
+                .addGap(18, 18, 18)
+                .addComponent(Btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(Lbl_Eliminar)
+                .addGap(18, 18, 18)
+                .addComponent(Btn_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Lbl_Limpiar)
+                .addGap(18, 18, 18)
+                .addComponent(Btn_Ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Lbl_Ayuda)
+                .addGap(21, 21, 21))
+        );
+
         javax.swing.GroupLayout Pnl_AdministradoresLayout = new javax.swing.GroupLayout(Pnl_Administradores);
         Pnl_Administradores.setLayout(Pnl_AdministradoresLayout);
         Pnl_AdministradoresLayout.setHorizontalGroup(
             Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Pnl_TituloAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addComponent(Pnl_botones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_AdministradoresLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Lbl_ContraAdmin)
-                            .addComponent(Lbl_EstadoAdmin)
-                            .addComponent(Lbl_Usuario))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Cbo_EstadoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Txt_CorreoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Txt_TelefonoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Txt_DireccionAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(Txt_Usuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                                .addComponent(Txt_ContraAdmin, javax.swing.GroupLayout.Alignment.LEADING))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_AdministradoresLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(Lbl_Buscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Btn_Buscar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_AdministradoresLayout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_AdministradoresLayout.createSequentialGroup()
-                                .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(Btn_Modifcar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17))
-                            .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Lbl_Limpiar)
-                                    .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Lbl_Guardar)
-                                            .addComponent(Btn_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                                                .addGap(5, 5, 5)
-                                                .addComponent(Lbl_Modificar))
-                                            .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                                                        .addGap(6, 6, 6)
-                                                        .addComponent(Lbl_Ayuda))
-                                                    .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(Btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Lbl_Eliminar)
-                            .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(Btn_Reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(Lbl_Reportes))))
+                                .addComponent(Lbl_EstadoAdmin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Lbl_Usuario, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Cbo_EstadoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Txt_CorreoAdmin)
+                            .addComponent(Txt_TelefonoAdmin)
+                            .addComponent(Txt_DireccionAdmin)
+                            .addComponent(Txt_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Txt_ContraAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(Lbl_CorreoAdmin, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Pnl_AdministradoresLayout.createSequentialGroup()
                         .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,107 +458,89 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
                                 .addComponent(Lbl_NombreAdmin)
                                 .addComponent(Lbl_IDAdmin)
                                 .addComponent(Lbl_DireccionAdmin, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addGap(17, 17, 17)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(Txt_ApellidoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Txt_IdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Txt_NombreAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Txt_ApellidoAdmin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Txt_NombreAdmin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Txt_IdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_AdministradoresLayout.createSequentialGroup()
+                        .addComponent(Lbl_Buscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Lbl_Actualizar)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_AdministradoresLayout.createSequentialGroup()
-                                .addComponent(Btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 915, Short.MAX_VALUE))
-                .addContainerGap())
+                                .addComponent(Btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15)))
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_AdministradoresLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))))
+            .addComponent(Pnl_TituloAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Pnl_AdministradoresLayout.setVerticalGroup(
             Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
                 .addComponent(Pnl_TituloAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl_IDAdmin)
-                            .addComponent(Txt_IdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl_NombreAdmin)
-                            .addComponent(Txt_NombreAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl_ApellidoAdmin)
-                            .addComponent(Txt_ApellidoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Txt_DireccionAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lbl_DireccionAdmin))
-                        .addGap(18, 18, 18)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Txt_TelefonoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lbl_TelefonoAdmin))
-                        .addGap(18, 18, 18)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Txt_CorreoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lbl_CorreoAdmin))
-                        .addGap(18, 18, 18)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl_ContraAdmin)
-                            .addComponent(Txt_ContraAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl_EstadoAdmin)
-                            .addComponent(Cbo_EstadoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl_Usuario)
-                            .addComponent(Txt_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Btn_Modifcar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl_Guardar)
-                            .addComponent(Lbl_Modificar)))
-                    .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                            .addGap(53, 53, 53)
-                            .addComponent(Lbl_Eliminar))
-                        .addComponent(Btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                        .addComponent(Btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Lbl_Actualizar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_Reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lbl_Ayuda)
-                    .addComponent(Lbl_Reportes)
-                    .addComponent(Lbl_Limpiar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
-                        .addGap(0, 27, Short.MAX_VALUE)
-                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lbl_Buscar)
-                            .addComponent(Txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(Btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(17, 17, 17))
+                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Pnl_AdministradoresLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lbl_IDAdmin)
+                                    .addComponent(Txt_IdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lbl_NombreAdmin)
+                                    .addComponent(Txt_NombreAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lbl_ApellidoAdmin)
+                                    .addComponent(Txt_ApellidoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(19, 19, 19)
+                                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Txt_DireccionAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lbl_DireccionAdmin))
+                                .addGap(18, 18, 18)
+                                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Txt_TelefonoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lbl_TelefonoAdmin))
+                                .addGap(18, 18, 18)
+                                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Txt_CorreoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lbl_CorreoAdmin))
+                                .addGap(18, 18, 18)
+                                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lbl_ContraAdmin)
+                                    .addComponent(Txt_ContraAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lbl_EstadoAdmin)
+                                    .addComponent(Cbo_EstadoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lbl_Usuario)
+                                    .addComponent(Txt_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Btn_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lbl_Buscar)
+                                    .addComponent(Txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Btn_Buscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Lbl_Actualizar))
+                    .addComponent(Pnl_botones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -577,13 +575,19 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
 
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
          ClsAdministradores admin = new ClsAdministradores();
+         //DaoAdministradores dao = new DaoAdministradores(); Parte de la funcion de encriptacion
             //admin.setIDAdmin(Integer.parseInt(Txt_IdAdmin.getText()));
             admin.setNombreAdmin(Txt_NombreAdmin.getText());
             admin.setApellidoAdmin(Txt_ApellidoAdmin.getText());
             admin.setDireccionAdmin(Txt_DireccionAdmin.getText());
             admin.setTelefonoAdmin(Txt_TelefonoAdmin.getText());
             admin.setCorreoAdmin(Txt_CorreoAdmin.getText());
-            admin.setContraAdmin(Txt_ContraAdmin.getText());
+            admin.setContraAdmin(new String(Txt_ContraAdmin.getPassword()));
+            
+            //char[] passwordChars = Txt_ContraAdmin.getPassword();Parte de la funcion de encriptacion
+            //String password = new String(passwordChars);Parte de la funcion de encriptacion
+            //String encryptedPassword = dao.encriptarPassword(password); Parte de la funcion de encriptacion
+            //admin.setContraAdmin(encryptedPassword); Parte de la funcion de encriptacion
             
             // Obtener el estado seleccionado del JComboBox y asignarlo al objeto admin
             String estadoSeleccionado = (String) Cbo_EstadoAdmin.getSelectedItem();
@@ -620,7 +624,10 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Txt_ContraAdmin.setText("");
         Txt_Usuario.setText("");
         Txt_Buscar.setText("");
-
+        
+        Btn_Eliminar.setEnabled(false);
+        Btn_Modificar.setEnabled(false);
+        Btn_Guardar.setEnabled(true);
     }
     
     
@@ -630,8 +637,11 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         
     }//GEN-LAST:event_Btn_ActualizarActionPerformed
 
-    private void Btn_ModifcarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ModifcarActionPerformed
+    private void Btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ModificarActionPerformed
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de Modificar este Registro?", 
+                "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
         
+        if (confirmacion == JOptionPane.YES_OPTION){
         ClsAdministradores admin = new ClsAdministradores();
         admin.setIDAdmin(Integer.parseInt(Txt_Buscar.getText()));
         admin.setNombreAdmin(Txt_NombreAdmin.getText());
@@ -659,29 +669,33 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(this, "Error al modificar el administrador");
             }
-        
-    }//GEN-LAST:event_Btn_ModifcarActionPerformed
+        } else {
+            JOptionPane.showMessageDialog(null, "Modificacion Cancelada.", "Informacion del Sistema", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_Btn_ModificarActionPerformed
 
     private void Btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EliminarActionPerformed
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de Eliminar este Registro? Una vez eliminado no podrá recuperarlo.", 
+                "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
         
-        int registrosBorrados=0;
-        ClsAdministradores admin = new ClsAdministradores();
-        admin.setIDAdmin(Integer.parseInt(Txt_Buscar.getText()));
-        registrosBorrados= admin.setBorrarAdministrador(admin);
-        JOptionPane.showMessageDialog(null, "Registro Borrado\n", 
-                    "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
-        
-        llenadoDeTabla();
-        limpiardatos();  
+        if (confirmacion == JOptionPane.YES_OPTION){
+            int registrosBorrados=0;
+            ClsAdministradores admin = new ClsAdministradores();
+            admin.setIDAdmin(Integer.parseInt(Txt_Buscar.getText()));
+            registrosBorrados = admin.setBorrarAdministrador(admin);
+            JOptionPane.showMessageDialog(null, "Registro Borrado\n", 
+                        "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
+
+            llenadoDeTabla();
+            limpiardatos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Eliminacion Cancelada.", "Informacion del Sistema", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_Btn_EliminarActionPerformed
 
     private void Btn_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AyudaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_AyudaActionPerformed
-
-    private void Btn_ReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReportesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_ReportesActionPerformed
 
     private void Txt_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_BuscarActionPerformed
         // TODO add your handling code here:
@@ -693,7 +707,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         admin.setIDAdmin(Integer.parseInt(Txt_Buscar.getText()));        
         admin = admin.getBuscarAdministradorPorId(admin);
         
-        if (admin != null) {
+        if (admin != null && admin.getNombreAdmin()!= null) {
             
             JOptionPane.showMessageDialog(this, "Administrador encontrado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE); 
         
@@ -710,11 +724,64 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
             String estado = admin.getEstadoAdmin().equalsIgnoreCase("activo") ? "activo" : "inactivo";
             Cbo_EstadoAdmin.setSelectedItem(estado);
             
+            Btn_Eliminar.setEnabled(true); //Activa boton Eliminar
+            Btn_Modificar.setEnabled(true); //Activa boton Modificar
+            Btn_Guardar.setEnabled(false); //Desactiva boton Registrar
         } else {
             JOptionPane.showMessageDialog(this, "Administrador no encontrado");
         }          
     }//GEN-LAST:event_Btn_BuscarActionPerformed
 
+    private void Txt_ContraAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_ContraAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Txt_ContraAdminActionPerformed
+
+    
+    //Este Evento se asegura de que al permanecer el Campo Txt_Buscar vacio, el boton Eliminar y modificar no se activen
+    private void Txt_BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Txt_BuscarKeyReleased
+        if(Btn_Eliminar.getText().isEmpty()){  
+            Btn_Eliminar.setEnabled(false);
+        }
+        if(Btn_Modificar.getText().isEmpty()){  
+            Btn_Modificar.setEnabled(false);
+        }
+    }//GEN-LAST:event_Txt_BuscarKeyReleased
+
+    private void setUpFiltroBuscaryTelefono(){
+        
+        //creacion de un DocumentFilter que va a permitir solo numeros
+        DocumentFilter filtros = new DocumentFilter(){
+            @Override
+            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if(text.matches("\\d*")){
+                super.replace(fb, offset, length, text, attrs); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+                }
+            }
+
+            @Override
+            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if(string.matches("\\d*")){
+                super.insertString(fb, offset, string, attr); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+                }
+            }
+
+            @Override
+            public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
+                super.remove(fb, offset, length); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            }
+        };
+        
+        //Obtener el Document de Txt_TelefonoAdmin y aplicarlo
+        PlainDocument docTelefono = (PlainDocument) Txt_TelefonoAdmin.getDocument();
+        docTelefono.setDocumentFilter(filtros);
+        
+        //Obtener el Document de Txt_Buscar y aplicarlo
+        PlainDocument docBuscar = (PlainDocument) Txt_Buscar.getDocument();
+        docBuscar.setDocumentFilter(filtros);
+     }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -996,6 +1063,262 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1019,8 +1342,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
     private javax.swing.JButton Btn_Eliminar;
     private javax.swing.JButton Btn_Guardar;
     private javax.swing.JButton Btn_Limpiar;
-    private javax.swing.JButton Btn_Modifcar;
-    private javax.swing.JButton Btn_Reportes;
+    private javax.swing.JButton Btn_Modificar;
     private javax.swing.JComboBox<String> Cbo_EstadoAdmin;
     private javax.swing.JLabel Lbl_Actualizar;
     private javax.swing.JLabel Lbl_ApellidoAdmin;
@@ -1036,15 +1358,15 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
     private javax.swing.JLabel Lbl_Limpiar;
     private javax.swing.JLabel Lbl_Modificar;
     private javax.swing.JLabel Lbl_NombreAdmin;
-    private javax.swing.JLabel Lbl_Reportes;
     private javax.swing.JLabel Lbl_TelefonoAdmin;
     private javax.swing.JLabel Lbl_Usuario;
     private javax.swing.JPanel Pnl_Administradores;
     private javax.swing.JPanel Pnl_TituloAdmin;
+    private javax.swing.JPanel Pnl_botones;
     private javax.swing.JTable Tbc_Admin;
     private javax.swing.JTextField Txt_ApellidoAdmin;
     private javax.swing.JTextField Txt_Buscar;
-    private javax.swing.JTextField Txt_ContraAdmin;
+    private javax.swing.JPasswordField Txt_ContraAdmin;
     private javax.swing.JTextField Txt_CorreoAdmin;
     private javax.swing.JTextField Txt_DireccionAdmin;
     private javax.swing.JTextField Txt_IdAdmin;

@@ -4,7 +4,17 @@
  */
 package Vista;
 
+import Modelo.Conexion;
 import Vista.JDialog_Administradores;
+import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 
@@ -193,9 +203,19 @@ public class Vista_Administrador extends javax.swing.JFrame {
         jMenu6.add(jMenuItem8);
 
         jMenuItem9.setText("Historial de pago de los clientes");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem9);
 
         jMenuItem10.setText("Factura");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem10);
 
         jMenuBar1.add(jMenu6);
@@ -299,6 +319,47 @@ public class Vista_Administrador extends javax.swing.JFrame {
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+                Connection conn = null;
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        try{
+            conn = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File ("").getAbsolutePath()
+                    + "/src/reportes/rptFactura.jrxml");
+            print = JasperFillManager.fillReport(report, p, conn);
+            JasperViewer view = new JasperViewer (print, false);
+            view.setTitle ("Reporte Factura");
+            view.setVisible(true);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+                
+        Connection conn = null;
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        try{
+            conn = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File ("").getAbsolutePath()
+                    + "/src/reportes/rptHistorialPago.jrxml");
+            print = JasperFillManager.fillReport(report, p, conn);
+            JasperViewer view = new JasperViewer (print, false);
+            view.setTitle ("Reporte Historial de Pago de Clientes");
+            view.setVisible(true);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
