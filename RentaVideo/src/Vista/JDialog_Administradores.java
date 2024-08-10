@@ -332,6 +332,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
         Txt_Usuario.setForeground(new java.awt.Color(255, 255, 255));
 
         Txt_ContraAdmin.setBackground(new java.awt.Color(51, 51, 51));
+        Txt_ContraAdmin.setForeground(new java.awt.Color(255, 255, 255));
         Txt_ContraAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Txt_ContraAdminActionPerformed(evt);
@@ -419,9 +420,6 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
                                     .addComponent(Btn_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Btn_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Lbl_Ayuda)))
-                            .addGroup(Pnl_botonesLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(Lbl_Guardar)
                             .addGroup(Pnl_botonesLayout.createSequentialGroup()
                                 .addGap(13, 13, 13)
@@ -429,15 +427,18 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
                             .addComponent(Lbl_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(Pnl_botonesLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Pnl_botonesLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         Pnl_botonesLayout.setVerticalGroup(
             Pnl_botonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Pnl_botonesLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
+                .addContainerGap()
                 .addComponent(Btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addComponent(Lbl_Guardar)
                 .addGap(18, 18, 18)
                 .addComponent(Btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -741,6 +742,12 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
 
     private void Btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BuscarActionPerformed
         
+        // Verificar si el campo Txt_Buscar está vacío
+        if (Txt_Buscar.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo ID a buscar no puede estar vacio.", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+            return; // Detener la ejecución si el campo está vacío
+        }
+
         ClsAdministradores admin = new ClsAdministradores();      
         admin.setIDAdmin(Integer.parseInt(Txt_Buscar.getText()));        
         admin = admin.getBuscarAdministradorPorId(admin);
