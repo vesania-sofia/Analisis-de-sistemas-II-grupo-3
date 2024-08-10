@@ -52,68 +52,7 @@ public class ClsAdministradores {
     
     public ClsAdministradores() {  
     }
-    /*
-    public ClsAdministradores (int id_admin) {
-        this.id_admin = id_admin;
-    }
     
-    public ClsAdministradores(int id_admin, String nombre_admin) {
-        this.id_admin = id_admin;
-        this.nombre_admin = nombre_admin;
-    }
-
-    public ClsAdministradores(int id_admin, String nombre_admin, String apellido_admin) {
-        this.id_admin = id_admin;
-        this.nombre_admin = nombre_admin;
-        this.apellido_admin = apellido_admin;
-    }
-
-    public ClsAdministradores(int id_admin, String nombre_admin, String apellido_admin, String direccion_admin) {
-        this.id_admin = id_admin;
-        this.nombre_admin = nombre_admin;
-        this.apellido_admin = apellido_admin;
-        this.direccion_admin = direccion_admin;
-    }
-
-    public ClsAdministradores(int id_admin, String nombre_admin, String apellido_admin, String direccion_admin, String telefono_admin) {
-        this.id_admin = id_admin;
-        this.nombre_admin = nombre_admin;
-        this.apellido_admin = apellido_admin;
-        this.direccion_admin = direccion_admin;
-        this.telefono_admin = telefono_admin;
-    }
-
-    public ClsAdministradores(int id_admin, String nombre_admin, String apellido_admin, String direccion_admin, String telefono_admin, String correo_admin) {
-        this.id_admin = id_admin;
-        this.nombre_admin = nombre_admin;
-        this.apellido_admin = apellido_admin;
-        this.direccion_admin = direccion_admin;
-        this.telefono_admin = telefono_admin;
-        this.correo_admin = correo_admin;
-    }
-
-    public ClsAdministradores(int id_admin, String nombre_admin, String apellido_admin, String direccion_admin, String telefono_admin, String correo_admin, String contraseña_admin) {
-        this.id_admin = id_admin;
-        this.nombre_admin = nombre_admin;
-        this.apellido_admin = apellido_admin;
-        this.direccion_admin = direccion_admin;
-        this.telefono_admin = telefono_admin;
-        this.correo_admin = correo_admin;
-        this.contraseña_admin = contraseña_admin;
-    }
-    
-    public ClsAdministradores(int id_admin, String nombre_admin, String apellido_admin, String direccion_admin, String telefono_admin, String correo_admin, String contraseña_admin, String estado_admin) {
-        this.id_admin = id_admin;
-        this.nombre_admin = nombre_admin;
-        this.apellido_admin = apellido_admin;
-        this.direccion_admin = direccion_admin;
-        this.telefono_admin = telefono_admin;
-        this.correo_admin = correo_admin;
-        this.contraseña_admin = contraseña_admin;
-        this.estado_admin = estado_admin;
-    }
-
-    */
     public ClsAdministradores(int id_admin, String nombre_admin, String apellido_admin, String direccion_admin, String telefono_admin, String correo_admin, String contraseña_admin, String estado_admin, String nombre_usuario) {
         this.id_admin = id_admin;
         this.nombre_admin = nombre_admin;
@@ -125,7 +64,6 @@ public class ClsAdministradores {
         this.estado_admin = estado_admin;
         this.nombre_usuario = nombre_usuario;
     }
-    
     
     
 @Override

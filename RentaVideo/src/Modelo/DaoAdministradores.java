@@ -5,6 +5,8 @@
 package Modelo;
 
 import Controlador.ClsAdministradores;
+//import java.security.MessageDigest;   Parte de la funcion de encriptacion
+//import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.*;
 import java.util.ArrayList;
@@ -45,6 +47,9 @@ public class DaoAdministradores {
             stmt.setString(3, admin.getDireccionAdmin());
             stmt.setString(4, admin.getTelefonoAdmin());
             stmt.setString(5, admin.getCorreoAdmin());
+                
+            //String contraseñaEncriptada = encriptarPassword(admin.getContraAdmin()); Parte de la funcion de encriptacion
+            //stmt.setString(6, contraseñaEncriptada); Parte de la funcion de encriptacion
             stmt.setString(6, admin.getContraAdmin());
             stmt.setString(7, admin.getEstadoAdmin());
             stmt.setString(8, admin.getNombreUsuario());
@@ -72,48 +77,37 @@ public class DaoAdministradores {
         
         List<ClsAdministradores> admins = new ArrayList<>();
         try {
-            conn = Conexion.getConnection(); // falta  la conexion con el driver (conector) de forma exitosa
+            conn = Conexion.getConnection(); 
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()){
                 admins.add(mapResultSetToAdmin(rs));
-                
-                /*
-                int id = rs.getInt( "id_admin");
-                String nombre = rs.getString("nombre_admin");
-                String apellido = rs.getString("apellido_admin");
-                String direccion = rs.getString("direccion_admin");
-                String telefono = rs.getString("telefono_admin");
-                String correo = rs.getString("correo_admin");
-                String contraseña = rs.getString("contraseña_admin");
-                String estado = rs.getString("estado_admin");
-                String usuario = rs.getString("nombre_usuario");
-                ClsAdministradores adm = new ClsAdministradores();
-                adm.setIDAdmin(id);
-                adm.setNombreAdmin(nombre);
-                adm.setApellidoAdmin(apellido);
-                adm.setDireccionAdmin(direccion);
-                adm.setTelefonoAdmin(telefono);
-                adm.setCorreoAdmin(correo);
-                adm.setContraAdmin(contraseña);
-                adm.setEstadoAdmin(estado);
-                adm.setNombreUsuario(usuario);
-                admins.add(adm);
-                */
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
             
             closeResources(rs, stmt, conn);
-            /*
-            Conexion.close(rs); // falta la conexion con el driver (conector) de forma exitosa
-            Conexion.close(stmt);
-            Conexion.close(conn);
-            */
+
         }       
         return admins;
     }
+    /* Encriptacion Funcional pero necesita modificaciones en login, necesita revision.
+    public String encriptarPassword(String password){
+        try{
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hash){
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch(NoSuchAlgorithmException e){
+            e.printStackTrace();
+            return null;
+        }
+    }*/
     
     
     public int ingresaAdministrador(ClsAdministradores admin){
@@ -127,16 +121,7 @@ public class DaoAdministradores {
             stmt = conn.prepareStatement(SQL_INSERT);
             
             setPreparedStatementValues(stmt, admin);
-            /*
-            stmt.setString(1, admin.getNombreAdmin());
-            stmt.setString(2, admin.getApellidoAdmin());
-            stmt.setString(3, admin.getDireccionAdmin());
-            stmt.setString(4, admin.getTelefonoAdmin());
-            stmt.setString(5, admin.getCorreoAdmin());
-            stmt.setString(6, admin.getContraAdmin());
-            stmt.setString(7, admin.getEstadoAdmin());
-            stmt.setString(8, admin.getNombreUsuario());
-            */
+
             System.out.println("ejecutando query: " + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados: " + rows);
@@ -144,10 +129,7 @@ public class DaoAdministradores {
             ex.printStackTrace(System.out);
         } finally {
             closeResources(stmt, conn);
-            /*
-            Conexion.close(stmt);
-            Conexion.close(conn);
-            */
+
         }
         return rows;
     }
@@ -163,16 +145,7 @@ public class DaoAdministradores {
             stmt = conn.prepareStatement(SQL_UPDATE);
             
             setPreparedStatementValues(stmt, admin);
-            /*
-            stmt.setString(1, admin.getNombreAdmin());
-            stmt.setString(2, admin.getApellidoAdmin());
-            stmt.setString(3, admin.getDireccionAdmin());
-            stmt.setString(4, admin.getTelefonoAdmin());
-            stmt.setString(5, admin.getCorreoAdmin());
-            stmt.setString(6, admin.getContraAdmin());
-            stmt.setString(7, admin.getEstadoAdmin());
-            stmt.setString(8, admin.getNombreUsuario());
-            */
+
             stmt.setInt(9, admin.getIdAdmin());
             
             rows = stmt.executeUpdate();
@@ -184,10 +157,7 @@ public class DaoAdministradores {
             ex.printStackTrace(System.out);
         } finally {
             closeResources(stmt, conn);
-            /*
-            Conexion.close(stmt);
-            Conexion.close(conn);
-            */
+
         }
 
         return rows;
@@ -210,10 +180,7 @@ public class DaoAdministradores {
             ex.printStackTrace(System.out);
         } finally {
             closeResources(stmt, conn);
-            /*
-            Conexion.close(stmt);
-            Conexion.close(conn);
-            */
+
         }
 
         return rows;
@@ -234,39 +201,13 @@ public class DaoAdministradores {
                 admin = mapResultSetToAdmin(rs);
                 System.out.println("registro consultado: " + admin);
             }
-            /*
-            while (rs.next()) {
-                int id = rs.getInt( "id_admin");
-                String nombre = rs.getString("nombre_admin");
-                String apellido = rs.getString("apellido_admin");
-                String direccion = rs.getString("direccion_admin");
-                String telefono = rs.getString("telefono_admin");
-                String correo = rs.getString("correo_admin");
-                String contraseña = rs.getString("contraseña_admin");
-                String estado = rs.getString("estado_admin");
-                String usuario = rs.getString("nombre_usuario");
-                admin.setIDAdmin(id);
-                admin.setNombreAdmin(nombre);
-                admin.setApellidoAdmin(apellido);
-                admin.setDireccionAdmin(direccion);
-                admin.setTelefonoAdmin(telefono);
-                admin.setCorreoAdmin(correo);
-                admin.setContraAdmin(contraseña);
-                admin.setEstadoAdmin(estado);
-                admin.setNombreUsuario(usuario);
-                
-                                
-            }*/
+
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
             
             closeResources(rs, stmt, conn);
-            /*
-            Conexion.close(rs);
-            Conexion.close(stmt);
-            Conexion.close(conn);
-            */
+
         }
         
         return admin;
@@ -280,8 +221,7 @@ public ClsAdministradores consultaAdministradorPorNombre(ClsAdministradores admi
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + admin);
             stmt = conn.prepareStatement(SQL_SELECT_NOMBRE);  
-            //stmt.setInt(1, admin.getIdAdmin());
-            //stmt.setString(1, admin.getContraAdmin());
+
             stmt.setString(1, admin.getNombreUsuario());
             rs = stmt.executeQuery();
             while (rs.next()) {
