@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="839a7234-2893-447e-9e0e-b71c4af2f1eb">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+ *
+FROM TBL_SISTEMA_DE_PAGOS sp
+JOIN TBL_ALQUILERES al ON sp.id_comprobante = al.id_comprobante
+JOIN TBL_VIDEOS v ON al.id_video = v.id_video
+JOIN TBL_CLIENTES c ON al.id_cliente = c.id_cliente
+JOIN TBL_ADMINISTRADORES a ON sp.id_admin = a.id_admin]]>
+	</queryString>
+	<field name="id_comprobante" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pago" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_sispag" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descuento_sispag" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="titulo_video" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio_video" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_cliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellido_cliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="-14" width="802" height="86" backcolor="#6A87BF" uuid="86b0f5d7-77c6-4088-a4cd-bc6d73f32a87"/>
+				<staticText>
+					<reportElement x="324" y="14" width="139" height="57" forecolor="#FFFFFF" uuid="3aabeabb-81b8-4c5e-b79f-2aad6d6fb708"/>
+					<textElement>
+						<font size="36" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Factura]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="670" y="66" width="132" height="20" forecolor="#FFFFFF" uuid="74987712-8567-4ec9-8a09-5e932e624bd0"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[MOVIE SHACK HUT]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<staticText>
+				<reportElement mode="Opaque" x="307" y="1" width="83" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="81145d6d-137b-4ee9-938b-53e90eb290fb"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[titulo_video]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="390" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="d987a0a0-94c2-41d1-92eb-1714f36169bf"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[precio_video]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="86" y="0" width="114" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="25d8e21a-ceaa-478c-8245-41db24f0d847"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[nombre_cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="200" y="1" width="107" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="7ac82f1a-8934-4853-b1f6-ac7ff270a5fb"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[apellido_cliente]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="802" height="1" forecolor="#666666" uuid="b0a1740a-3fc2-413a-ad9b-18e5e76455ce"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="482" y="0" width="87" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="2585277c-ff0c-4d00-a67c-0e06c5b7ae44"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[tipo_sispag]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="569" y="1" width="131" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="24b09e07-2700-4a72-b42b-dda7cf1fccdd"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[descuento_sispag]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="700" y="0" width="69" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="d9c63255-5263-4df3-a183-b7fd6ba6a26f"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="86" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="03592dbb-528b-402d-b9cf-b960ca339e49"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[id_comprobante]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="802" height="1" uuid="f03c0b34-ff8f-46e8-8a6c-2ac6120f2e14"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="86" height="20" uuid="7128b1b7-f836-46e3-9bc5-f6cd8680584a"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_comprobante}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="306" y="0" width="84" height="20" uuid="fc066a04-0cc8-4221-bdba-c0551d5c3144"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titulo_video}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="390" y="0" width="92" height="20" uuid="c6791b0f-86eb-4f54-b895-1b11079c51bd"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio_video}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="86" y="0" width="114" height="19" uuid="05c10012-6943-4010-b0fd-ceaf9d261b84"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_cliente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="200" y="0" width="107" height="20" uuid="2376b800-301c-4acd-bc2d-91594616adf9"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apellido_cliente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="569" y="0" width="131" height="20" uuid="5634b922-96fd-4c96-b87c-a762ecbd8e4e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descuento_sispag}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="482" y="0" width="87" height="20" uuid="5ec62e62-d2d0-4dae-be68-fa201a41f786"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_sispag}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="700" y="0" width="69" height="20" uuid="b461cf65-c1cf-40ca-83f0-b30e0fb4936b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pago}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="762" height="13" backcolor="#E6E6E6" uuid="04b809d3-45d3-4077-a239-627c33191487"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="762" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="172a5eb7-3929-48c1-bdd3-f970954cde59"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="f639d6ab-ff65-4136-a7a5-af791ca522ad"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

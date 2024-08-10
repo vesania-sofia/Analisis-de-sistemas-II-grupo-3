@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS TBL_USUARIO (
 	nombre_usuario VARCHAR(45) NOT NULL,
 	contraseña_usuario VARCHAR(25) NOT NULL,
 	ultima_sesion_usuario VARCHAR(25),
-	status_usuario VARCHAR(1) NOT NULL,
+	status_usuario VARCHAR(25) NOT NULL,
 	nombre_real_usuario VARCHAR(60),
 	correo_usuario VARCHAR(60),
 	telefono_usuario VARCHAR(25),
@@ -90,3 +90,84 @@ CREATE TABLE IF NOT EXISTS TBL_USUARIO (
     FOREIGN KEY (id_admin) REFERENCES TBL_ADMINISTRADORES(id_admin), 
     FOREIGN KEY (id_usuario) REFERENCES TBL_USUARIO(id_usuario) 
 );	
+
+
+
+CREATE VIEW vw_videos_rentados AS
+SELECT 
+    c.nombre_cliente,
+    c.apellido_cliente,
+    v.titulo_video,
+    a.fecha_alquiler,
+    a.fecha_devolucion,
+    a.estatus_alquiler
+FROM 
+    TBL_ALQUILERES a
+INNER JOIN TBL_CLIENTES c ON a.id_cliente = c.id_cliente
+INNER JOIN TBL_VIDEOS v ON a.id_video = v.id_video
+WHERE a.estatus_alquiler = 'Rentado';
+
+SELECT * FROM vw_videos_rentados;
+
+
+
+CREATE OR REPLACE VIEW vw_videos_rentados_por_dia (
+    nombre_cliente,
+    apellido_cliente,
+    titulo_video,
+    fecha_alquiler
+) AS
+SELECT 
+    c.nombre_cliente,
+    c.apellido_cliente,
+    v.titulo_video,
+    a.fecha_alquiler
+FROM 
+    TBL_ALQUILERES a
+INNER JOIN TBL_CLIENTES c ON a.id_cliente = c.id_cliente
+INNER JOIN TBL_VIDEOS v ON a.id_video = v.id_video
+WHERE a.fecha_alquiler = '2023-11-24';
+
+SET @fecha_especifica = '2023-11-24';  -- Reemplaza con la fecha deseada
+SELECT * FROM vw_videos_rentados_por_dia;
+
+
+
+CREATE VIEW vw_rentas_diarias AS
+
+
+
+SELECT 
+    fecha_alquiler,
+    COUNT(*) AS total_rentas
+FROM 
+    TBL_ALQUILERES
+GROUP BY fecha_alquiler;
+
+
+SELECT * FROM vw_rentas_diarias;
+
+
+SELECT 
+    'Semanal' AS periodo,
+    YEARWEEK(A.fecha_alquiler, 1) AS periodo_especifico,
+    SUM(S.pago) AS ganancias
+FROM 
+    TBL_ALQUILERES A
+JOIN 
+    TBL_SISTEMA_DE_PAGOS S ON A.id_comprobante = S.id_comprobante
+GROUP BY 
+    YEARWEEK(A.fecha_alquiler, 1)
+
+UNION ALL
+
+SELECT 
+    'Mensual' AS periodo,
+    DATE_FORMAT(A.fecha_alquiler, '%Y-%m') AS periodo_especifico,
+    SUM(S.pago) AS ganancias
+FROM 
+    TBL_ALQUILERES A
+JOIN 
+    TBL_SISTEMA_DE_PAGOS S ON A.id_comprobante = S.id_comprobante
+GROUP BY 
+    DATE_FORMAT(A.fecha_alquiler, '%Y-%m');
