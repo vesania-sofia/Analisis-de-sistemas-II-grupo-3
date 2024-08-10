@@ -116,7 +116,7 @@ public class Vista_Usuario extends javax.swing.JFrame {
         jMenuBar1.setBackground(new java.awt.Color(255, 51, 51));
 
         jMenu2.setBackground(new java.awt.Color(255, 51, 51));
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Reportes.png"))); // NOI18N
+        jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\progra3\\Analisis-de-sistemas-II-grupo-3\\RentaVideo\\src\\Imagenes\\Reportes.png")); // NOI18N
         jMenu2.setText("REPORTES");
         jMenu2.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jMenu2.setIconTextGap(1);
@@ -206,6 +206,23 @@ public class Vista_Usuario extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
+        Connection conn = null;        
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            conn = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+
+                    + "/src/Reportes/rptRentaVideoUltimaVisita1.jrxml");
+	    print = JasperFillManager.fillReport(report, p, conn);
+            JasperViewer view = new JasperViewer(print, false);
+	    view.setTitle("Reporte Prueba");
+            view.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed

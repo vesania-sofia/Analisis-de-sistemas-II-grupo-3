@@ -15,7 +15,7 @@
               <Color blue="33" green="33" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/Reportes.png"/>
+              <Image iconType="2" name="C:\Users\User\progra3\Analisis-de-sistemas-II-grupo-3\RentaVideo\src\Imagenes\Reportes.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="REPORTES"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
