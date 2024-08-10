@@ -167,6 +167,11 @@ public class Vista_Administrador extends javax.swing.JFrame {
         jMenu6.add(jMenuItem1);
 
         jMenuItem3.setText("Registro de clientes ");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem3);
 
         jMenuItem2.setText("Bitácora");
@@ -360,6 +365,10 @@ public class Vista_Administrador extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
