@@ -5,12 +5,21 @@
 package Vista;
 import Controlador.clsVideo;
 import Modelo.daoVideo;
+import Seguridad.Modelo.Conexion;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -339,6 +348,11 @@ public class JDialog_Videos extends javax.swing.JDialog {
 
         Btn_ayuda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Btn_ayuda.setText("Ayuda");
+        Btn_ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ayudaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -367,11 +381,11 @@ public class JDialog_Videos extends javax.swing.JDialog {
                     .addComponent(txtsintesis, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(381, 381, 381)
-                        .addComponent(Btn_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Btn_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -523,25 +537,25 @@ public class JDialog_Videos extends javax.swing.JDialog {
     }//GEN-LAST:event_txtprecioActionPerformed
 
     private void Btn_buscarIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_buscarIdActionPerformed
-        clsVideo video = new clsVideo();
-        video.setId_video(Integer.parseInt(txtbuscado.getText()));
-        video = video.getBuscarInformacionRegistroVideoPorId(video);
+       clsVideo video = new clsVideo();
+video.setId_video(Integer.parseInt(txtbuscado.getText()));
+video = video.getBuscarInformacionRegistroVideoPorId(video);
 
-        if (video != null) {
+if (video != null && video.getId_video() != 0) {
+    JOptionPane.showMessageDialog(this, "Video encontrado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-            JOptionPane.showMessageDialog(this, "Cliente encontrado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    txttitulo.setText(video.getTitulo_video());
+    txtprecio.setText(String.valueOf(video.getPrecio_video()));
+    txtaño.setText(video.getAño_estreno_video());
+    txtgenero.setText(video.getGenero_video());
+    txtactores.setText(video.getActores_video());
+    txtsintesis.setText(video.getSintesis_video());
+    txtexistencia.setText(video.getExistencia_video());
+    txtformato.setText(video.getFormato_video());
+} else {
+    JOptionPane.showMessageDialog(this, "Video no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+}
 
-            txttitulo.setText(video.getTitulo_video());
-            txtprecio.setText(String.valueOf(video.getPrecio_video()));
-            txtaño.setText(video.getAño_estreno_video());
-            txtgenero.setText(video.getGenero_video());
-            txtactores.setText(video.getActores_video());
-            txtsintesis.setText(video.getSintesis_video());
-            txtexistencia.setText(video.getExistencia_video());
-            txtformato.setText(video.getFormato_video());
-        } else {
-            JOptionPane.showMessageDialog(this, "Administrador no encontrado");
-        }
     }//GEN-LAST:event_Btn_buscarIdActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -550,6 +564,24 @@ public class JDialog_Videos extends javax.swing.JDialog {
             "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
         llenadoDeTablas();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void Btn_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ayudaActionPerformed
+        // TODO add your handling code here:
+          try {
+            if ((new File("src\\Ayudas\\ayudas-videos.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\Ayudas\\ayudas-videos.chm");
+                p.waitFor();
+            } else {
+                System.out.println("La ayuda no fue encontrada");
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_Btn_ayudaActionPerformed
       public void limpiarTextos()
     {
         

@@ -167,6 +167,11 @@ public class Vista_Administrador extends javax.swing.JFrame {
         jMenu6.add(jMenuItem1);
 
         jMenuItem3.setText("Registro de clientes ");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem3);
 
         jMenuItem2.setText("Bitácora");
@@ -178,6 +183,11 @@ public class Vista_Administrador extends javax.swing.JFrame {
         jMenu6.add(jMenuItem2);
 
         jMenuItem4.setText("Videos rentados de determinado tipo ");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem4);
 
         jMenuItem5.setText("Videos rentados en determinado día");
@@ -360,6 +370,44 @@ public class Vista_Administrador extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+         Connection conn = null;
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        try {
+             conn = Seguridad.Modelo.Conexion.getConnection();
+             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                     + "\\src\\Reportes\\rptcliente.jrxml");
+             print = JasperFillManager.fillReport(report, p, conn);
+             JasperViewer view = new JasperViewer(print, false);
+             view.setTitle("Reporte Videos");
+             view.setVisible(true);     
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        Connection conn = null;
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        try {
+             conn = Seguridad.Modelo.Conexion.getConnection();
+             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                     + "\\src\\Reportes\\rptvideo.jrxml");
+             print = JasperFillManager.fillReport(report, p, conn);
+             JasperViewer view = new JasperViewer(print, false);
+             view.setTitle("Reporte Videos");
+             view.setVisible(true);     
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
