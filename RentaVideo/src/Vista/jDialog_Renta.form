@@ -202,7 +202,7 @@
               <Color blue="bf" green="87" red="6a" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/t39.png"/>
+              <Image iconType="2" name="C:\Users\User\Downloads\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\RentaVideo\src\Imagenes\t39.png"/>
             </Property>
           </Properties>
         </Component>
@@ -635,7 +635,7 @@
         <Component class="javax.swing.JButton" name="Btn_registrar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/guardar.png"/>
+              <Image iconType="2" name="C:\Users\User\Downloads\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\RentaVideo\src\Imagenes\guardar.png"/>
             </Property>
           </Properties>
           <Events>
@@ -656,7 +656,7 @@
         <Component class="javax.swing.JButton" name="Btn_eliminar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/eliminar.png"/>
+              <Image iconType="2" name="C:\Users\User\Downloads\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\RentaVideo\src\Imagenes\eliminar.png"/>
             </Property>
           </Properties>
           <Events>
@@ -677,7 +677,7 @@
         <Component class="javax.swing.JButton" name="Btn_modificar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/editar.png"/>
+              <Image iconType="2" name="C:\Users\User\Downloads\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\RentaVideo\src\Imagenes\editar.png"/>
             </Property>
           </Properties>
           <Events>
@@ -698,7 +698,7 @@
         <Component class="javax.swing.JButton" name="Btn_limpiar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/limpiar.png"/>
+              <Image iconType="2" name="C:\Users\User\Downloads\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\RentaVideo\src\Imagenes\limpiar.png"/>
             </Property>
           </Properties>
           <Events>

@@ -20,7 +20,7 @@ public class Conexion {
 
 private static final String JDBC_URL = "jdbc:mysql://localhost/tienda_videos?useSSL=false&serverTimezone=UTC";    
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASS = "vesania";
+    private static final String JDBC_PASS = "200118";
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
     }

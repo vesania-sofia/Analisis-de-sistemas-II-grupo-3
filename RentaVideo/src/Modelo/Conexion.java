@@ -23,7 +23,7 @@ public class Conexion {
     public static Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/tienda_videos?useSSL=false&serverTimezone=UTC";
         String user = "root"; //mi usuario
-        String password = "vesania"; //segun usuario para la conexion a BD
+        String password = "200118"; //segun usuario para la conexion a BD
         return DriverManager.getConnection(url, user, password);  // Pendiente concretar conexion
     }
     

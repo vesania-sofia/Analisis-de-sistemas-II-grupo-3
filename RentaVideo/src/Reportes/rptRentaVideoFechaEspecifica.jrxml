@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3dd773db-d176-4b36-99a2-9d19ed1fd3fd">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="66f4ab17-12a7-43bf-b5be-7d74fd9819dc">
 	<queryString language="SQL">
 		<![CDATA[select *   from tbl_alquileres AL
 join tbl_videos V on al.id_video=V.id_video;]]>
@@ -13,26 +10,29 @@ join tbl_videos V on al.id_video=V.id_video;]]>
 	<field name="titulo_video" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="genero_video" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band/>
 	</background>
 	<title>
 		<band height="72">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="79038ecb-e469-40df-91ca-0e686b9e8c7d"/>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="c1206f3d-d3f9-4e1c-bdca-4b1511a6e0b7"/>
 				<staticText>
-					<reportElement x="20" y="20" width="278" height="43" forecolor="#FFFFFF" uuid="048fa9ee-d4c1-468c-b9fe-7776e1bd1a27"/>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="809c79c4-1fdc-4a48-a829-2461d67a21ff"/>
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Videos Rentados]]></text>
+					<text><![CDATA[TITLE]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="fc571055-4654-462a-abdd-6bfe4fa76c6d"/>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="1381f15d-453f-4518-ba1a-9eab0ff62d10"/>
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[por Fecha Específica]]></text>
+					<text><![CDATA[Add a description here]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -43,43 +43,56 @@ join tbl_videos V on al.id_video=V.id_video;]]>
 	<columnHeader>
 		<band height="21">
 			<line>
-				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="29dc18f3-4319-4b8b-9fdb-f2137a9c32bc"/>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="eeaab1ea-4bfe-44c4-bfc7-60305759414e"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="14" y="1" width="241" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="edcde3bf-be6d-401b-a033-9e424d64fcb2"/>
+				<reportElement mode="Opaque" x="0" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="95531535-b12a-4c7c-9e4c-bc4a041e614e"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[fecha_alquiler]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="305" y="0" width="234" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0de02d59-6eb4-4c86-a49a-07da76cbddb2"/>
+				<reportElement mode="Opaque" x="185" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="2299d8a9-c6fc-4d74-9275-4cfc0fe9e78d"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[titulo_video]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="370" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a4f092e5-1679-4c48-befa-c3b20884622b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[genero_video]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="0baf108c-b20d-4697-8e8d-828fca284196"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="dcc6cbc4-0a2e-44aa-93eb-1dc1e3d1f977"/>
 			</line>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="69" y="0" width="186" height="20" uuid="9513a66c-898e-4c0b-ade9-304043e440df"/>
+				<reportElement x="0" y="0" width="185" height="20" uuid="a7f502dd-fc91-4bdd-9bf4-5009b5daf5e0"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_alquiler}]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="375" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="ee355386-2b53-4aca-a55b-79a7cfa47006"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="SansSerif" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="185" y="0" width="185" height="20" uuid="d27cdb4e-f2e8-4aef-ac1b-86ce1a806134"/>
+				<textElement>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{titulo_video}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="370" y="0" width="185" height="20" uuid="51327070-e86b-470d-a98a-5d9e9ff027c2"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{genero_video}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -89,16 +102,16 @@ join tbl_videos V on al.id_video=V.id_video;]]>
 	<pageFooter>
 		<band height="17">
 			<textField>
-				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="2999d664-c31a-4921-b66a-f51123682cee"/>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="cefd554e-4f6e-4b7b-8e7e-16f76aa0602d"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="4426f0a7-93ec-4c8a-9fe6-8a81ad0d0e1c"/>
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="7c7da2aa-8f14-4d0a-ba6f-8cea09cbe4e2"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="0" y="4" width="100" height="13" uuid="96302899-7b74-483d-b298-db2944d28518"/>
+				<reportElement x="0" y="4" width="100" height="13" uuid="c7495dc0-f097-45c9-8d56-428a94dacec8"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>

@@ -32,10 +32,10 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author sofia
+ * @author DELL
  */
 public class jDialog_Renta extends javax.swing.JDialog {
-
+     
      public void llenadoDeComboCliente() {
         clsRegistroCliente cliente = new clsRegistroCliente();
         List<clsRegistroCliente> listadoClientes = cliente.getListadoRegistroCliente();
@@ -102,8 +102,8 @@ public class jDialog_Renta extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        model.addElement("activo");
-        model.addElement("inactivo");
+        model.addElement("Rentado");
+        model.addElement("Devuelto");
         Cbo_estatusAlquiler.setModel(model);
     }
 
@@ -348,7 +348,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pan_videoLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
+                        .addGap(63, 63, 63)
                         .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pan_videoLayout.createSequentialGroup()
                                 .addGroup(pan_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,7 +403,8 @@ public class jDialog_Renta extends javax.swing.JDialog {
 
         jPanel3.setBackground(new java.awt.Color(105, 135, 189));
 
-        Btn_registrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar.png"))); // NOI18N
+        Btn_registrar.setBackground(new java.awt.Color(255, 255, 255));
+        Btn_registrar.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Downloads\\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\\RentaVideo\\src\\Imagenes\\guardar.png")); // NOI18N
         Btn_registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_registrarActionPerformed(evt);
@@ -414,6 +415,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("  Agregar");
 
+        Btn_eliminar.setBackground(new java.awt.Color(255, 255, 255));
         Btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
         Btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -425,6 +427,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("   Eliminar ");
 
+        Btn_modificar.setBackground(new java.awt.Color(255, 255, 255));
         Btn_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
         Btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -436,6 +439,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("    Editar    ");
 
+        Btn_limpiar.setBackground(new java.awt.Color(255, 255, 255));
         Btn_limpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/limpiar.png"))); // NOI18N
         Btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -469,7 +473,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
@@ -537,7 +541,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pan_video, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -565,8 +569,6 @@ public class jDialog_Renta extends javax.swing.JDialog {
         clsRenta renta = new clsRenta();
 
         try {
-        //Id del Alquiler
-        //renta.setId_comprobante(Integer.parseInt(Txt_idAlquiler.getText()));
         // Extraer y convertir el ID del cliente
         String clienteSeleccionado = Cbo_cliente.getSelectedItem().toString();
         int idCliente = Integer.parseInt(clienteSeleccionado.split(" - ")[0].trim());
@@ -577,22 +579,30 @@ public class jDialog_Renta extends javax.swing.JDialog {
         int idVideo = Integer.parseInt(videoSeleccionado.split(" - ")[0].trim());
         renta.setId_video(idVideo);
 
-        /*// Establecer las fechas
-        java.sql.Date fechaAlquiler = null;
-        java.sql.Date fechaDevolucion = null;
+        String fechaInicio = ((JTextField) Txt_fechaInicioRenta.getDateEditor().getUiComponent()).getText();
+        String fechaFin = ((JTextField) Txt_fechaDevolucionRenta.getDateEditor().getUiComponent()).getText();
+
+        if (!fechaInicio.isEmpty()) {
         try {
-        fechaAlquiler = new java.sql.Date(sdf.parse(Txt_fechaInicioRenta.getText()).getTime());
-        fechaDevolucion = new java.sql.Date(sdf.parse(Txt_fechaDevolucionRenta.getText()).getTime());
+        renta.setFecha_alquiler(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(fechaInicio).getTime()));
         } catch (ParseException e) {
-        JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto: " + e.getMessage(), 
-            "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Salir si hay un error en el formato de fecha
+        JOptionPane.showMessageDialog(null, "Error al parsear la fecha de inicio: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        return;
         }
-        renta.setFecha_alquiler(fechaAlquiler);
-        renta.setFecha_devolucion(fechaDevolucion);*/
-        
-        String fechaInicio = ((JTextField)Txt_fechaInicioRenta.getDateEditor().getUiComponent()).getText();
-        String fechaFin = ((JTextField)Txt_fechaDevolucionRenta.getDateEditor().getUiComponent()).getText();
+        } else {
+        renta.setFecha_alquiler(null);
+        }
+
+        if (!fechaFin.isEmpty()) {
+        try {
+        renta.setFecha_devolucion(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(fechaFin).getTime()));
+        } catch (ParseException e) {
+        JOptionPane.showMessageDialog(null, "Error al parsear la fecha de fin: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        } else {
+        renta.setFecha_devolucion(null);
+        }
 
         // Estatus renta
         String estadoSeleccionado = (String) Cbo_estatusAlquiler.getSelectedItem();
@@ -607,6 +617,8 @@ public class jDialog_Renta extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(null, "Datos Modificados\n", 
             "Información del Sistema", JOptionPane.INFORMATION_MESSAGE); 
         llenadoDeTablas();
+        llenadoDeComboCliente();
+        llenadoDeComboVideo();
         limpiarTextos();
         } else {
         JOptionPane.showMessageDialog(null, "Error al modificar datos\n", 
@@ -616,6 +628,7 @@ public class jDialog_Renta extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(null, "Error al convertir el ID a número: " + e.getMessage(), 
         "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_Btn_modificarActionPerformed
 
     private void Txt_buscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_buscadoActionPerformed
@@ -732,12 +745,27 @@ public class jDialog_Renta extends javax.swing.JDialog {
         Txt_fechaDevolucionRenta.setText(renta.getFecha_devolucion() != null ? sdf.format(renta.getFecha_devolucion()) : "");*/
         
         // Fechas
-        String fechaInicio = ((JTextField)Txt_fechaInicioRenta.getDateEditor().getUiComponent()).getText();
-        String fechaFin = ((JTextField)Txt_fechaDevolucionRenta.getDateEditor().getUiComponent()).getText();
-        
+        //String fechaInicio = ((JTextField)Txt_fechaInicioRenta.getDateEditor().getUiComponent()).getText();
+        //String fechaFin = ((JTextField)Txt_fechaDevolucionRenta.getDateEditor().getUiComponent()).getText();
+        if (renta.getFecha_alquiler() != null) {
+        Txt_fechaInicioRenta.setDate(renta.getFecha_alquiler());
+        }
+        if (renta.getFecha_devolucion() != null) {
+        Txt_fechaDevolucionRenta.setDate(renta.getFecha_devolucion());
+        }
+    
         // Estatus Renta
-        String estadoSeleccionado = (String) Cbo_estatusAlquiler.getSelectedItem();
-        renta.setEstatus_alquiler(estadoSeleccionado.equalsIgnoreCase("Rentado") ? "Rentado" : "Devuelto");
+        String estadoActual = renta.getEstatus_alquiler();
+        if (estadoActual != null) {
+        if (estadoActual.equalsIgnoreCase("Rentado")) {
+            Cbo_estatusAlquiler.setSelectedItem("Rentado");
+        } else if (estadoActual.equalsIgnoreCase("Devuelto")) {
+            Cbo_estatusAlquiler.setSelectedItem("Devuelto");
+        } else {
+            // Si el estado no coincide con ninguno de los valores esperados
+            JOptionPane.showMessageDialog(this, "Estado de alquiler no válido", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 
         // Seleccionar video en Cbo_idVideo
         int CodVideo = renta.getId_video();
@@ -805,8 +833,8 @@ public class jDialog_Renta extends javax.swing.JDialog {
         Cbo_cliente.setSelectedIndex(0);
         Cbo_idVideo.setSelectedIndex(0);
         Cbo_estatusAlquiler.setSelectedIndex(0);
-        //Txt_fechaInicioRenta.setText("");
-        //Txt_fechaDevolucionRenta.setText("");
+        ((JTextField) Txt_fechaInicioRenta.getDateEditor().getUiComponent()).setText("");
+        ((JTextField) Txt_fechaDevolucionRenta.getDateEditor().getUiComponent()).setText("");   
         Txt_buscado.setText("");
     }
     public void habilitarBotones()

@@ -69,27 +69,24 @@ public class Vista_Usuario extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Doctor Glitch", 0, 48)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Downloads\\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\\RentaVideo\\src\\Imagenes\\t39.png")); // NOI18N
         jLabel4.setText("MOVIE SHACK HUT");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 673, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(81, 81, 81)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(81, Short.MAX_VALUE)))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 782, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 118, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(31, 31, 31)
-                    .addComponent(jLabel4)
-                    .addContainerGap(31, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -128,7 +125,7 @@ public class Vista_Usuario extends javax.swing.JFrame {
         jMenuBar1.setBackground(new java.awt.Color(255, 51, 51));
 
         jMenu2.setBackground(new java.awt.Color(255, 51, 51));
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Reportes.png"))); // NOI18N
+        jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Downloads\\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\\RentaVideo\\src\\Imagenes\\Reportes.png")); // NOI18N
         jMenu2.setText("REPORTES");
         jMenu2.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
         jMenu2.setIconTextGap(1);
@@ -245,6 +242,24 @@ public class Vista_Usuario extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
+         // TODO add your handling code here:
+                Connection conn = null;
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        try 
+            {
+            conn = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/Reportes/rptRentaVideoUltimaVisita1.jrxml");
+            print = JasperFillManager.fillReport(report, p, conn);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setVisible(true);
+            
+            } catch (Exception e){
+                e.printStackTrace();
+            }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed

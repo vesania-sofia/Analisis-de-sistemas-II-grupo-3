@@ -46,6 +46,7 @@ public class Vista_Administrador extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -114,7 +115,7 @@ public class Vista_Administrador extends javax.swing.JFrame {
 
         jMenu1.setBackground(new java.awt.Color(255, 0, 51));
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clientes.png"))); // NOI18N
-        jMenu1.setText("Clientes");
+        jMenu1.setText("Clientes           ");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
@@ -129,10 +130,18 @@ public class Vista_Administrador extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem14);
 
+        jMenuItem12.setText("Tipo Usuario");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem12);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/admin.png"))); // NOI18N
-        jMenu2.setText("Administradores");
+        jMenu2.setText("Administradores        ");
 
         jMenuItem13.setText("Mantenimiento");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +154,7 @@ public class Vista_Administrador extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/video.png"))); // NOI18N
-        jMenu5.setText("Videos");
+        jMenu5.setText("Videos   ");
 
         jMenuItem15.setText("Mantenimiento");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
@@ -264,7 +273,7 @@ public class Vista_Administrador extends javax.swing.JFrame {
         jMenuBar1.add(jMenu7);
 
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salir.png"))); // NOI18N
-        jMenu8.setText("Salir");
+        jMenu8.setText("Salir        ");
         jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu8MouseClicked(evt);
@@ -328,6 +337,22 @@ public class Vista_Administrador extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
+        
+        Connection conn = null;
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        try {
+             conn = Seguridad.Modelo.Conexion.getConnection();
+             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                     + "\\src\\Reportes\\rptRentaVideoUltimaVisita1.jrxml");
+             print = JasperFillManager.fillReport(report, p, conn);
+             JasperViewer view = new JasperViewer(print, false);
+             view.setTitle("Reporte Videos");
+             view.setVisible(true);     
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
@@ -490,6 +515,12 @@ public class Vista_Administrador extends javax.swing.JFrame {
         alt_cli.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        // TODO add your handling code here:
+        Vista.jDialog_TipoUsuario alt_cli = new jDialog_TipoUsuario(this, true);
+        alt_cli.setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -540,6 +571,7 @@ public class Vista_Administrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
