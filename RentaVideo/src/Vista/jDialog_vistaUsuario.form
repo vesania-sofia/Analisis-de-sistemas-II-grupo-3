@@ -98,14 +98,9 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="Btn_reportes" min="-2" pref="118" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="Btn_actualizar" min="-2" pref="95" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="587" max="-2" attributes="0"/>
-                                  <Component id="Btn_ayuda" min="-2" pref="118" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="Btn_actualizar" min="-2" pref="95" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="587" max="-2" attributes="0"/>
+                          <Component id="Btn_ayuda" min="-2" pref="118" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="33" max="32767" attributes="0"/>
@@ -173,8 +168,6 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="Btn_reportes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -304,13 +297,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ayuda"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="Btn_reportes">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Reportes"/>
-          </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_reportesActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_ayudaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Btn_actualizar">

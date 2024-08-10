@@ -320,6 +320,11 @@ Cbo_estado.setSelectedIndex(0);
 
         Btn_ayuda.setText("Ayuda");
         Btn_ayuda.setToolTipText("");
+        Btn_ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ayudaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -539,6 +544,25 @@ Cbo_estado.setSelectedIndex(0);
     private void Txt_apellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_apellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Txt_apellidoActionPerformed
+
+    private void Btn_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ayudaActionPerformed
+        // TODO add your handling code here:
+       try {
+            if ((new File("src\\Ayudas\\ayuda archivo.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\Ayudas\\ayuda archivo.chm");
+                p.waitFor();
+            } else {
+                System.out.println("La ayuda no fue encontrada");
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } 
+        
+        
+    }//GEN-LAST:event_Btn_ayudaActionPerformed
 
         public void limpiarTextos()
     {
