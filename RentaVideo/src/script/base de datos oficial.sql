@@ -171,3 +171,21 @@ JOIN
     TBL_SISTEMA_DE_PAGOS S ON A.id_comprobante = S.id_comprobante
 GROUP BY 
     DATE_FORMAT(A.fecha_alquiler, '%Y-%m');
+
+
+-- TBL_TIPO_USUARIO
+INSERT INTO TBL_TIPO_USUARIO (nombre_Tusuario, status_Tusuario)
+VALUES
+  ('Administrador', 'Activo'),
+  ('Cliente', 'Activo');
+
+-- TBL_USUARIO
+INSERT INTO TBL_USUARIO (nombre_usuario, contraseña_usuario, status_usuario, nombre_real_usuario, correo_usuario, id_tipo_usuario)
+VALUES
+  ('user1', 'pass1', 'A', 'John Doe', 'johndoe@example.com', 2),
+  ('admin1', 'passadmin', 'A', 'Admin User', 'admin@example.com', 1);
+
+-- TBL_ADMINISTRADORES
+INSERT INTO TBL_ADMINISTRADORES (nombre_admin, apellido_admin, correo_admin, contraseña_admin, nombre_usuario)
+VALUES
+  ('Admin', 'User', 'admin@example.com', '123', 'admin');
