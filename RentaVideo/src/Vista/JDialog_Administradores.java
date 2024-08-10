@@ -211,7 +211,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
 
         jLabel5.setFont(new java.awt.Font("Doctor Glitch", 0, 48)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("MOVIE SHACK HUT");
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Downloads\\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\\Analisis-de-sistemas-II-grupo-3-LOGING-Usuario9959-21-5909\\RentaVideo\\src\\Imagenes\\t39.png")); // NOI18N
 
         javax.swing.GroupLayout Pnl_TituloAdminLayout = new javax.swing.GroupLayout(Pnl_TituloAdmin);
         Pnl_TituloAdmin.setLayout(Pnl_TituloAdminLayout);
@@ -223,9 +223,9 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
                         .addGap(451, 451, 451)
                         .addComponent(jLabel7))
                     .addGroup(Pnl_TituloAdminLayout.createSequentialGroup()
-                        .addGap(291, 291, 291)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(309, Short.MAX_VALUE))
+                        .addGap(88, 88, 88)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 872, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
         Pnl_TituloAdminLayout.setVerticalGroup(
             Pnl_TituloAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -557,7 +557,7 @@ public final class JDialog_Administradores extends javax.swing.JDialog {
                                 .addGroup(Pnl_AdministradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(Lbl_Usuario)
                                     .addComponent(Txt_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 3, Short.MAX_VALUE))
+                        .addGap(0, 2, Short.MAX_VALUE))
                     .addComponent(Pnl_botones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
